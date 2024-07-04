@@ -36,8 +36,8 @@ Este aplicativo pretende **automatizar** la forma en la que los gerentes y emple
 | Rol | Asignado |
 |--|--|
 | Programador Backend | [Wilder Torres](https://github.com/wilderTorres18) |
-| Programador Frontend | [Jhomar Chero Sosoa](https://github.com/Jhomar-Alexis) |
-| Scrum Máster | [Guillermo Rojas](https://github.com/Noble620) |
+| Programador Frontend | [Jhomar Chero Sosa](https://github.com/Jhomar-Alexis) |
+
 
 
 ## Documentación
