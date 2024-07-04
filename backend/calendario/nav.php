@@ -19,7 +19,13 @@ $flag=1;
         $i++; 
         $tar=$tar+5;
 }
-$query2="SELECT Max(Venta.fecha) as fecha,CatProducto.nombre,(CatProducto.precio*VENTA_PRODUCCION.cantidad)as tot FROM Venta,CatProducto,Produccion,VENTA_PRODUCCION WHERE Venta.ID_VENTA=VENTA_PRODUCCION.FK_ID_VENTA and VENTA_PRODUCCION.FK_ID_PRODUCCION=Produccion.ID_PRODUCCION and Produccion.FK_ID_CATPRODUCTO=CatProducto.ID_CATPRODUCTO ";
+$query2 = "SELECT MAX(Venta.fecha) AS fecha, CatProducto.nombre, SUM(CatProducto.precio * VENTA_PRODUCCION.cantidad) AS tot 
+FROM Venta 
+JOIN VENTA_PRODUCCION ON Venta.ID_VENTA = VENTA_PRODUCCION.FK_ID_VENTA 
+JOIN Produccion ON VENTA_PRODUCCION.FK_ID_PRODUCCION = Produccion.ID_PRODUCCION 
+JOIN CatProducto ON Produccion.FK_ID_CATPRODUCTO = CatProducto.ID_CATPRODUCTO 
+GROUP BY CatProducto.nombre";
+
 $result2=mysqli_query($conn,$query2);
 
       
@@ -170,7 +176,7 @@ $veri=0;
           </div>
           <div>
             <div class="small text-gray-500"><?php echo $fec; ?></div>
-            La ultima Venta fue de <?php echo $nom2; ?> con una ganancia de <?php echo $gan; ?>
+            La ultima Venta fue de <?php echo isset($nom2) ? $nom2 : 0; ?> con una ganancia de <?php echo isset($gan) ? $gan : 0; ?>
           </div>
         </a>
         <a class="dropdown-item d-flex align-items-center" href="#">

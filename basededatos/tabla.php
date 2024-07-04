@@ -1,10 +1,11 @@
 <?php
-require ("connectionbd.php");
-$idb=$_POST["idb"];
+require("connectionbd.php");
+$idb = $_POST["idb"];
 
-		$sql_comboprov="SELECT bodega.ID_BODEGA,insumo.ID_INSUMO,insumo.nombre as isn,insumo.descripcion as isdc,bodega_insumo.unidades as ick,insumo.precio,bodega_insumo.registro from bodega,insumo,bodega_insumo WHERE bodega.ID_BODEGA='$idb' and bodega_insumo.`FK_ID_BODEGA`=bodega.ID_BODEGA and bodega_insumo.FK_ID_INSUMO=insumo.ID_INSUMO;";
-		$result_comboprov=mysqli_query($conn,$sql_comboprov);
-?> 
+$sql_comboprov = "SELECT bodega.ID_BODEGA, insumo.ID_INSUMO, insumo.nombre as isn, insumo.descripcion as isdc, bodega_insumo.unidades as ick, insumo.precio FROM bodega, insumo, bodega_insumo WHERE bodega.ID_BODEGA='$idb' AND bodega_insumo.FK_ID_BODEGA=bodega.ID_BODEGA AND bodega_insumo.FK_ID_INSUMO=insumo.ID_INSUMO;";
+$result_comboprov = mysqli_query($conn, $sql_comboprov);
+?>
+
 
   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             

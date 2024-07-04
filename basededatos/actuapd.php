@@ -1,21 +1,32 @@
 <?php
 session_start();
-require ("connectionbd.php");
-$cod_pro= $_POST['cod'];	
-$nom_pro= $_POST['nom'];		
-$cat_pro= $_POST['cat'];	
-$des_pro= $_POST['des'];	
-$pre_pro= $_POST['pre'];	
-$sab_pro= $_POST['sab'];	
-$est=$_POST['esta']; 
-$img_pro= $_FILES["img"]["name"];
-$ruta=$_FILES["img"]["tmp_name"];
-$destino="fotos/".$img_pro;
-copy($ruta,$destino);
+require("connectionbd.php");
+
+$cod_pro = $_POST['cod'];  
+$nom_pro = $_POST['nom'];      
+$cat_pro = $_POST['cat'];  
+$des_pro = $_POST['des'];  
+$pre_pro = $_POST['pre'];  
+$sab_pro = $_POST['sab'];  
+$est = $_POST['esta']; 
+$img_pro = $_FILES["img"]["name"];
+$ruta = $_FILES["img"]["tmp_name"];
+$destino = "fotos/" . $img_pro;
+
+if (!empty($ruta) && is_uploaded_file($ruta)) {
+    // Intenta mover el archivo
+    if (copy($ruta, $destino)) {
+        echo "Archivo cargado y movido con éxito";
+    } else {
+        echo "Error al mover el archivo";
+    }
+} else {
+    echo "No se ha cargado ningún archivo o el archivo no es válido";
+}
 
 $id = $_SESSION['cl']['id_u'];
 $fecha=date("Y-m-d");
-$horario = new DateTime("now", new DateTimeZone('America/Bogota'));
+$horario = new DateTime("now", new DateTimeZone('America/Lima'));
 $hora="".$horario->format('H:i');
 $desc="Se ha modificado el producto ".$nom_pro." con el id ".$cod_pro;
 if(strcasecmp($sab_pro,'1')==0){

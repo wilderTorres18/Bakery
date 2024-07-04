@@ -18,7 +18,7 @@ session_start();
 
     <!--Fonts-->
     <link href="css/font.css" rel="stylesheet">
-    <title>FreskyPan - Panaderia en Fusagasuga</title>
+    <title>Panaderia "Los gemelos"</title>
 </head>
 
 <body>
