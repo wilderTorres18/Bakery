@@ -61,7 +61,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Ventas (Semanales)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$<?php echo $prom2 ?></div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">S/<?php echo isset($prom2) ? $prom2 : 0 ?></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -78,7 +78,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Ventas (Mensuales)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$<?php echo $prom4 ?></div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">S/<?php echo isset($prom4) ? $prom4 : 0 ?></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -170,13 +170,13 @@
                   </div>
                   <div class="mt-4 text-center small">
                     <span class="mr-2">
-                      <i class="fas fa-circle text-primary"></i> <?php echo  $nb1;?>
+                      <i class="fas fa-circle text-primary"></i> <?php echo isset($nb1) ? $nb1 : 0;?>
                     </span>
                     <span class="mr-2">
-                      <i class="fas fa-circle text-success"></i> <?php echo  $nb2;?>
+                      <i class="fas fa-circle text-success"></i> <?php echo  isset($nb2) ? $nb2 : 0;?>
                     </span>
                     <span class="mr-2">
-                      <i class="fas fa-circle text-info"></i> <?php echo  $nb3;?>
+                      <i class="fas fa-circle text-info"></i> <?php echo  isset($nb3) ? $nb3 : 0;?>
                     </span>
                   </div>
                 </div>
@@ -192,79 +192,108 @@
 
               <!-- Project Card Example -->
               <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Porcentaje de operaciones por usuarios</h6>
-                </div>
-                <div class="card-body">
-                  <?php if($lo3>0 || $lo4 >0){ ?>
-                  <h4 class="small font-weight-bold"> <?php echo $nus; ?> <span class="float-right"><?php echo $div;?>%</span></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: <?php echo $div;?>%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                <?php } if($lo3>1 || $lo4 >1){?>
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Porcentaje de operaciones por usuarios</h6>
+  </div>
+  <div class="card-body">
+  <?php if (isset($lo3, $lo4) && ($lo3 > 0 || $lo4 > 0)) { ?>
+      <h4 class="small font-weight-bold">
+        <?php echo isset($nus) ? $nus : 'N/A'; ?>
+        <span class="float-right"><?php echo isset($div) ? $div . '%' : '0%'; ?></span>
+      </h4>
+      <div class="progress mb-4">
+        <div class="progress-bar bg-danger" role="progressbar" style="width: <?php echo isset($div) ? $div : '0'; ?>%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    <?php } if (isset($lo3, $lo4) && ($lo3 > 1 || $lo4 > 1)) {?>
+      <h4 class="small font-weight-bold">
+        <?php echo isset($nus1) ? $nus1 : 'N/A'; ?>
+        <span class="float-right"><?php echo isset($div1) ? $div1 . '%' : '0%'; ?></span>
+      </h4>
+      <div class="progress mb-4">
+        <div class="progress-bar bg-warning" role="progressbar" style="width: <?php echo isset($div1) ? $div1 : '0'; ?>%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    <?php } if (isset($lo3, $lo4) && ($lo3 > 2 || $lo4 > 2)) {?>
+      <h4 class="small font-weight-bold">
+        <?php echo isset($nus2) ? $nus2 : 'N/A'; ?>
+        <span class="float-right"><?php echo isset($div2) ? $div2 . '%' : '0%'; ?></span>
+      </h4>
+      <div class="progress mb-4">
+        <div class="progress-bar" role="progressbar" style="width: <?php echo isset($div2) ? $div2 : '0'; ?>%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    <?php } if (isset($lo3, $lo4) && ($lo3 > 3 || $lo4 > 3)) {?>
+      <h4 class="small font-weight-bold">
+        <?php echo isset($nus3) ? $nus3 : 'N/A'; ?>
+        <span class="float-right"><?php echo isset($div3) ? $div3 . '%' : '0%'; ?></span>
+      </h4>
+      <div class="progress mb-4">
+        <div class="progress-bar bg-info" role="progressbar" style="width: <?php echo isset($div3) ? $div3 : '0'; ?>%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    <?php } if (isset($lo3, $lo4) && ($lo3 > 4 || $lo4 > 1)) {?>
+      <h4 class="small font-weight-bold">
+        <?php echo isset($nus4) ? $nus4 : 'N/A'; ?>
+        <span class="float-right"><?php echo isset($div4) ? $div4 . '%' : '0%'; ?></span>
+      </h4>
+      <div class="progress">
+        <div class="progress-bar bg-success" role="progressbar" style="width: <?php echo isset($div4) ? $div4 : '0'; ?>%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    <?php } ?>
+  </div>
+</div>
 
-                  <h4 class="small font-weight-bold"><?php echo $nus1; ?><span class="float-right"><?php echo $div1;?>%</span></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: <?php echo $div1;?>%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                <?php } if($lo3>2 || $lo4 >2) { ?>
-                  <h4 class="small font-weight-bold"><?php echo $nus2; ?> <span class="float-right"><?php echo $div2;?>%</span></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar" role="progressbar" style="width: <?php echo $div2;?>%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                <?php } if($lo3>3 || $lo4 >3){ ?>
-                  <h4 class="small font-weight-bold"><?php echo $nus3; ?> <span class="float-right"><?php echo $div3;?>%</span></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar bg-info" role="progressbar" style="width: <?php echo $div3;?>%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                <?php } if($lo3>4 || $lo4 >4){ ?>
-                  <h4 class="small font-weight-bold"><?php echo $nus4; ?> <span class="float-right"><?php echo $div4;?></span></h4>
-                  <div class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" style="<?php echo $div4;?>%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                <?php } ?>
-                </div>
-              </div>
 
             </div>
 
             <div class="col-lg-6 mb-4">
-              <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Productos más Vendidos</h6>
-                </div>
-                <div class="card-body">
-                            <?php if($lo5>0 || $lo6 >0){ ?>
-                  <h4 class="small font-weight-bold"> <?php echo $bnus; ?> <span class="float-right"><?php echo $bdiv;?>%</span></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: <?php echo $bdiv;?>%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                <?php } if($lo5>1 || $lo6 >1){?>
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Productos más Vendidos</h6>
+    </div>
+    <div class="card-body">
+      <?php if (isset($lo5, $lo6) && ($lo5 > 0 || $lo6 > 0)) { ?>
+        <h4 class="small font-weight-bold">
+          <?php echo isset($bnus) ? $bnus : 'Producto no especificado'; ?>
+          <span class="float-right"><?php echo isset($bdiv) ? $bdiv . '%' : '0%'; ?></span>
+        </h4>
+        <div class="progress mb-4">
+          <div class="progress-bar bg-danger" role="progressbar" style="width: <?php echo isset($bdiv) ? $bdiv : '0'; ?>%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      <?php } if (isset($lo5, $lo6) && ($lo5 > 1 || $lo6 > 1)) { ?>
+        <h4 class="small font-weight-bold">
+          <?php echo isset($bnus1) ? $bnus1 : 'Producto no especificado'; ?>
+          <span class="float-right"><?php echo isset($bdiv1) ? $bdiv1 . '%' : '0%'; ?></span>
+        </h4>
+        <div class="progress mb-4">
+          <div class="progress-bar bg-warning" role="progressbar" style="width: <?php echo isset($bdiv1) ? $bdiv1 : '0'; ?>%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      <?php } if (isset($lo5, $lo6) && ($lo5 > 2 || $lo6 > 2)) {?>
+        <h4 class="small font-weight-bold">
+          <?php echo isset($bnus2) ? $bnus2 : 'Producto no especificado'; ?>
+          <span class="float-right"><?php echo isset($bdiv2) ? $bdiv2 . '%' : '0%'; ?></span>
+        </h4>
+        <div class="progress mb-4">
+          <div class="progress-bar" role="progressbar" style="width: <?php echo isset($bdiv2) ? $bdiv2 : '0'; ?>%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      <?php } if (isset($lo5, $lo6) && ($lo5 > 3 || $lo6 > 3)) { ?>
+        <h4 class="small font-weight-bold">
+          <?php echo isset($bnus3) ? $bnus3 : 'Producto no especificado'; ?>
+          <span class="float-right"><?php echo isset($bdiv3) ? $bdiv3 . '%' : '0%'; ?></span>
+        </h4>
+        <div class="progress mb-4">
+          <div class="progress-bar bg-info" role="progressbar" style="width: <?php echo isset($bdiv3) ? $bdiv3 : '0'; ?>%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      <?php }  if (isset($lo5, $lo6) && ($lo5 > 4 || $lo6 > 4)) {?>
+        <h4 class="small font-weight-bold">
+          <?php echo isset($bnus4) ? $bnus4 : 'Producto no especificado'; ?>
+          <span class="float-right"><?php echo isset($bdiv4) ? $bdiv4 . '%' : '0%'; ?></span>
+        </h4>
+        <div class="progress">
+          <div class="progress-bar bg-success" role="progressbar" style="width: <?php echo isset($bdiv4) ? $bdiv4 : '0'; ?>%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      <?php } ?>
+    </div>
+  </div>
+</div>
 
-                  <h4 class="small font-weight-bold"><?php echo $bnus1; ?><span class="float-right"><?php echo $bdiv1;?>%</span></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: <?php echo $bdiv1;?>%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                <?php } if($lo5>2 || $lo6 >2) { ?>
-                  <h4 class="small font-weight-bold"><?php echo $bnus2; ?> <span class="float-right"><?php echo $bdiv2;?>%</span></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar" role="progressbar" style="width: <?php echo $bdiv2;?>%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                <?php } if($lo5>3 || $lo6 >3){ ?>
-                  <h4 class="small font-weight-bold"><?php echo $bnus3; ?> <span class="float-right"><?php echo $bdiv3;?>%</span></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar bg-info" role="progressbar" style="width: <?php echo $bdiv3;?>%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                <?php } if($lo5>4 || $lo6 >4){ ?>
-                  <h4 class="small font-weight-bold"><?php echo $bnus4; ?> <span class="float-right"><?php echo $bdiv4;?>%</span></h4>
-                  <div class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" style="width:<?php echo $bdiv4; ?>%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                <?php } ?>
-                </div>
-              </div>
-
-            </div>
           </div>
 
         </div>
