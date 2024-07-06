@@ -38,7 +38,18 @@ session_start();
                 <li class="nav-item">
                     <a class="nav-link" href="historia.html">Historia</a>
                 </li>
+                <li class="nav-item active">
+          <a class="nav-link" href="contacto.php">Contactanos</a>
+        </li>
             </ul>
+
+            <div class="btn-group mr-2" role="group" aria-label="Second group">
+    <form class="form-inline my-2 my-lg-0">
+             <?php if(!(isset($_SESSION['cl']))){?>
+      <a href="nuevo_cliente.php" class="btn btn-primary my-2 my-sm-0 ">Registrarse</a>
+  <?php }?>
+    </form>
+    </div>
             <form class="form-inline my-2 my-lg-0">
                 <?php if (!(isset($_SESSION['cl']))) { ?>
                     <a href="login/" class="btn btn-success my-2 my-sm-0">Iniciar sesión</a>
@@ -54,8 +65,8 @@ session_start();
     <div class="contenedor">
         <header>
             <div class="logo">
-                <h1>FreskyPan</h1>
-                <p>Una panaderia en Fusagasuga</p>
+                <h1>"Los Gemelos"</h1>
+                <p>Una panaderia en Perú</p>
             </div>
             <form action="">
                 <input type="text" class="barra-busqueda" id="barra-busqueda" placeholder="¿Que se te antoja hoy?">
@@ -105,8 +116,12 @@ session_start();
                             <?php } ?>
                         </div>
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="addon-wrapping"> Precio :$ <?php echo $cod; ?></span>
+                            <span class="input-group-text" id="addon-wrapping"> Precio :S/ <?php echo $cod; ?></span>
                         </div>
+                        <?php if(isset($_SESSION['cl'])){?>
+                        <a class="btn btn-outline-primary" href="./carritodecompras.php?id=<?php  echo $id;?>">Añadir al carrito de compras</a>
+              <!--  <button type="button" class="btn btn-outline-primary">Comprar</button> -->
+<?php }?>
                     </div>
             <?php  }
             } ?>
@@ -133,7 +148,7 @@ session_start();
             </div>
         </div>
         <div class="creado-por">
-            <p>Sitio diseñado por <a href="#">Deportivo Tapitas</a> - <a href="#">Universidad de Cundinamarca</a></p>
+            <p>Sitio diseñado por <a href="#">WJ SOFTWORKS</a> - <a href="#">PIURA - PERU</a></p>
         </div>
     </footer>
 
