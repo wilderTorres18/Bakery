@@ -1,19 +1,19 @@
 <?php
 session_start();
 require ("connectionbd.php");
-$ced_cl= $_POST['ced'];	
-$nom_cl= $_POST['nom'];	
-$tel_cl= $_POST['tel'];	
-$des_cl= $_POST['des'];	
-$dir_cl= $_POST['dir'];	
-$a1_cl= $_POST['a1'];	
-$a2_cl= $_POST['a2'];	
+$dni_cl= $_POST['dni'];	
+$nom_cl= $_POST['nombre'];	
+$tel_cl= $_POST['telefono'];		
+$des_cl= $_POST['descripcion'];		
+$dir_cl= $_POST['direccion'];	
+$a1_cl= $_POST['apellido_1'];	
+$a2_cl= $_POST['apellido_2'];	
 
-$cl = array('nomcl' => $nom_cl , 'ape1' => $a1_cl ,'ape2' => $a2_cl,'cedcl' => $ced_cl,'descl' => $des_cl ,'dircl'=> $dir_cl );
+$cl = array('nomcl' => $nom_cl , 'ape1' => $a1_cl ,'ape2' => $a2_cl,'dnicl' => $dni_cl,'descl' => $des_cl ,'dircl'=> $dir_cl );
 $_SESSION['cl']=$cl;
 
 
-$query="Insert into clientes (ced_cl,nom_cl,des_cl,dir_cl,a1_cl,a2_cl,est_cl,pas_cl)values('$ced_cl','$nom_cl','$des_cl','$dir_cl','$a1_cl','$a2_cl','1','pass')";
+$query="Insert into clientes (dni,nombre,descripcion,direccion,apellido_1,apellido_2,password)values('$ced_cl','$nom_cl','$des_cl','$dir_cl','$a1_cl','$a2_cl','pass')";
 $result=mysqli_query($conn,$query);
 $query2="Insert into telcl (ced_cl,tel_cl) values('$ced_cl','$tel_cl')";
 $result2=mysqli_query($conn,$query2);

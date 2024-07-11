@@ -828,7 +828,7 @@ ALTER TABLE `DEVOLUCION_MATERIAPRIMA`
 
 
 -- 
--- de "ON DELETE CASCADE" a "ON DELETE RESTRICT"  (EVITAR ON DELETE CASCADE)
+-- de "ON DELETE CASCADE" a "ON DELETE RESTRICT"  (EVITAR ON DELETE CASCADE) - WILDER 
 --
 -- Cambio de restricciones para `BODEGA_INSUMO`
   ALTER TABLE `BODEGA_INSUMO`
@@ -926,8 +926,10 @@ ALTER TABLE `DEVOLUCION_MATERIAPRIMA`
   ADD CONSTRAINT `FK_ID_DEVOLUCION_DEVOLUCION_MATERIAPRIMA` FOREIGN KEY (`FK_ID_DEVOLUCION`) REFERENCES `Devolucion` (`ID_DEVOLUCION`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 
+-- POR WILDER CHERO TENER EN CUENTA ESTOS CAMBIOS LO CUAL SON ACTUALIZACIONES 
+
 --CAMBIOS ADICIONALES
--- HACER QUE EL CAMPO IVA SEA NULLABLE
+-- HACER QUE EL CAMPO 'IVA' SEA NULLABLE
 ALTER TABLE catproducto
 MODIFY iva INT DEFAULT 0 NULL;
 
@@ -935,6 +937,104 @@ MODIFY iva INT DEFAULT 0 NULL;
 ALTER TABLE catproducto
 MODIFY precio DECIMAL(10,2);
 
+-- NUEVA TABLA
+CREATE TABLE `clientes` (
+  `dni` varchar(8) COLLATE utf8_spanish_ci NOT NULL,
+  `nombre` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `direccion` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `apellido_1` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `apellido_2` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `estado` tinyint(1) NOT NULL DEFAULT 1,
+  `password` varchar(255) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=UTF8_SPANISH_CI;
+--
+-- Volcado de datos para la tabla `clientes`
+--
+
+INSERT INTO `clientes` (`dni`, `nombre`, `descripcion`, `direccion`, `apellido_1`, `apellido_2`, `estado`, `password`) VALUES
+('10986523', 'Manuel', 'Hi, i am manuel', 'calle los geramios', 'velasquez', 'Ojeda', '1', 'pass'),
+('10987456', 'Juan', 'Ninguna', 'Av Grau #3222', 'Perez', 'Gutierrez', '1', '12345678'),
+('12568479', 'Jose', 'i am jose', '40, Porta Bello, La Vuelta, FusagasugÃ¡, Cundinama', 'sandoval', 'Hernandez', '1', '123'),
+('78165651', 'Matias', 'Chonchitos', '40, Porta Bello, La Vuelta', 'Silva', 'Hernandez', '1', '12');
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `contratos`
+--
+
+CREATE TABLE `contratos` (
+  `cod_con` varchar(4) COLLATE utf8_spanish_ci NOT NULL,
+  `tip_con` varchar(6) COLLATE utf8_spanish_ci NOT NULL,
+  `id_ped` int(3) NOT NULL,
+  `fec_ent` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `hor_ent` varchar(5) COLLATE utf8_spanish_ci NOT NULL,
+  `id_cl` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
+  `est_con` tinyint(1) NOT NULL DEFAULT 1,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `contratos`
+--
+
+INSERT INTO `contratos` (`cod_con`, `tip_con`, `id_ped`, `fec_ent`, `hor_ent`, `id_cl`, `est_con`) VALUES
+('32', 'Mes', 6, '763', '12', '2', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `lote`
+--
+
+CREATE TABLE `lote` (
+  `id_lot` varchar(11) COLLATE utf8_spanish_ci NOT NULL,
+  `fec` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `cod_pro` varchar(3) COLLATE utf8_spanish_ci NOT NULL,
+  `st_prn` smallint(6) NOT NULL DEFAULT 1,
+  `est_lot` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci ROW_FORMAT=REDUNDANT;
+
+
+--
+-- Disparadores `lote`
+--
+DELIMITER $$
+CREATE TRIGGER `cambialote` BEFORE INSERT ON `lote` FOR EACH ROW BEGIN
+    SET NEW.`id_lot` = (
+       SELECT IFNULL(MAX(id_lot), 0) + 1
+       FROM lote
+       WHERE `fec`  = NEW.fec
+         
+    );
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `telcl`
+--
+
+CREATE TABLE `telcl` (
+  `ced_cl` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `tel_cl` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+
+--
+-- Indices de la tabla `agenda`
+--
+ALTER TABLE `agenda`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `inicio_normal` (`inicio_normal`),
+  ADD UNIQUE KEY `final_normal` (`final_normal`);
+
+--
+-- Indices de la tabla `clientes`
+--
+ALTER TABLE `clientes`
+  ADD PRIMARY KEY (`dni`);
 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
