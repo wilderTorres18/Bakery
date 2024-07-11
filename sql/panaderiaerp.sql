@@ -1017,7 +1017,7 @@ DELIMITER ;
 --
 
 CREATE TABLE `telcl` (
-  `ced_cl` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `dni` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
   `tel_cl` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -1026,16 +1026,77 @@ CREATE TABLE `telcl` (
 -- Indices de la tabla `agenda`
 --
 ALTER TABLE `agenda`
-  ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `inicio_normal` (`inicio_normal`),
   ADD UNIQUE KEY `final_normal` (`final_normal`);
 
 --
 -- Indices de la tabla `clientes`
 --
-ALTER TABLE `clientes`
-  ADD PRIMARY KEY (`dni`);
+ALTER TABLE `clientes` 
+  ADD PRIMARY KEY (`dni`);  --ced_cl como dni
 
+--
+-- Indices de la tabla `contratos`
+--
+ALTER TABLE `contratos`
+  ADD PRIMARY KEY (`cod_con`),
+  ADD KEY `id_ped` (`id_ped`);
+
+--
+-- Indices de la tabla `devolucion`
+--
+ALTER TABLE `devolucion`
+  ADD PRIMARY KEY (`ID_DEVOLUCION`),
+  ADD KEY `cod_con` (`cod_con`);
+
+--
+-- Indices de la tabla `lote`
+--
+ALTER TABLE `lote`
+  ADD PRIMARY KEY (`id_lot`,`fec`),
+  ADD KEY `cod_pro` (`cod_pro`);
+
+--
+-- Indices de la tabla `pedidos`
+--
+ALTER TABLE `pedido`
+  ADD KEY `cod_pro` (`cod_pro`),
+  ADD KEY `dni` (`dni`);
+  
+
+--
+-- Indices de la tabla `telcl`
+--
+ALTER TABLE `telcl`
+  ADD PRIMARY KEY (`dni`,`tel_cl`);
+
+
+-- Restricciones para tablas volcadas
+--
+-- Filtros para la tabla `devolucion`
+--
+ALTER TABLE `devolucion`
+  ADD CONSTRAINT `devolucion_ibfk_1` FOREIGN KEY (`cod_con`) REFERENCES `pedido` (`ID_PEDIDO`);
+
+--
+-- Filtros para la tabla `lote`
+--
+ALTER TABLE `lote`
+  ADD CONSTRAINT `lote_ibfk_1` FOREIGN KEY (`cod_pro`) REFERENCES `caproducto` (`ID_CATPRODUCTO`);
+
+--
+-- Filtros para la tabla `pedidos`
+--
+ALTER TABLE `pedidos`
+  ADD CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`ced_cl`) REFERENCES `clientes` (`ced_cl`),
+  ADD CONSTRAINT `pedidos_ibfk_2` FOREIGN KEY (`cod_pro`) REFERENCES `caproducto` (`ID_CATPRODUCTO`);
+
+--
+-- Filtros para la tabla `telcl`
+--
+ALTER TABLE `telcl`
+  ADD CONSTRAINT `fk_telc_dni` FOREIGN KEY (`dni`) REFERENCES `clientes` (`dni`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
