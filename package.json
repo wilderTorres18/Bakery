@@ -4,6 +4,7 @@
   "description": "![FreskyPan Software ERP](https://lh3.googleusercontent.com/pw/ACtC-3f7EZUhUgWYHrME0JGv_ii6FdD84m0eIBkcknhLjwTrFveJeRlOzmnBi6xI5T4Sn-OKGkvK5mmp6LD2C9k09_nI5ebqMsRRn_sRZUZvo7AJ0Ic5rzBBrhx-CCbCDRGbsl644oyywRWhh2lFY8ysGnBR=w1366-h380-no?authuser=0)\r # FreskyPan",
   "main": "index.js",
   "scripts": {
+    "build:css": "npx tailwindcss -i ./src/styles.css -o ./css/tailwind.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
