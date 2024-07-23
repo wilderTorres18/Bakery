@@ -1013,6 +1013,32 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `pedidos`
+--
+
+CREATE TABLE `pedidos` (
+  `Id_ped` int(3) NOT NULL AUTO_INCREMENT,
+  `Fec_ped` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
+  `can_ped` int(11) NOT NULL,
+  `dir_ped` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `des_ped` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `cod_pro` int NOT NULL,
+  `dni_cl` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `est_ped` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`Id_ped`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `pedidos`
+--
+
+INSERT INTO `pedidos` (`Id_ped`, `Fec_ped`, `can_ped`, `dir_ped`, `des_ped`, `cod_pro`, `ced_cl`, `est_ped`) VALUES
+(1, '10/29/2019', 78, '40, Porta Bello, La ', 'jk', '67', '15', '1'),
+(2, '11/01/2019', 12, 'hk', 'xz', '12', '12345', '1');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `telcl`
 --
 
@@ -1059,9 +1085,9 @@ ALTER TABLE `lote`
 --
 -- Indices de la tabla `pedidos`
 --
-ALTER TABLE `pedido`
+ALTER TABLE `pedidos`
   ADD KEY `cod_pro` (`cod_pro`),
-  ADD KEY `dni` (`dni`);
+  ADD KEY `dni_cl` (`dni_cl`);
   
 
 --
@@ -1088,8 +1114,11 @@ ALTER TABLE `lote`
 -- Filtros para la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  ADD CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`ced_cl`) REFERENCES `clientes` (`ced_cl`),
-  ADD CONSTRAINT `pedidos_ibfk_2` FOREIGN KEY (`cod_pro`) REFERENCES `caproducto` (`ID_CATPRODUCTO`);
+  ADD CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`dni_cl`) REFERENCES `clientes` (`dni`),
+  ADD CONSTRAINT `pedidos_ibfk_2` FOREIGN KEY (`cod_pro`) REFERENCES `catproducto` (`ID_CATPRODUCTO`);
+
+ALTER TABLE `pedidos`
+  MODIFY `Id_ped` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Filtros para la tabla `telcl`
