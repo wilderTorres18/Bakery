@@ -57,7 +57,6 @@ session_start();
             </ul>
 
           </div>
-          <p class="mb-4">Aqui encontrara información acerca de los pedidos</a>.</p>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
@@ -75,25 +74,10 @@ session_start();
                       <th>Fecha</th>
                       <th>Número producto</th>
                       <th>Nombre producto</th>
-                      <th>Cantidad Inicial</th>
                       <th>Stock</th>
                       <th></th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <th>Número de lote</th>
-                      <th>Fecha</th>
-                      <th>Número producto</th>
-                      <th>Nombre producto</th>
-                       <th>Cantidad Inicial</th>
-                      <th>Stock</th>
-
-                      <th></th>
-                      <!--  <th></th>
-                      <th></th>-->
-                    </tr>
-                  </tfoot>
                   <tbody>
 
                     <?php require("../basededatos/listalo.php"); ?>

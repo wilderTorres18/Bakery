@@ -83,18 +83,6 @@ session_start();
                       <th>Opción</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <th>Nombre</th>
-                      <th>Precio</th>
-                      <th>Sabor</th>
-                      <th>Descripcion</th>
-                      <th>Stock</th>
-                      <th>Estado</th>
-                      <th>Modificar</th>
-                      <th>Opción</th>
-                    </tr>
-                  </tfoot>
                   <tbody>
 
                     <?php require("../basededatos/listapv.php"); ?>

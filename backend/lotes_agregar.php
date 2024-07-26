@@ -92,7 +92,7 @@ session_start();
                       <div class="form-group col-md-4">
                         <div class="space-small"></div>
                         <div class="space-small"></div>
-                        <label for="inputName">Cantidad inicial</label>
+                        <label for="inputName">Cantidad inicial (Stock)</label>
                         <input type="number" name="ci" class="form-control" id="inputName" maxlength="11" onkeypress="return can_ini(event)" oninput="maxlengthNumber(this)" onpaste="return false" placeholder="">
                         <label for="inputName">Unidades</label>
                         <input type="number" name="uni" class="form-control" id="inputName" maxlength="11" onkeypress="return uni_lo(event)" oninput="maxlengthNumber(this)" onpaste="return false" placeholder="">

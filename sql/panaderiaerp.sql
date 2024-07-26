@@ -1020,7 +1020,7 @@ CREATE TABLE `pedidos` (
   `Id_ped` int(3) NOT NULL AUTO_INCREMENT,
   `Fec_ped` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
   `can_ped` int(11) NOT NULL,
-  `dir_ped` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `dir_ped` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `des_ped` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `cod_pro` int NOT NULL,
   `dni_cl` varchar(10) COLLATE utf8_spanish_ci NOT NULL,

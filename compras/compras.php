@@ -28,7 +28,10 @@ $d=$todayh['mday'];
 			$ids=$arreglo[$i]['Id'];
 			$can=$arreglo[$i]['Cantidad'];
 			
-			$actualizar = "UPDATE produccion SET unidades=unidades-'$can' where FK_ID_CATPRODUCTO='$ids'";
+			$actualizar = "UPDATE produccion 
+               SET unidades = unidades - '$can',
+                   cantidadInicial = cantidadInicial - '$can' 
+               WHERE FK_ID_CATPRODUCTO = '$ids'";
 		
 		$ejecutar = mysqli_query($conn, $actualizar);
 		}
