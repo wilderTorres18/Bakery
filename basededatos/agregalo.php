@@ -9,7 +9,7 @@ $fec=$_POST['fecha'];
 $ids = $_SESSION['cl']['id_u'];
 $actua=date("Y-m-d");
 $fecha=date("Y-m-d",strtotime($actua." - 1 days") );
-$horario = new DateTime("now", new DateTimeZone('America/Bogota'));
+$horario = new DateTime("now", new DateTimeZone('America/Lima'));
 $hora="".$horario->format('H:i');
 $query4="SELECT nombre,duracion FROM catproducto WHERE ID_CATPRODUCTO='$cod_pro'";
  $result6=mysqli_query($conn,$query4);

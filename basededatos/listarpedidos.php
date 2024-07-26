@@ -1,18 +1,18 @@
 <?php
 require ("connectionbd.php");
 if(empty($_GET)){
-	$result=mysqli_query($conn,"SELECT id_pedido,plazo,fecha,exigencia,prNombre,segNombre,prApellido,segApellido,Pedido.estado FROM Pedidos,Proveedor,PEDIDO_PROVEEDOR WHERE PEDIDO_PROVEEDOR.FK_ID_PEDIDO=ID_PEDIDO AND PEDIDO_PROVEEDOR.FK_ID_PROVEEDOR=ID_PROVEEDOR AND Pedido.estado=1;");
+	$result=mysqli_query($conn,"SELECT id_ped,Fec_ped,can_ped,dir_ped,segNombre,prApellido,segApellido,est_ped FROM Pedidos,Proveedor,PEDIDO_PROVEEDOR WHERE PEDIDO_PROVEEDOR.FK_ID_PEDIDO=ID_PEDIDO AND PEDIDO_PROVEEDOR.FK_ID_PROVEEDOR=ID_PROVEEDOR AND Pedido.estado=1;");
 	$vertodo="False";
 } else {
-	$result=mysqli_query($conn,"SELECT ID_PEDIDO,plazo,fecha,exigencia,prNombre,segNombre,prApellido,segApellido,Pedido.estado FROM Pedidos,Proveedor,PEDIDO_PROVEEDOR WHERE PEDIDO_PROVEEDOR.FK_ID_PEDIDO=ID_PEDIDO AND PEDIDO_PROVEEDOR.FK_ID_PROVEEDOR=ID_PROVEEDOR;");
+	$result=mysqli_query($conn,"SELECT id_ped,Fec_ped,can_ped,dir_ped,segNombre,prApellido,segApellido,est_ped FROM Pedidos,Proveedor,PEDIDO_PROVEEDOR WHERE PEDIDO_PROVEEDOR.FK_ID_PEDIDO=ID_PEDIDO AND PEDIDO_PROVEEDOR.FK_ID_PROVEEDOR=ID_PROVEEDOR;");
 	$vertodo="True";
 }		
 			while($fila=mysqli_fetch_array($result)){			
-				$cod = $fila['ID_PEDIDO'];
-				$fec = $fila['fecha'];
-				$pla = $fila['plazo'];
-				$exi = $fila['exigencia'];
-				$est = $fila['estado'];
+				$cod = $fila['id_ped'];
+				$fec = $fila['Fec_ped'];
+				$pla = $fila['can_ped'];
+				$exi = $fila['dir_ped'];
+				$est = $fila['est_ped'];
 				$pro = $fila['prNombre']." ".$fila['segNombre']." ".$fila['prApellido']." ".$fila['segApellido'];
 				$result2=mysqli_query($conn,"SELECT MateriaPrima.nombre AS nmp,unidades,MedidaCantidad.nombre AS nmc,cancelado FROM Pedido,MateriaPrima,PEDIDO_MATERIAPRIMA,MedidaCantidad WHERE ID_PEDIDO=PEDIDO_MATERIAPRIMA.FK_ID_PEDIDO AND PEDIDO_MATERIAPRIMA.FK_ID_MATERIAPRIMA=ID_MATERIAPRIMA AND ID_PEDIDO=$cod AND ID_MEDIDACANTIDAD=FK_ID_MEDIDACANTIDAD AND cancelado=0;");
 				$result3=mysqli_query($conn,"SELECT nombre,unidades,cancelado FROM Pedido,Insumo,PEDIDO_INSUMO WHERE ID_PEDIDO=PEDIDO_INSUMO.FK_ID_PEDIDO AND PEDIDO_INSUMO.FK_ID_INSUMO=ID_INSUMO AND ID_PEDIDO=$cod AND cancelado=0;");
