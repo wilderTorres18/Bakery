@@ -233,6 +233,61 @@ INSERT INTO `MedidaCantidad` (`ID_MEDIDACANTIDAD`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `pedidos`
+--
+
+CREATE TABLE `pedidos` (
+  `Id_ped` int(3) NOT NULL AUTO_INCREMENT,
+  `Fec_ped` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
+  `can_ped` int(11) NOT NULL,
+  `dir_ped` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `des_ped` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `cod_pro` int NOT NULL,
+  `dni_cl` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `est_ped` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`Id_ped`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `pedidos`
+--
+
+INSERT INTO `pedidos` (`Id_ped`, `Fec_ped`, `can_ped`, `dir_ped`, `des_ped`, `cod_pro`, `ced_cl`, `est_ped`) VALUES
+(1, '10/29/2019', 78, '40, Porta Bello, La ', 'jk', '67', '15', '1'),
+(2, '11/01/2019', 12, 'hk', 'xz', '12', '12345', '1');
+
+-- --------------------------------------------------------
+CREATE TABLE `clientes` (
+  `dni` varchar(8) COLLATE utf8_spanish_ci NOT NULL,
+  `nombre` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `direccion` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `apellido_1` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `apellido_2` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `estado` tinyint(1) NOT NULL DEFAULT 1,
+  `password` varchar(255) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=UTF8_SPANISH_CI;
+--
+-- Volcado de datos para la tabla `clientes`
+--
+
+INSERT INTO `clientes` (`dni`, `nombre`, `descripcion`, `direccion`, `apellido_1`, `apellido_2`, `estado`, `password`) VALUES
+('10986523', 'Manuel', 'Hi, i am manuel', 'calle los geramios', 'velasquez', 'Ojeda', '1', 'pass'),
+('10987456', 'Juan', 'Ninguna', 'Av Grau #3222', 'Perez', 'Gutierrez', '1', '12345678'),
+('12568479', 'Jose', 'i am jose', '40, Porta Bello, La Vuelta, FusagasugÃ¡, Cundinama', 'sandoval', 'Hernandez', '1', '123'),
+('78165651', 'Matias', 'Chonchitos', '40, Porta Bello, La Vuelta', 'Silva', 'Hernandez', '1', '12');
+-- --------------------------------------------------------
+--
+-- Estructura de tabla para la tabla `telcl`
+--
+
+CREATE TABLE `telcl` (
+  `dni` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `tel_cl` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+
+--
 -- Índices para tablas volcadas
 --
 

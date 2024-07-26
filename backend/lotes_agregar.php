@@ -39,8 +39,6 @@ session_start();
 
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">Agregar producciones</h1>
-          <p class="mb-4">En este apartado podremos agregar distintas producciones</a>.</p>
-
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -92,9 +90,9 @@ session_start();
                       <div class="form-group col-md-4">
                         <div class="space-small"></div>
                         <div class="space-small"></div>
-                        <label for="inputName">Cantidad inicial (Stock)</label>
+                        <label for="inputName">Cantidad inicial</label>
                         <input type="number" name="ci" class="form-control" id="inputName" maxlength="11" onkeypress="return can_ini(event)" oninput="maxlengthNumber(this)" onpaste="return false" placeholder="">
-                        <label for="inputName">Unidades</label>
+                        <label for="inputName">Unidades(Stock)</label>
                         <input type="number" name="uni" class="form-control" id="inputName" maxlength="11" onkeypress="return uni_lo(event)" oninput="maxlengthNumber(this)" onpaste="return false" placeholder="">
                         <label for="inputName">Fecha</label>
                         <input type="date" id="inputName" class="form-control" name="fecha" width="100%" />

@@ -70,11 +70,11 @@ session_start();
                 <table class="table table-bordered" id="dataTable" id="Productos_Ver" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Número de lote</th>
+                      <th style="width: 10%;">Número de lote</th>
                       <th>Fecha</th>
-                      <th>Número producto</th>
                       <th>Nombre producto</th>
-                      <th>Stock</th>
+                      <th style="width: 10%;">Cant. Inicial</th>
+                      <th style="width: 10%;">Stock</th>
                       <th></th>
                     </tr>
                   </thead>

@@ -65,7 +65,7 @@ echo "no se pudo",mysqli_error($conn);
         if(!$result90){
           echo "error",mysqli_error($conn);
         }
-$query="UPDATE catproducto SET stock=stock+'$canini' where ID_CATPRODUCTO='$cod_pro'";
+$query="UPDATE catproducto SET stock=stock+'$uni' where ID_CATPRODUCTO='$cod_pro'";
 $result=mysqli_query($conn,$query);	
 echo "registro insertado";
 header('location:../backend/lotes_ver.php');
