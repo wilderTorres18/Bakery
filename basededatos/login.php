@@ -36,7 +36,8 @@ if ($num_user > 0) {
             $a1_cl = $fila['apellido_1'];
 			$a2_cl = $fila['apellido_2'];
 			$dir_cl = $fila['direccion'];
-			$cl = array('nomcl' => $nom_cl , 'ape1' => $a1_cl ,'ape2' => $a2_cl,'dnicl' => $dni_cl,'dircl'=> $dir_cl );
+            $des_cl = $fila['descripcion'];
+			$cl = array('nomcl' => $nom_cl , 'ape1' => $a1_cl ,'ape2' => $a2_cl,'dnicl' => $dni_cl,'dircl'=> $dir_cl, 'descl' => $des_cl);
             $_SESSION['cl'] = $cl;
             header('Location: ../index.php'); // Redirige a la página de productos para clientes
             exit();

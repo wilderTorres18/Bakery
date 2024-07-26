@@ -10,10 +10,9 @@
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/629388bad9.js"></script>
     <title>Freskypan - Panadería en Fusagasugá</title>
-</head>
-<style>
+    <style>
         .bg-custom {
-            background-image: url('./backend/img/dos.jpg'); /* Reemplaza con la ruta a tu imagen */
+            background-image: url('./backend/img/2024/vision.jpg'); /* Reemplaza con la ruta a tu imagen */
             background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el contenedor */
             background-position: center; /* Centra la imagen */
             background-repeat: no-repeat; /* No repite la imagen */
@@ -33,31 +32,49 @@
             background-color: #357ABD; /* Azul más oscuro al pasar el ratón */
         }
     </style>
+</head>
 
 <body class="bg-gray-100">
     <!-- component -->
-    <!-- Create by joker banny -->
-    <div class="h-screen bg-custom flex justify-center items-center">
-        <div class="lg:w-2/5 md:w-1/2 w-2/3">
-            <form class="bg-white p-10 rounded-lg shadow-lg min-w-full">
-                <h1 class="text-center text-2xl mb-6 text-gray-600 font-bold font-sans">Registrate</h1>
-                <div>
-                    <label class="text-gray-800 font-semibold block my-3 text-md" for="username">Username</label>
-                    <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="username" id="username" placeholder="username" />
+    <div class="min-h-screen bg-custom flex justify-center items-center p-4">
+        <div class="lg:w-2/5 md:w-1/2 w-full max-w-md">
+            <form class="bg-white p-6 md:p-8 rounded-lg shadow-lg" action="basededatos/agregarc2.php" method="POST">
+                <h1 class="text-center text-2xl mb-6 text-gray-600 font-bold font-sans">Regístrate</h1>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-gray-800 font-semibold block my-3 text-md" for="dni">DNI</label>
+                        <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="number" name="dni" id="dni" placeholder="DNI" />
+                    </div>
+                    <div>
+                        <label class="text-gray-800 font-semibold block my-3 text-md" for="tel">Teléfono</label>
+                        <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="number" name="telefono" id="tel" placeholder="999999999" />
+                    </div>
+                    <div>
+                        <label class="text-gray-800 font-semibold block my-3 text-md" for="nom">Nombre</label>
+                        <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="nombre" id="nom" placeholder="Nombre" />
+                    </div>
+                    <div>
+                        <label class="text-gray-800 font-semibold block my-3 text-md" for="a1">Primer apellido</label>
+                        <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="apellido_1" id="a1" placeholder="Primer apellido" />
+                    </div>
+                    <div>
+                        <label class="text-gray-800 font-semibold block my-3 text-md" for="a2">Segundo apellido</label>
+                        <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="apellido_2" id="a2" placeholder="Segundo apellido" />
+                    </div>
+                    <div>
+                        <label class="text-gray-800 font-semibold block my-3 text-md" for="dir">Dirección</label>
+                        <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="direccion" id="dir" placeholder="Dirección" />
+                    </div>
+                    <div>
+                        <label class="text-gray-800 font-semibold block my-3 text-md" for="des">Descripción</label>
+                        <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="descripcion" id="des" placeholder="Descripción" />
+                    </div>
+                    <div>
+                        <label class="text-gray-800 font-semibold block my-3 text-md" for="pass">Password</label>
+                        <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="password" name="pass" id="pass" placeholder="......" />
+                    </div>
                 </div>
-                <div>
-                    <label class="text-gray-800 font-semibold block my-3 text-md" for="email">Email</label>
-                    <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="email" id="email" placeholder="@email" />
-                </div>
-                <div>
-                    <label class="text-gray-800 font-semibold block my-3 text-md" for="password">Password</label>
-                    <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="password" id="password" placeholder="password" />
-                </div>
-                <div>
-                    <label class="text-gray-800 font-semibold block my-3 text-md" for="confirm">Confirm password</label>
-                    <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="confirm" id="confirm" placeholder="confirm password" />
-                </div>
-                <button type="submit" class="w-full mt-6 btn-register rounded-lg px-4 py-2 text-lg tracking-wide font-semibold font-sans">Register</button>
+                <button type="submit" class="w-full mt-6 btn-register rounded-lg px-4 py-2 text-lg tracking-wide font-semibold font-sans">Registrar</button>
                 <a href="../index.php" class="w-full mt-6 mb-3 btn-guest rounded-lg px-4 py-2 text-lg text-center tracking-wide font-semibold font-sans block">Continuar como invitado</a>
             </form>
         </div>

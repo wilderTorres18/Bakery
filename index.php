@@ -7,164 +7,151 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- CSS-->
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="login/vendor/bootstrap/css/bootstrap.min.css" crossorigin="anonymous">
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <!--FontAwesome-->
-    <script src="js/629388bad9.js"></script>
+    <script src="https://kit.fontawesome.com/629388bad9.js" crossorigin="anonymous"></script>
 
     <!-- Custom favicon for this template-->
     <link rel="icon" type="image/png" href="favicon.png" />
 
-    <!--Fonts-->
-    <link href="css/font.css" rel="stylesheet">
-    <title>Panaderia "Los gemelos"</title>
+    <title>Panadería "Los Gemelos"</title>
 </head>
 
-<body>
+<body class="bg-gray-100">
     <!--Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">
-            <img src="favicon.png" width="30" height="30" class="d-inline-block align-top" alt="">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="historia.html">Historia</a>
-                </li>
-                <li class="nav-item active">
-          <a class="nav-link" href="contacto.php">Contactanos</a>
-        </li>
-            </ul>
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+            <div class="relative flex items-center justify-between h-16">
+                <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                    <!-- Mobile menu button-->
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                        <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+                    <a class="navbar-brand flex-shrink-0" href="#">
+                        <img src="favicon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                    </a>
+                    <div class="hidden sm:block sm:ml-6">
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-gray-900 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Inicio</a>
+                            <a href="historia.html" class="text-gray-900 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Historia</a>
+                            <a href="contacto.php" class="text-gray-900 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contáctanos</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden sm:block">
+                    <div class="flex items-center">
+                        <div class="btn-group mr-2" role="group" aria-label="Second group">
+                            <?php if (!(isset($_SESSION['cl']))) { ?>
+                                <a href="nuevo_cliente.php" class="btn btn-primary my-2 my-sm-0 ">Registrarse</a>
+                            <?php } ?>
+                        </div>
+                        <div class="form-inline my-2 my-lg-0">
+                            <?php if (!(isset($_SESSION['cl']))) { ?>
+                                <a href="login/" class="btn btn-success my-2 my-sm-0">Iniciar sesión</a>
+                            <?php } ?>
+                            <?php if (isset($_SESSION['cl'])) { ?>
+                                <a href="salir.php" class="btn btn-success my-2 my-sm-0">Salir</a>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-            <div class="btn-group mr-2" role="group" aria-label="Second group">
-    <form class="form-inline my-2 my-lg-0">
-             <?php if(!(isset($_SESSION['cl']))){?>
-      <a href="nuevo_cliente.php" class="btn btn-primary my-2 my-sm-0 ">Registrarse</a>
-  <?php }?>
-    </form>
-    </div>
-            <form class="form-inline my-2 my-lg-0">
-                <?php if (!(isset($_SESSION['cl']))) { ?>
-                    <a href="login/" class="btn btn-success my-2 my-sm-0">Iniciar sesión</a>
-                <?php } ?>
-                <?php if (isset($_SESSION['cl'])) { ?>
-                    <a href="salir.php" class="btn btn-success my-2 my-sm-0">Salir</a>
-                <?php } ?>
-            </form>
+        <!-- Mobile menu, show/hide based on menu state. -->
+        <div class="sm:hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Inicio</a>
+                <a href="historia.html" class="text-gray-900 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Historia</a>
+                <a href="contacto.php" class="text-gray-900 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contáctanos</a>
+            </div>
         </div>
     </nav>
 
     <!--Header-->
-    <div class="contenedor">
-        <header>
-            <div class="logo">
-                <h1>"Los Gemelos"</h1>
-                <p>Una panaderia en Perú</p>
-            </div>
-            <form action="">
-                <input type="text" class="barra-busqueda" id="barra-busqueda" placeholder="¿Que se te antoja hoy?">
+    <div class="bg-yellow-400 py-12">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl font-bold text-gray-800">"Los Gemelos"</h1>
+            <p class="mt-2 text-gray-700">Una panadería en Perú</p>
+            <form action="" class="mt-6">
+                <input type="text" class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none" id="barra-busqueda" placeholder="¿Qué se te antoja hoy?">
             </form>
-            <div class="categorias" id="categorias">
-                <a href="#" class="activo">Todos</a>
-                <a href="#">Dulce</a>
-                <a href="#">Salado</a>
-                <a href="#">Postres</a>
-                <a href="#">Tortas</a>
+            <div class="mt-4">
+                <a href="#" class="inline-block bg-white text-gray-800 py-2 px-4 rounded-lg shadow hover:bg-gray-200">Todos</a>
+                <a href="#" class="inline-block bg-white text-gray-800 py-2 px-4 rounded-lg shadow hover:bg-gray-200">Dulce</a>
+                <a href="#" class="inline-block bg-white text-gray-800 py-2 px-4 rounded-lg shadow hover:bg-gray-200">Salado</a>
+                <a href="#" class="inline-block bg-white text-gray-800 py-2 px-4 rounded-lg shadow hover:bg-gray-200">Postres</a>
+                <a href="#" class="inline-block bg-white text-gray-800 py-2 px-4 rounded-lg shadow hover:bg-gray-200">Tortas</a>
             </div>
-        </header>
-
-        <!--Grip Productos-->
-        <section class="grid" id="grid">
-            <?php
-            require("basededatos/connectionbd.php");
-            $query = "Select catproducto.stock,catproducto.nombre,catproducto.imagen,catproducto.sabor,catproducto.ID_CATPRODUCTO,catproducto.descripcion,catproducto.precio from catproducto";
-            $result = mysqli_query($conn, $query);
-            $i = 0;
-
-            while ($fila = mysqli_fetch_array($result)) {
-                $Nom = $fila['nombre'];
-                $cod = $fila['precio'];
-                $sab = $fila['sabor'];
-                $des = $fila['descripcion'];
-
-                $stock = ['stock'];
-                $id = $fila['ID_CATPRODUCTO'];
-                $img = $fila['imagen'];
-                $i++;
-                if ($stock > 0) {
-            ?>
-
-                    <div class="item" data-categoria="<?php echo $sab; ?>" data-etiquetas="<?php echo $sab; ?> <?php echo $Nom; ?>" data-descripcion="<?php echo $des; ?>">
-                        <div class="item-contenido">
-                            <img src="basededatos/<?php echo $img; ?>" alt="">
-                        </div>
-                        <div class="small"></div>
-                        <div class="input-group flex-nowrap">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="addon-wrapping"><?php echo $Nom; ?></span>
-                            </div>
-                            <?php if (isset($_SESSION['cl'])) { ?>
-                                <!--  <input type="number" class="form-control" placeholder="Cantidad" aria-label="Cantidad"
-                        aria-describedby="addon-wrapping"> -->
-                            <?php } ?>
-                        </div>
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="addon-wrapping"> Precio :S/ <?php echo $cod; ?></span>
-                        </div>
-                        <?php if(isset($_SESSION['cl'])){?>
-                        <a class="btn btn-outline-primary" href="./carritodecompras.php?id=<?php  echo $id;?>">Añadir al carrito de compras</a>
-              <!--  <button type="button" class="btn btn-outline-primary">Comprar</button> -->
-<?php }?>
-                    </div>
-            <?php  }
-            } ?>
-        </section>
+        </div>
     </div>
 
+    <!--Grid Productos-->
+    <section class="container mx-auto py-8 px-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="grid">
+        <?php
+        require("basededatos/connectionbd.php");
+        $query = "SELECT stock, nombre, imagen, sabor, ID_CATPRODUCTO, descripcion, precio FROM catproducto";
+        $result = mysqli_query($conn, $query);
+        while ($fila = mysqli_fetch_array($result)) {
+            $Nom = $fila['nombre'];
+            $cod = $fila['precio'];
+            $sab = $fila['sabor'];
+            $des = $fila['descripcion'];
+            $stock = $fila['stock'];
+            $id = $fila['ID_CATPRODUCTO'];
+            $img = $fila['imagen'];
+            if ($stock > 0) {
+        ?>
+            <div class="bg-white p-4 rounded-lg shadow-lg mt-4" data-categoria="<?php echo $sab; ?>" data-etiquetas="<?php echo $sab; ?> <?php echo $Nom; ?>" data-descripcion="<?php echo $des; ?>">
+                <img src="basededatos/<?php echo $img; ?>" alt="<?php echo $Nom; ?>" class="w-full h-48 object-cover rounded-lg mb-4">
+                <h2 class="text-xl font-bold text-gray-800"><?php echo $Nom; ?></h2>
+                <p class="text-gray-600"><?php echo $des; ?></p>
+                <div class="flex justify-between items-center mt-4">
+                    <span class="text-gray-800 font-bold">Precio: S/ <?php echo $cod; ?></span>
+                    <?php if (isset($_SESSION['cl'])) { ?>
+                        <a href="./carritodecompras.php?id=<?php echo $id; ?>" class="bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-700">Añadir al carrito</a>
+                    <?php } ?>
+                </div>
+            </div>
+        <?php  }
+        } ?>
+    </div>
+</section>
+
+
     <!--Footer-->
-    <footer class="contenedor">
-        <div class="redes-sociales">
-            <div class="contenedor-icono">
-                <a href="#" target="_blank" class="twitter">
+    <footer class="bg-gray-800 py-6 mt-12">
+        <div class="container mx-auto text-center text-white">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="#" class="text-white hover:text-gray-400">
                     <i class="fab fa-twitter"></i>
                 </a>
-            </div>
-            <div class="contenedor-icono">
-                <a href="#" target="_blank" class="facebook">
+                <a href="#" class="text-white hover:text-gray-400">
                     <i class="fab fa-facebook"></i>
                 </a>
-            </div>
-            <div class="contenedor-icono">
-                <a href="#" target="_blank" class="instagram">
+                <a href="#" class="text-white hover:text-gray-400">
                     <i class="fab fa-instagram"></i>
                 </a>
             </div>
-        </div>
-        <div class="creado-por">
-            <p>Sitio diseñado por <a href="#">WJ SOFTWORKS</a> - <a href="#">PIURA - PERU</a></p>
+            <p>Sitio diseñado por <a href="#" class="underline">WJ SOFTWORKS</a> - <a href="#" class="underline">PIURA - PERU</a></p>
         </div>
     </footer>
 
     <!--JavaScript-->
-    
-    <!--Muuri-->
-    <script src="js/web-animations.min.js"></script>
-    <script src="js/muuri.min.js"></script>
-
     <!--JQuery-->
-    <script src="js/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
-    <script src="js/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
-    <script src="js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNddZrEvvOCcfjOgiWtLNwSEbCrsczx3phrrYsDAyzpCfwfjJrEMyuwYvJtbt3I" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.min.js" integrity="sha384-pP5pYqQn9l3Bbo1Mj4Ad5Nq1dhevhSiwAHuQPs6abQh4Jt5e1Lx6U5G78ycBocsr" crossorigin="anonymous"></script>
     <script src="js/main.js"></script>
 </body>
 

@@ -1,148 +1,149 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- CSS-->
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="login/vendor/bootstrap/css/bootstrap.min.css" crossorigin="anonymous">
-    <!--FontAwesome-->
-    <script src="js/629388bad9.js"></script>
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/629388bad9.js" crossorigin="anonymous"></script>
 
     <!-- Custom favicon for this template-->
     <link rel="icon" type="image/png" href="favicon.png" />
 
-
-    <!--Fonts-->
-    <link href="css/font.css" rel="stylesheet">
-    <title>FreskyPan - Panaderia en Fusagasuga</title>
+    <title>FreskyPan - Panadería en Fusagasugá</title>
 </head>
 
-
-<body>
+<body class="bg-gray-100">
 
     <!--Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="index.php">
-        <img src="favicon.png" width="30" height="30" class="d-inline-block align-top" alt="">
-        
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" 
-              data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
-              aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item ">
-            <a class="nav-link" href="index.php">Inicio </a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="historia.html">Historia <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="contacto.php">Contactanos</a>
-          </li>
-          
-        </ul>
-        <div class="btn-group mr-2" role="group" aria-label="Second group">
-        <form class="form-inline my-2 my-lg-0">
-          <a href="nuevo_cliente.php" class="btn btn-primary my-2 my-sm-0 ">Registrarse</a>
-        </form>
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+            <div class="relative flex items-center justify-between h-16">
+                <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                    <!-- Mobile menu button-->
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                        <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+                    <a class="navbar-brand flex-shrink-0" href="#">
+                        <img src="favicon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                    </a>
+                    <div class="hidden sm:block sm:ml-6">
+                        <div class="flex space-x-4">
+                            <a href="index.php" class="text-gray-900 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Inicio</a>
+                            <a href="historia.html" class="text-gray-900 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Historia</a>
+                            <a href="contacto.php" class="text-gray-900 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contáctanos</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden sm:block">
+                    <div class="flex items-center">
+                        <div class="btn-group mr-2" role="group" aria-label="Second group">
+                            <a href="nuevo_cliente.php" class="btn btn-primary my-2 my-sm-0">Registrarse</a>
+                        </div>
+                        <a href="login/" class="btn btn-success my-2 my-sm-0">Iniciar sesión</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <form class="form-inline my-2 my-lg-0">   
-            
-       
-          <a href="login/" class="btn btn-success my-2 my-sm-0">Iniciar sesión</a>
-    
-        </form>
-      </div>
+
+        <!-- Mobile menu, show/hide based on menu state. -->
+        <div class="sm:hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.php" class="text-gray-900 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Inicio</a>
+                <a href="historia.html" class="text-gray-900 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Historia</a>
+                <a href="contacto.php" class="text-gray-900 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contáctanos</a>
+            </div>
+        </div>
     </nav>
-  
-  
-    <section>
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-6 order-lg-2">
-            <div class="p-5">
-              <img class="img-fluid rounded-circle" src="img/uno.jpg" alt="">
+
+    <!-- Historia -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="order-2 lg:order-1">
+                    <div class="p-5">
+                        <h2 class="text-3xl font-bold text-gray-800">Una panadería para ti...</h2>
+                        <p class="mt-4 text-gray-600">Somos una panadería desarrollada desde los principios de Fusagasugá. Nuestra historia se remonta a hace muchos años, comienzos de una familia humilde y trabajadora con ganas de salir adelante.</p>
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2">
+                    <div class="p-5">
+                        <img class="w-full h-auto rounded-lg shadow-lg" src="img/uno.jpg" alt="Una panadería para ti...">
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-lg-6 order-lg-1">
-            <div class="p-5">
-              <h2 class="display-4">Una panaderia para ti...</h2>
-              <p>Somos una panaderia desarrollada desde lo principios de FUsagasuga, nuestra historia se remonta a hace muchos años, comienzos de una familia humilde y trabjadora con ganas de salir adelante.</p>
-            </div>
-          </div>
         </div>
-      </div>
     </section>
-  
-    <section>
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-6">
-            <div class="p-5">
-              <img class="img-fluid rounded-circle" src="img/dos.jpg" alt="">
+
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div>
+                    <div class="p-5">
+                        <img class="w-full h-auto rounded-lg shadow-lg" src="img/dos.jpg" alt="Nuestros Productos">
+                    </div>
+                </div>
+                <div>
+                    <div class="p-5">
+                        <h2 class="text-3xl font-bold text-gray-800">Nuestros Productos</h2>
+                        <p class="mt-4 text-gray-600">Nos resalta nuestra calidad y amabilidad que día a día ofrecemos a nuestros clientes, aportando los mejores ingredientes de primera calidad a cada uno de nuestros procesos que llevamos día a día.</p>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="p-5">
-              <h2 class="display-4">Nuestros Productos</h2>
-              <p>Nos resaltra nuestra calidad y amabilidad que dia a dia ofrecemos a nuestros clientes, aportando los mejores ingredientes de primera calidad a cada uno de nuestros procesos que llevamos dia a dia.</p>
-            </div>
-          </div>
         </div>
-      </div>
     </section>
-  
-    <section>
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-6 order-lg-2">
-            <div class="p-5">
-              <img class="img-fluid rounded-circle" src="img/tres.jpg" alt="">
+
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="order-2 lg:order-1">
+                    <div class="p-5">
+                        <h2 class="text-3xl font-bold text-gray-800">¿Por qué?</h2>
+                        <p class="mt-4 text-gray-600">Elegirnos no es una opción, sino un gusto a tu paladar. Convierte tus momentos en pequeños recuerdos que lleves en tu corazón día a día.</p>
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2">
+                    <div class="p-5">
+                        <img class="w-full h-auto rounded-lg shadow-lg" src="img/tres.jpg" alt="¿Por qué?">
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-lg-6 order-lg-1">
-            <div class="p-5">
-              <h2 class="display-4">¿Por que?</h2>
-              <p>Elegirnos no es una opción si no un gusto a tu paladar, convierte tus momentos en pequeños recuerdos que lleves en tu corazon dia a dia.</p>
-            </div>
-          </div>
         </div>
-      </div>
     </section>
-  
-     <!--Footer-->
-     <footer class="contenedor">
-        <div class="redes-sociales">
-            <div class="contenedor-icono">
-                <a href="#" target="_blank" class="twitter">
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 py-6 mt-12">
+        <div class="container mx-auto text-center text-white">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="#" class="text-white hover:text-gray-400">
                     <i class="fab fa-twitter"></i>
                 </a>
-            </div>
-            <div class="contenedor-icono">
-                <a href="#" target="_blank" class="facebook">
+                <a href="#" class="text-white hover:text-gray-400">
                     <i class="fab fa-facebook"></i>
                 </a>
-            </div>
-            <div class="contenedor-icono">
-                <a href="#" target="_blank" class="instagram">
+                <a href="#" class="text-white hover:text-gray-400">
                     <i class="fab fa-instagram"></i>
                 </a>
             </div>
-        </div>
-        <div class="creado-por">
-            <p>Sitio diseñado por <a href="#">Deportivo Tapitas</a> - <a href="#">Universidad de Cundinamarca</a></p>
+            <p>Sitio diseñado por <a href="#" class="underline">Deportivo Tapitas</a> - <a href="#" class="underline">Universidad de Cundinamarca</a></p>
         </div>
     </footer>
-  
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  
-  </body>
+
+    <!--JavaScript-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNddZrEvvOCcfjOgiWtLNwSEbCrsczx3phrrYsDAyzpCfwfjJrEMyuwYvJtbt3I" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.min.js" integrity="sha384-pP5pYqQn9l3Bbo1Mj4Ad5Nq1dhevhSiwAHuQPs6abQh4Jt5e1Lx6U5G78ycBocsr" crossorigin="anonymous"></script>
+</body>
+
 </html>

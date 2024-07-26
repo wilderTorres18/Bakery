@@ -1,10 +1,10 @@
 <?php
 require ("connectionbd.php");
 if(empty($_GET)){
-	$result=mysqli_query($conn,"SELECT ID_PEDIDO,plazo,fecha,exigencia,prNombre,segNombre,prApellido,segApellido,Pedido.estado FROM Pedido,Proveedor,PEDIDO_PROVEEDOR WHERE PEDIDO_PROVEEDOR.FK_ID_PEDIDO=ID_PEDIDO AND PEDIDO_PROVEEDOR.FK_ID_PROVEEDOR=ID_PROVEEDOR AND Pedido.estado=1;");
+	$result=mysqli_query($conn,"SELECT id_pedido,plazo,fecha,exigencia,prNombre,segNombre,prApellido,segApellido,Pedido.estado FROM Pedidos,Proveedor,PEDIDO_PROVEEDOR WHERE PEDIDO_PROVEEDOR.FK_ID_PEDIDO=ID_PEDIDO AND PEDIDO_PROVEEDOR.FK_ID_PROVEEDOR=ID_PROVEEDOR AND Pedido.estado=1;");
 	$vertodo="False";
 } else {
-	$result=mysqli_query($conn,"SELECT ID_PEDIDO,plazo,fecha,exigencia,prNombre,segNombre,prApellido,segApellido,Pedido.estado FROM Pedido,Proveedor,PEDIDO_PROVEEDOR WHERE PEDIDO_PROVEEDOR.FK_ID_PEDIDO=ID_PEDIDO AND PEDIDO_PROVEEDOR.FK_ID_PROVEEDOR=ID_PROVEEDOR;");
+	$result=mysqli_query($conn,"SELECT ID_PEDIDO,plazo,fecha,exigencia,prNombre,segNombre,prApellido,segApellido,Pedido.estado FROM Pedidos,Proveedor,PEDIDO_PROVEEDOR WHERE PEDIDO_PROVEEDOR.FK_ID_PEDIDO=ID_PEDIDO AND PEDIDO_PROVEEDOR.FK_ID_PROVEEDOR=ID_PROVEEDOR;");
 	$vertodo="True";
 }		
 			while($fila=mysqli_fetch_array($result)){			
