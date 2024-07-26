@@ -58,8 +58,6 @@ session_start();
 
           </div>
 
-          <p class="mb-4">Aqui encontrara información acerca de los productos</a>.</p>
-
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">

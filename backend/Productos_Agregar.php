@@ -1,6 +1,6 @@
 <?php
 session_start();
- if((isset($_SESSION['cl']))){ 
+if((isset($_SESSION['cl']))){ 
 require ("../basededatos/connectionbd.php");
 $codg="Select MAX(ID_CATPRODUCTO) as idc from CATPRODUCTO";
 $res=mysqli_query($conn,$codg);
@@ -10,7 +10,7 @@ $codg2=intval($file['idc'])+1;
 }else if((mysqli_num_fields($res))==0){
 $codg2=1;
 }
-  ?>
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -25,16 +25,14 @@ $codg2=1;
 
 </head>
 
+<body>
 <div id="wrapper">
-
 
   <!-- Sidebar -->
   <?php
   require('menu.php');
   ?>
-
   <!-- End of Sidebar -->
-
 
   <!-- Content Wrapper -->
   <div id="content-wrapper" class="d-flex flex-column">
@@ -46,13 +44,13 @@ $codg2=1;
       <?php
       require('Navigation.php');
       ?>
-      <!-- End of -->
+      <!-- End of Topbar -->
+
       <!-- Begin Page Content -->
       <div class="container-fluid">
 
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Agregar Productos</h1>
-        <p class="mb-4">En este apartado podremos agregar distintos productos</a>.</p>
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
@@ -63,33 +61,28 @@ $codg2=1;
             <!-- Aca se envian los datos a un archivo php ene el action="../basededatos/agregapd.php" -->
             <form action="../basededatos/agregapd.php" method="POST" enctype="multipart/form-data">
 
-
-              <label for="inputName">Codigo del Producto</label>
-              <input type="number" name="cod" class="form-control" id="inputName" value="<?php echo $codg2; ?>" maxlength="11" oninput="return maxlengthNumber(this)" readonly="" onkeypress="return Num_1(event)" onpaste="return false" placeholder="">
+              <label for="inputName">Código del Producto</label>
+              <input type="number" name="cod" class="form-control" id="inputName" value="<?php echo $codg2; ?>" maxlength="11" readonly placeholder="">
 
               <div class="form-row">
-
                 <div class="form-group col-md-6">
                   <label for="inputName">Nombre del Producto</label>
-                  <input type="text" name="nom" class="form-control" id="inputName" maxlength="20" onkeypress="return texto_1(event)" onpaste="return false" placeholder="">
+                  <input type="text" name="nom" class="form-control" id="inputName" maxlength="20" placeholder="">
                 </div>
                 <div class="form-group col-md-6">
                   <label for="inputPrice">Precio</label>
-                  <input type="number" name="pre" class="form-control" id="inputrice" maxlength="11" oninput="return maxlengthNumber(this)" onkeypress="return Num_1(event)" onpaste="return false" placeholder="">
+                  <input type="text" name="pre" class="form-control" id="inputPrice" placeholder="">
                 </div>
               </div>
 
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="inputState">Duración</label>
-                  <input type="number" name="dur" class="form-control" id="inputrice" maxlength="11" oninput="return maxlengthNumber(this)" onkeypress="return Num_1(event)" onpaste="return false" placeholder="Duración en Dias">
+                  <input type="number" name="dur" class="form-control" id="inputrice" maxlength="11" placeholder="Duración en Días">
                 </div>
-
-
                 <div class="form-group col-md-6">
                   <label for="inputState">Estado</label>
                   <select id="inputState" name="est" class="form-control">
-                    
                     <option value="1">Activo</option>
                     <option value="0">Suspendido</option>
                   </select>
@@ -98,12 +91,9 @@ $codg2=1;
 
               <div class="form-row">
                 <div class="form-group col-md-6">
-
-                  <label for="inputState">Categoria</label>
+                  <label for="inputState">Categoría</label>
                   <?php require('../basededatos/select.php') ?>
                 </div>
-
-
                 <div class="form-group col-md-6">
                   <label for="inputState">Sabor</label>
                   <select id="inputState" name="sab" class="form-control">
@@ -118,26 +108,18 @@ $codg2=1;
                 <div class="form-group col-md-6">
                   <div class="form-group">
                     <label for="exampleFormControlTextarea1">Descripción</label>
-                    <textarea class="form-control" name="des" id="exampleFormControlTextarea1" rows="1" maxlength="40"  onpaste="return false" rows="3"></textarea>
+                    <textarea class="form-control" name="des" id="exampleFormControlTextarea1" maxlength="40" rows="3"></textarea>
                   </div>
                 </div>
                 <div class="form-group col-md-6">
-
-                  <div class="form-group ">
+                  <div class="form-group">
                     <label for="exampleFormControlFile1">Imagen del Producto</label>
                     <input type="file" name="img" accept="image/*" class="form-control-file" id="exampleFormControlFile1">
                   </div>
-
                 </div>
-
               </div>
 
-
-
-
               <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#myModal">Añadir</button>
-
-
 
               <!-- Modal -->
               <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -150,7 +132,7 @@ $codg2=1;
                       </button>
                     </div>
                     <div class="modal-body">
-                      ¿Estas seguro de agregar este ítem?
+                      ¿Estás seguro de agregar este ítem?
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
@@ -158,51 +140,43 @@ $codg2=1;
                     </div>
                   </div>
                 </div>
+              </div>
 
             </form>
-
-            <!--End  Add Example -->
+            <!--End Add Example -->
           </div>
         </div>
 
       </div>
+      <!-- /.container-fluid -->
 
-      <script>
-        function maxlengthNumber(ob) {
-          console.log(ob.value);
-
-          if (ob.value.length > ob.maxLength) {
-
-            ob.value = ob.value.slice(0, ob.maxLength);
-          }
-        }
-      </script>
-<!-- Validation -->
-<?php
-      require('Validation.php');
-      ?>
+      <!-- Validation -->
+      <?php require('Validation.php'); ?>
       <!-- End Validation -->
-
 
       <script src="vendor/jquery/jquery.min.js"></script>
       <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-      <!-- Core plugin JavaScript-->
       <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-      <!-- Custom scripts for all pages-->
       <script src="js/sb-admin-2.min.js"></script>
-
-      <!-- Page level plugins -->
       <script src="vendor/datatables/jquery.dataTables.js"></script>
       <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-      <!-- Page level custom scripts -->
       <script src="js/demo/datatables-demo.js"></script>
 
-      </body>
+      <script>
+        function validateDecimal(input) {
+          input.value = input.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+        }
+      </script>
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+</body>
 
 </html>
 <?php }
 require('llenar3.php');
- ?>
+?>

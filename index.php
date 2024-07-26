@@ -41,9 +41,12 @@ session_start();
                     </a>
                     <div class="hidden sm:block sm:ml-6">
                         <div class="flex space-x-4">
-                            <a href="#" class="text-gray-900 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Inicio</a>
-                            <a href="historia.html" class="text-gray-900 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Historia</a>
-                            <a href="contacto.php" class="text-gray-900 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contáctanos</a>
+                            <a href="#"
+                                class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Inicio</a>
+                            <a href="historia.html"
+                                class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Historia</a>
+                            <a href="contacto.php"
+                                class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Contáctanos</a>
                         </div>
                     </div>
                 </div>
@@ -51,17 +54,24 @@ session_start();
                     <div class="flex items-center">
                         <div class="btn-group mr-2" role="group" aria-label="Second group">
                             <?php if (!(isset($_SESSION['cl']))) { ?>
-                                <a href="nuevo_cliente.php" class="btn btn-primary my-2 my-sm-0 ">Registrarse</a>
+                            <a href="nuevo_cliente.php"
+                                class="btn bg-green-500 hover:bg-green-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Registrarse</a>
                             <?php } ?>
                         </div>
                         <div class="form-inline my-2 my-lg-0">
                             <?php if (!(isset($_SESSION['cl']))) { ?>
-                                <a href="login/" class="btn btn-success my-2 my-sm-0">Iniciar sesión</a>
+                            <a href="login/"
+                                class="btn bg-blue-500 hover:bg-blue-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Iniciar
+                                sesión</a>
                             <?php } ?>
                             <?php if (isset($_SESSION['cl'])) { ?>
-                                <a href="salir.php" class="btn btn-success my-2 my-sm-0">Salir</a>
+                            <a href="salir.php"
+                                class="btn bg-red-500 hover:bg-red-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Salir</a>
                             <?php } ?>
                         </div>
+                        <a href="carrito.php" class="ml-4 text-gray-900 hover:text-gray-600">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -76,14 +86,15 @@ session_start();
             </div>
         </div>
     </nav>
-
     <!--Header-->
-    <div class="bg-yellow-400 py-12">
-        <div class="container mx-auto text-center">
+    <div class="bg-yellow-400 py-12 bg-cover bg-center" style="background-image: url('/basededatos/fotos/portada.png');">
+        <div class="container mx-auto text-center bg-opacity-75 bg-yellow-400 p-4 rounded-lg">
             <h1 class="text-4xl font-bold text-gray-800">"Los Gemelos"</h1>
             <p class="mt-2 text-gray-700">Una panadería en Perú</p>
             <form action="" class="mt-6">
-                <input type="text" class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none" id="barra-busqueda" placeholder="¿Qué se te antoja hoy?">
+                <input type="text"
+                    class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+                    id="barra-busqueda" placeholder="¿Qué se te antoja hoy?">
             </form>
             <div class="mt-4">
                 <a href="#" class="inline-block bg-white text-gray-800 py-2 px-4 rounded-lg shadow hover:bg-gray-200">Todos</a>
@@ -95,39 +106,65 @@ session_start();
         </div>
     </div>
 
-    <!--Grid Productos-->
-    <section class="container mx-auto py-8 px-8">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="grid">
-        <?php
-        require("basededatos/connectionbd.php");
-        $query = "SELECT stock, nombre, imagen, sabor, ID_CATPRODUCTO, descripcion, precio FROM catproducto";
-        $result = mysqli_query($conn, $query);
-        while ($fila = mysqli_fetch_array($result)) {
-            $Nom = $fila['nombre'];
-            $cod = $fila['precio'];
-            $sab = $fila['sabor'];
-            $des = $fila['descripcion'];
-            $stock = $fila['stock'];
-            $id = $fila['ID_CATPRODUCTO'];
-            $img = $fila['imagen'];
-            if ($stock > 0) {
-        ?>
-            <div class="bg-white p-4 rounded-lg shadow-lg mt-4" data-categoria="<?php echo $sab; ?>" data-etiquetas="<?php echo $sab; ?> <?php echo $Nom; ?>" data-descripcion="<?php echo $des; ?>">
-                <img src="basededatos/<?php echo $img; ?>" alt="<?php echo $Nom; ?>" class="w-full h-48 object-cover rounded-lg mb-4">
-                <h2 class="text-xl font-bold text-gray-800"><?php echo $Nom; ?></h2>
-                <p class="text-gray-600"><?php echo $des; ?></p>
-                <div class="flex justify-between items-center mt-4">
-                    <span class="text-gray-800 font-bold">Precio: S/ <?php echo $cod; ?></span>
-                    <?php if (isset($_SESSION['cl'])) { ?>
-                        <a href="./carritodecompras.php?id=<?php echo $id; ?>" class="bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-700">Añadir al carrito</a>
-                    <?php } ?>
+    <!--Grid Productos y Carrito de Compras-->
+    <div class="container mx-auto py-8 px-8 grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <!-- Productos -->
+        <div class="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+            <?php
+            require("basededatos/connectionbd.php");
+            $query = "SELECT stock, nombre, imagen, sabor, ID_CATPRODUCTO, descripcion, precio FROM catproducto";
+            $result = mysqli_query($conn, $query);
+            while ($fila = mysqli_fetch_array($result)) {
+                $Nom = $fila['nombre'];
+                $cod = $fila['precio'];
+                $sab = $fila['sabor'];
+                $des = $fila['descripcion'];
+                $stock = $fila['stock'];
+                $id = $fila['ID_CATPRODUCTO'];
+                $img = $fila['imagen'];
+                if ($stock > 0) {
+            ?>
+                <div class="bg-white p-4 rounded-lg shadow-lg mt-4" data-categoria="<?php echo $sab; ?>" data-etiquetas="<?php echo $sab; ?> <?php echo $Nom; ?>" data-descripcion="<?php echo $des; ?>">
+                    <img src="basededatos/<?php echo $img; ?>" alt="<?php echo $Nom; ?>" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h2 class="text-xl font-bold text-gray-800"><?php echo $Nom; ?></h2>
+                    <p class="text-gray-600"><?php echo $des; ?></p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-gray-800 font-bold">Precio: S/ <?php echo $cod; ?></span>
+                        <?php if (isset($_SESSION['cl'])) { ?>
+                            <a href="./carritodecompras.php?id=<?php echo $id; ?>" class="bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-700">Añadir al carrito</a>
+                        <?php } ?>
+                    </div>
+                </div>
+            <?php  }
+            } ?>
+        </div>
+        <!-- Carrito de Compras -->
+        <div class="lg:col-span-1 bg-white p-4 rounded-lg shadow-lg mt-4">
+            <div class="border-b pb-3 mb-4">
+                <h2 class="text-xl font-bold text-gray-800">Carrito de compras</h2>
+                <button class="text-gray-500 hover:text-gray-700 focus:outline-none"><i class="fas fa-times"></i></button>
+            </div>
+            <div>
+                <div class="flex items-center justify-between mb-4">
+                    <img src="basededatos/croissant.jpg" alt="Croissant" class="w-12 h-12 object-cover rounded">
+                    <div>
+                        <p class="text-gray-800">Croissant</p>
+                        <p class="text-gray-600">Cantidad: 1</p>
+                    </div>
+                    <p class="text-gray-800">S/ 21.00</p>
+                </div>
+                <!-- Total -->
+                <div class="border-t pt-3">
+                    <p class="text-xl font-bold text-gray-800">Total: S/ 21.00</p>
+                </div>
+                <!-- Botones -->
+                <div class="mt-4">
+                    <a href="#" class="w-full bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 block text-center">Proceder a pagar</a>
+                    <a href="#" class="w-full bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300 block text-center mt-2">Seguir comprando</a>
                 </div>
             </div>
-        <?php  }
-        } ?>
+        </div>
     </div>
-</section>
-
 
     <!--Footer-->
     <footer class="bg-gray-800 py-6 mt-12">

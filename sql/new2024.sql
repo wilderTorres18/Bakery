@@ -122,6 +122,115 @@ CREATE TABLE `CatProducto` (
 
 -- --------------------------------------------------------
 
+--
+-- Estructura de tabla para la tabla `Devolucion`
+--
+
+CREATE TABLE `Devolucion` (
+  `ID_DEVOLUCION` int(4) NOT NULL,
+  `descripcion` varchar(60) NOT NULL,
+  `fecha` date NOT NULL,
+  `estado` tinyint(1) NOT NULL,
+  `FK_ID_PEDIDO` int(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `Factura`
+--
+
+CREATE TABLE `Factura` (
+  `ID_FACTURA` int(6) NOT NULL,
+  `fecha` date NOT NULL,
+  `FK_ID_PEDIDO` int(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `Insumo`
+--
+
+CREATE TABLE `Insumo` (
+  `ID_INSUMO` int(3) NOT NULL,
+  `nombre` varchar(20) NOT NULL,
+  `stock` int(3) NOT NULL,
+  `descripcion` varchar(50) NOT NULL,
+  `precio` int(9) NOT NULL,
+  `cantidad` int(3) NOT NULL,
+  `iva` int(2) NOT NULL,
+  `estado` tinyint(1) NOT NULL,
+  `FK_ID_TIPOINSUMO` int(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `Log`
+--
+
+CREATE TABLE `Log` (
+  `ID_LOG` int(7) NOT NULL AUTO_INCREMENT,
+  `fecha` date NOT NULL,
+  `hora` varchar(5) DEFAULT NULL,
+  `descripcion` varchar(100) NOT NULL,
+  `FK_ID_USUARIO` int(11) NOT NULL,
+  PRIMARY KEY (ID_LOG)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+--
+-- Disparadores `log`
+--
+DELIMITER $$
+CREATE TRIGGER `logtg` BEFORE INSERT ON `Log` FOR EACH ROW SET NEW.`ID_LOG` = (
+       SELECT IFNULL(MAX(ID_LOG), 0) + 1
+       FROM Log
+       
+         
+    )
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `MateriaPrima`
+--
+
+CREATE TABLE `MateriaPrima` (
+  `ID_MATERIAPRIMA` int(3) NOT NULL,
+  `nombre` varchar(20) NOT NULL,
+  `cantidad` int(2) NOT NULL,
+  `descripcion` varchar(50) NOT NULL,
+  `precio` int(6) NOT NULL,
+  `iva` int(2) NOT NULL,
+  `stock` int(3) NOT NULL,
+  `estado` tinyint(1) NOT NULL,
+  `FK_ID_MEDIDACANTIDAD` int(2) NOT NULL,
+  `FK_ID_TIPOMATERIAPRIMA` int(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `MedidaCantidad`
+--
+
+CREATE TABLE `MedidaCantidad` (
+  `ID_MEDIDACANTIDAD` int(2) NOT NULL,
+  `nombre` varchar(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `MedidaCantidad`
+--
+
+INSERT INTO `MedidaCantidad` (`ID_MEDIDACANTIDAD`, `nombre`) VALUES
+(1,'kg'),(2,'lb'),(3,'ton'),(4,'g'),(5,'mg'),(6,'L'),(7,'mL'),(8,'oz'),(9,'galón'),(10,'cc'),(11,'Uni');
+
+-- --------------------------------------------------------
 
 --
 -- Índices para tablas volcadas

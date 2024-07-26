@@ -77,14 +77,6 @@ session_start();
                       <th>Opción</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <th>Número</th>
-                      <th>Nombre</th>
-                      <th>Categoría</th>
-                      <th>Opción</th>
-                    </tr>
-                  </tfoot>
                   <tbody>
  
                     <?php require("../basededatos/listat.php"); ?>
