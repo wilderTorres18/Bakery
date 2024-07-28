@@ -16,7 +16,7 @@ session_start();
     <!-- Custom favicon for this template-->
     <link rel="icon" type="image/png" href="favicon.png" />
 
-    <title>FreskyPan - Panadería en Fusagasugá</title>
+    <title>Panadería "Los Gemelos"</title>
 </head>
 
 <body class="bg-gray-100">
