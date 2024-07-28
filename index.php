@@ -1,6 +1,8 @@
 <?php
 session_start();
+$numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0;
 ?>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -9,12 +11,10 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <!--FontAwesome-->
+    <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/629388bad9.js" crossorigin="anonymous"></script>
-
     <!-- Custom favicon for this template-->
     <link rel="icon" type="image/png" href="favicon.png" />
-
     <title>Panadería "Los Gemelos"</title>
 </head>
 
@@ -41,14 +41,10 @@ session_start();
                     </a>
                     <div class="hidden sm:block sm:ml-6">
                         <div class="flex space-x-4">
-                            <a href="index.php"
-                                class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Inicio</a>
-                            <a href="historia.php"
-                                class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Historia</a>
-                            <a href="establecimiento.php"
-                                class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Establecimientos</a>
-                                <a href="contacto.php"
-                                class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Contáctanos</a>
+                            <a href="index.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Inicio</a>
+                            <a href="historia.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Historia</a>
+                            <a href="establecimiento.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Establecimientos</a>
+                            <a href="contacto.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Contáctanos</a>
                         </div>
                     </div>
                 </div>
@@ -56,29 +52,27 @@ session_start();
                     <div class="flex items-center">
                         <div class="btn-group mr-2" role="group" aria-label="Second group">
                             <?php if (!(isset($_SESSION['cl']))) { ?>
-                            <a href="nuevo_cliente.php"
-                                class="btn bg-green-500 hover:bg-green-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Registrarse</a>
+                            <a href="nuevo_cliente.php" class="btn bg-green-500 hover:bg-green-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Registrarse</a>
                             <?php } ?>
                         </div>
                         <div class="form-inline my-2 my-lg-0">
                             <?php if (!(isset($_SESSION['cl']))) { ?>
-                            <a href="login/"
-                                class="btn bg-blue-500 hover:bg-blue-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Iniciar
-                                sesión</a>
+                            <a href="login/" class="btn bg-blue-500 hover:bg-blue-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Iniciar sesión</a>
                             <?php } ?>
                             <?php if (isset($_SESSION['cl'])) { ?>
-                            <a href="salir.php"
-                                class="btn bg-red-500 hover:bg-red-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Salir</a>
+                            <a href="salir.php" class="btn bg-red-500 hover:bg-red-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Salir</a>
                             <?php } ?>
                         </div>
-                        <a href="carrito.php" class="ml-4 text-gray-900 hover:text-gray-600">
+                        <a href="carritoindex.php" id="carrito-btn" class="ml-4 text-gray-900 hover:text-gray-600 relative">
                             <i class="fas fa-shopping-cart"></i>
+                            <?php if ($numero_productos > 0) { ?>
+                            <span class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center"><?php echo $numero_productos; ?></span>
+                            <?php } ?>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
-
         <!-- Mobile menu, show/hide based on menu state. -->
         <div class="sm:hidden" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1">
@@ -94,9 +88,7 @@ session_start();
             <h1 class="text-4xl font-bold text-gray-800">"Los Gemelos"</h1>
             <p class="mt-2 text-gray-700">Una panadería en Perú</p>
             <form action="" class="mt-6">
-                <input type="text"
-                    class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
-                    id="barra-busqueda" placeholder="¿Qué se te antoja hoy?">
+                <input type="text" class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none" id="barra-busqueda" placeholder="¿Qué se te antoja hoy?">
             </form>
             <div class="mt-4">
                 <a href="#" class="inline-block bg-white text-gray-800 py-2 px-4 rounded-lg shadow hover:bg-gray-200">Todos</a>
@@ -111,7 +103,7 @@ session_start();
     <!--Grid Productos y Carrito de Compras-->
     <div class="container mx-auto py-8 px-8 grid grid-cols-1 lg:grid-cols-4 gap-6">
         <!-- Productos -->
-        <div class="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div class="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
             <?php
             require("basededatos/connectionbd.php");
             $query = "SELECT stock, nombre, imagen, sabor, ID_CATPRODUCTO, descripcion, precio FROM catproducto";
@@ -133,37 +125,24 @@ session_start();
                     <div class="flex justify-between items-center mt-4">
                         <span class="text-gray-800 font-bold">Precio: S/ <?php echo $cod; ?></span>
                         <?php if (isset($_SESSION['cl'])) { ?>
-                            <a href="./carritodecompras.php?id=<?php echo $id; ?>" class="bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-700">Añadir al carrito</a>
+                            <a href="#" class="bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 add-to-cart" data-id="<?php echo $id; ?>">Añadir al carrito</a>
                         <?php } ?>
                     </div>
                 </div>
             <?php  }
             } ?>
         </div>
-        <!-- Carrito de Compras -->
-        <div class="lg:col-span-1 bg-white p-4 rounded-lg shadow-lg mt-4">
-            <div class="border-b pb-3 mb-4">
-                <h2 class="text-xl font-bold text-gray-800">Carrito de compras</h2>
-                <button class="text-gray-500 hover:text-gray-700 focus:outline-none"><i class="fas fa-times"></i></button>
+    </div>
+
+    <!-- Carrito Modal -->
+    <div id="carritoModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 hidden">
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold">Carrito de Compras</h2>
+                <button class="text-gray-600 hover:text-gray-800" id="closeCarritoModal">&times;</button>
             </div>
-            <div>
-                <div class="flex items-center justify-between mb-4">
-                    <img src="basededatos/croissant.jpg" alt="Croissant" class="w-12 h-12 object-cover rounded">
-                    <div>
-                        <p class="text-gray-800">Croissant</p>
-                        <p class="text-gray-600">Cantidad: 1</p>
-                    </div>
-                    <p class="text-gray-800">S/ 21.00</p>
-                </div>
-                <!-- Total -->
-                <div class="border-t pt-3">
-                    <p class="text-xl font-bold text-gray-800">Total: S/ 21.00</p>
-                </div>
-                <!-- Botones -->
-                <div class="mt-4">
-                    <a href="#" class="w-full bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 block text-center">Proceder a pagar</a>
-                    <a href="#" class="w-full bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300 block text-center mt-2">Seguir comprando</a>
-                </div>
+            <div id="carritoContent">
+                <!-- Contenido del carrito aquí -->
             </div>
         </div>
     </div>
@@ -187,11 +166,41 @@ session_start();
     </footer>
 
     <!--JavaScript-->
-    <!--JQuery-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNddZrEvvOCcfjOgiWtLNwSEbCrsczx3phrrYsDAyzpCfwfjJrEMyuwYvJtbt3I" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.min.js" integrity="sha384-pP5pYqQn9l3Bbo1Mj4Ad5Nq1dhevhSiwAHuQPs6abQh4Jt5e1Lx6U5G78ycBocsr" crossorigin="anonymous"></script>
-    <script src="js/main.js"></script>
-</body>
+    <script>
+        $(document).ready(function() {
+            $('.add-to-cart').click(function(e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+                $.ajax({
+                    url: 'carritodecompras.php',
+                    method: 'GET',
+                    data: { id: id },
+                    success: function(response) {
+                        $('#carritoContent').html(response);
+                        $('#carritoModal').removeClass('hidden');
+                    }
+                });
+            });
 
+            $('#carrito-btn').click(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: 'carritodecompras.php',
+                    method: 'GET',
+                    success: function(response) {
+                        $('#carritoContent').html(response);
+                        $('#carritoModal').removeClass('hidden');
+                    }
+                });
+            });
+
+            $('#closeCarritoModal').click(function() {
+                $('#carritoModal').addClass('hidden');
+            });
+        });
+    </script>
+</body>
 </html>
