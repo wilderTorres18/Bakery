@@ -1,5 +1,6 @@
 <?php
 session_start();
+$numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0;
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -64,9 +65,10 @@ session_start();
                 <a href="salir.php" class="btn bg-red-500 hover:bg-red-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Salir</a>
               <?php } ?>
             </div>
-            <a href="carrito.php" class="ml-4 text-gray-900 hover:text-gray-600">
-              <i class="fas fa-shopping-cart"></i>
-            </a>
+            <a href="carritoindex.php" id="carrito-btn" class="ml-4 text-gray-900 hover:text-gray-600 relative">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span id="cart-count" class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center"><?php echo $numero_productos; ?></span>
+                        </a>
           </div>
         </div>
       </div>
@@ -155,6 +157,7 @@ session_start();
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNddZrEvvOCcfjOgiWtLNwSEbCrsczx3phrrYsDAyzpCfwfjJrEMyuwYvJtbt3I" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.min.js" integrity="sha384-pP5pYqQn9l3Bbo1Mj4Ad5Nq1dhevhSiwAHuQPs6abQh4Jt5e1Lx6U5G78ycBocsr" crossorigin="anonymous"></script>
+  
 </body>
 
 </html>

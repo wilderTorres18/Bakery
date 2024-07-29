@@ -4,6 +4,11 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 require("basededatos/connectionbd.php");
 
+if(isset($_POST['action']) && $_POST['action'] === 'count') {
+    echo isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0;
+    exit;
+}
+
 if(isset($_GET['id'])) {
     $id = $_GET['id'];
     $producto = obtenerProductoPorId($conn, $id);
@@ -101,6 +106,7 @@ $(document).ready(function() {
             data: { id: id },
             success: function(response) {
                 $('#carritoContent').html(response);
+                updateCartCount();
             }
         });
     });
@@ -114,5 +120,16 @@ $(document).ready(function() {
     $("#comprar").click(function() {
         window.location.href = './compras/compras.php';
     });
+
+    function updateCartCount() {
+        $.ajax({
+            url: 'carritodecompras.php',
+            method: 'POST',
+            data: { action: 'count' },
+            success: function(response) {
+                $('#cart-count').text(response);
+            }
+        });
+    }
 });
 </script>

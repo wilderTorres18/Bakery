@@ -40,7 +40,7 @@ if (isset($_POST['actualizar'])) {
 </head>
 <body class="bg-gray-100">
     <!--Navigation-->
-    <nav class="bg-white shadow-md">
+    <nav class="bg-white shadow-md mb-8">
         <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
             <div class="relative flex items-center justify-between h-16">
                 <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -70,9 +70,9 @@ if (isset($_POST['actualizar'])) {
                 </div>
                 <div class="hidden sm:block">
                     <div class="flex items-center">
-                        <a href="carritoindex.php" id="carrito-btn" class="ml-4 text-gray-900 hover:text-gray-600">
+                        <a href="carritoindex.php" id="carrito-btn" class="ml-4 text-gray-900 hover:text-gray-600 relative">
                             <i class="fas fa-shopping-cart"></i>
-                            <span class="ml-1"><?php echo isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0; ?></span>
+                            <span class="ml-1 bg-red-500 text-white rounded-full px-2 py-1 text-xs absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2"><?php echo isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0; ?></span>
                         </a>
                     </div>
                 </div>
@@ -82,18 +82,18 @@ if (isset($_POST['actualizar'])) {
 
     <!-- Carrito de Compras -->
     <div class="container mx-auto py-8">
-        <h1 class="text-2xl font-bold mb-6">Carrito de compras</h1>
+        <h1 class="text-3xl font-bold mb-6 text-center">Carrito de compras</h1>
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
             <form action="carritoindex.php" method="post">
                 <table class="min-w-full leading-normal">
                     <thead>
-                        <tr>
-                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Imagen</th>
-                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Producto</th>
-                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Precio</th>
-                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Cantidad</th>
-                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">TOTAL</th>
-                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Eliminar</th>
+                        <tr class="bg-gray-200">
+                            <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Imagen</th>
+                            <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Producto</th>
+                            <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Precio</th>
+                            <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Cantidad</th>
+                            <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Total</th>
+                            <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -104,35 +104,35 @@ if (isset($_POST['actualizar'])) {
                                 $subtotal = $item['Precio'] * $item['Cantidad'];
                                 $total += $subtotal;
                         ?>
-                        <tr>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <img src="basededatos/<?php echo $item['Imagen']; ?>" alt="<?php echo $item['Nombre']; ?>" class="w-20 h-20 object-cover">
+                        <tr class="bg-white border-b">
+                            <td class="px-4 py-4 text-sm">
+                                <img src="basededatos/<?php echo $item['Imagen']; ?>" alt="<?php echo $item['Nombre']; ?>" class="w-16 h-16 object-cover rounded">
                             </td>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900 whitespace-no-wrap"><?php echo $item['Nombre']; ?></p>
+                            <td class="px-4 py-4 text-sm">
+                                <p class="text-gray-900"><?php echo $item['Nombre']; ?></p>
                             </td>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900 whitespace-no-wrap">S/ <?php echo number_format($item['Precio'], 2); ?></p>
+                            <td class="px-4 py-4 text-sm">
+                                <p class="text-gray-900">S/ <?php echo number_format($item['Precio'], 2); ?></p>
                             </td>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <input type="number" name="cantidad[<?php echo $item['Id']; ?>]" value="<?php echo $item['Cantidad']; ?>" class="w-16 text-center border rounded">
+                            <td class="px-4 py-4 text-sm">
+                                <input type="number" name="cantidad[<?php echo $item['Id']; ?>]" value="<?php echo $item['Cantidad']; ?>" class="w-12 text-center border rounded">
                             </td>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900 whitespace-no-wrap">S/ <?php echo number_format($subtotal, 2); ?></p>
+                            <td class="px-4 py-4 text-sm">
+                                <p class="text-gray-900">S/ <?php echo number_format($subtotal, 2); ?></p>
                             </td>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            <td class="px-4 py-4 text-sm">
                                 <button type="submit" name="eliminar" value="<?php echo $item['Id']; ?>" class="text-red-600 hover:text-red-800"><i class="fas fa-trash-alt"></i></button>
                             </td>
                         </tr>
                         <?php
                             }
                         } else {
-                            echo '<tr><td colspan="6" class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">No hay productos en el carrito.</td></tr>';
+                            echo '<tr><td colspan="6" class="px-5 py-5 text-sm text-center text-gray-600">No hay productos en el carrito.</td></tr>';
                         }
                         ?>
                     </tbody>
                 </table>
-                <div class="flex justify-between items-center mt-6 px-5 py-3">
+                <div class="flex justify-between items-center mt-6 px-5 py-3 border-t">
                     <span class="text-xl font-bold">Total: S/ <?php echo number_format($total, 2); ?></span>
                     <div>
                         <a href="index.php" class="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded">Seguir comprando</a>

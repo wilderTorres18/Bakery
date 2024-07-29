@@ -65,9 +65,7 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
                         </div>
                         <a href="carritoindex.php" id="carrito-btn" class="ml-4 text-gray-900 hover:text-gray-600 relative">
                             <i class="fas fa-shopping-cart"></i>
-                            <?php if ($numero_productos > 0) { ?>
-                            <span class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center"><?php echo $numero_productos; ?></span>
-                            <?php } ?>
+                            <span id="cart-count" class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center"><?php echo $numero_productos; ?></span>
                         </a>
                     </div>
                 </div>
@@ -181,6 +179,7 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
                     success: function(response) {
                         $('#carritoContent').html(response);
                         $('#carritoModal').removeClass('hidden');
+                        updateCartCount();
                     }
                 });
             });
@@ -200,6 +199,17 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
             $('#closeCarritoModal').click(function() {
                 $('#carritoModal').addClass('hidden');
             });
+
+            function updateCartCount() {
+                $.ajax({
+                    url: 'carritodecompras.php',
+                    method: 'POST',
+                    data: { action: 'count' },
+                    success: function(response) {
+                        $('#cart-count').text(response);
+                    }
+                });
+            }
         });
     </script>
 </body>
