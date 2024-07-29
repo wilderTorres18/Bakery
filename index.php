@@ -15,6 +15,8 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
     <script src="https://kit.fontawesome.com/629388bad9.js" crossorigin="anonymous"></script>
     <!-- Custom favicon for this template-->
     <link rel="icon" type="image/png" href="favicon.png" />
+    <!-- SweetAlert2 -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Panadería "Los Gemelos"</title>
 </head>
 

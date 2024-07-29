@@ -36,8 +36,54 @@ if (isset($_POST['actualizar'])) {
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/629388bad9.js" crossorigin="anonymous"></script>
+    <!-- SweetAlert2 -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Carrito de Compras</title>
 </head>
+<style>
+        .cart-container {
+            max-width: 900px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .cart-details, .cart-summary {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        .cart-details {
+            width: 60%;
+        }
+        .cart-summary {
+            width: 35%;
+        }
+        .cart-summary p {
+            margin: 5px 0;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        .cart-item img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .cart-item div {
+            flex: 1;
+            margin-left: 10px;
+        }
+        .cart-item p {
+            margin: 0;
+        }
+    </style>
 <body class="bg-gray-100">
     <!--Navigation-->
     <nav class="bg-white shadow-md mb-8">
@@ -80,68 +126,48 @@ if (isset($_POST['actualizar'])) {
         </div>
     </nav>
 
-    <!-- Carrito de Compras -->
-    <div class="container mx-auto py-8">
-        <h1 class="text-3xl font-bold mb-6 text-center">Carrito de compras</h1>
-        <div class="bg-white shadow-md rounded-lg overflow-hidden">
+    <div class="cart-container">
+        <div class="cart-details">
+            <h2 class="text-2xl font-bold mb-4">Carrito de Compras</h2>
             <form action="carritoindex.php" method="post">
-                <table class="min-w-full leading-normal">
-                    <thead>
-                        <tr class="bg-gray-200">
-                            <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Imagen</th>
-                            <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Producto</th>
-                            <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Precio</th>
-                            <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Cantidad</th>
-                            <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Total</th>
-                            <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Eliminar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $total = 0;
-                        if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
-                            foreach ($_SESSION['carrito'] as $item) {
-                                $subtotal = $item['Precio'] * $item['Cantidad'];
-                                $total += $subtotal;
-                        ?>
-                        <tr class="bg-white border-b">
-                            <td class="px-4 py-4 text-sm">
-                                <img src="basededatos/<?php echo $item['Imagen']; ?>" alt="<?php echo $item['Nombre']; ?>" class="w-16 h-16 object-cover rounded">
-                            </td>
-                            <td class="px-4 py-4 text-sm">
-                                <p class="text-gray-900"><?php echo $item['Nombre']; ?></p>
-                            </td>
-                            <td class="px-4 py-4 text-sm">
-                                <p class="text-gray-900">S/ <?php echo number_format($item['Precio'], 2); ?></p>
-                            </td>
-                            <td class="px-4 py-4 text-sm">
-                                <input type="number" name="cantidad[<?php echo $item['Id']; ?>]" value="<?php echo $item['Cantidad']; ?>" class="w-12 text-center border rounded">
-                            </td>
-                            <td class="px-4 py-4 text-sm">
-                                <p class="text-gray-900">S/ <?php echo number_format($subtotal, 2); ?></p>
-                            </td>
-                            <td class="px-4 py-4 text-sm">
-                                <button type="submit" name="eliminar" value="<?php echo $item['Id']; ?>" class="text-red-600 hover:text-red-800"><i class="fas fa-trash-alt"></i></button>
-                            </td>
-                        </tr>
-                        <?php
-                            }
-                        } else {
-                            echo '<tr><td colspan="6" class="px-5 py-5 text-sm text-center text-gray-600">No hay productos en el carrito.</td></tr>';
-                        }
-                        ?>
-                    </tbody>
-                </table>
-                <div class="flex justify-between items-center mt-6 px-5 py-3 border-t">
-                    <span class="text-xl font-bold">Total: S/ <?php echo number_format($total, 2); ?></span>
+                <?php
+                $total = 0;
+                if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
+                    foreach ($_SESSION['carrito'] as $item) {
+                        $subtotal = $item['Precio'] * $item['Cantidad'];
+                        $total += $subtotal;
+                ?>
+                <div class="cart-item">
+                    <img src="basededatos/<?php echo $item['Imagen']; ?>" alt="<?php echo $item['Nombre']; ?>">
                     <div>
-                        <a href="index.php" class="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded">Seguir comprando</a>
-                        <button type="submit" name="actualizar" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Actualizar</button>
-                        <a href="compras/compras.php" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded">Proceder a pagar</a>
+                        <p class="text-lg font-semibold"><?php echo $item['Nombre']; ?></p>
+                        <p class="text-sm text-gray-500">S/ <?php echo number_format($item['Precio'], 2); ?></p>
                     </div>
+                    <div>
+                        <input type="number" name="cantidad[<?php echo $item['Id']; ?>]" value="<?php echo $item['Cantidad']; ?>" class="w-12 text-center border rounded">
+                    </div>
+                    <p class="text-lg font-semibold">S/ <?php echo number_format($subtotal, 2); ?></p>
+                    <button type="submit" name="eliminar" value="<?php echo $item['Id']; ?>" class="text-red-600 hover:text-red-800"><i class="fas fa-trash-alt"></i></button>
                 </div>
-            </form>
+                <?php
+                    }
+                } else {
+                    echo '<p class="text-center text-gray-600">No hay productos en el carrito.</p>';
+                }
+                ?>
+                <a href="index.php" class="text-blue-500 hover:underline mt-4 block">← Seguir comprando</a>
+        
         </div>
+        <div class="cart-summary">
+            <h3 class="text-xl font-bold">Resumen del pedido</h3>
+            <div class="mt-4">
+                <p>Items: <?php echo isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0; ?></p>
+                <p class="text-lg font-bold">Total: S/ <?php echo number_format($total, 2); ?></p>
+                <button type="submit" name="actualizar" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mt-4">Actualizar</button>
+                <a href="compras/compras.php" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded mt-4 inline-block">Proceder a pagar</a>
+            </div>
+        </div>
+        </form>
     </div>
 </body>
 </html>

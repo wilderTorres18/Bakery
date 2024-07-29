@@ -170,7 +170,7 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
                     <i class="fab fa-instagram"></i>
                 </a>
             </div>
-            <p>Sitio diseñado por <a href="#" class="underline">2024</a> - <a href="#" class="underline">softwar </a></p>
+            <p>Sitio diseñado por <a href="#" class="underline">2024</a> - <a href="#" class="underline">software </a></p>
         </div>
     </footer>
 
