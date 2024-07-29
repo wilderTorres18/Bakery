@@ -49,6 +49,15 @@ try {
         if (!mysqli_query($conn, $actualizar)) {
             throw new Exception("Error en la actualización de unidades: " . mysqli_error($conn));
         }
+		    // Actualizar la tabla Catproducto
+    $actualizarCatproducto = "UPDATE Catproducto 
+                              SET stock = stock - '$can'
+                              WHERE ID_CATPRODUCTO = '$ids'";
+
+    if (!mysqli_query($conn, $actualizarCatproducto)) {
+        throw new Exception("Error en la actualización del stock en Catproducto: " . mysqli_error($conn));
+    }
+
     }
 
     unset($_SESSION['carrito']);
