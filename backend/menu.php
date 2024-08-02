@@ -1,6 +1,8 @@
 <?php
-$rol = $_SESSION['cl']['rol'];
-
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+$rol = isset($_SESSION['cl']['rol']) ? $_SESSION['cl']['rol'] : null;
 ?>
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-design sidebar sidebar-light accordion" id="accordionSidebar">

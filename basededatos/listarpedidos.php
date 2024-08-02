@@ -1,10 +1,10 @@
 <?php
 require ("connectionbd.php");
 if(empty($_GET)){
-	$result=mysqli_query($conn,"SELECT id_ped,Fec_ped,can_ped,dir_ped,segNombre,prApellido,segApellido,est_ped FROM Pedidos,Proveedor,PEDIDO_PROVEEDOR WHERE PEDIDO_PROVEEDOR.FK_ID_PEDIDO=ID_PEDIDO AND PEDIDO_PROVEEDOR.FK_ID_PROVEEDOR=ID_PROVEEDOR AND Pedido.estado=1;");
+	$result=mysqli_query($conn,"SELECT id_ped,Fec_ped,can_ped,dir_ped,segNombre,prApellido,segApellido,est_ped FROM Pedidos,Proveedor,PEDIDO_PROVEEDOR WHERE PEDIDO_PROVEEDOR.FK_ID_PEDIDO=id_ped AND PEDIDO_PROVEEDOR.FK_ID_PROVEEDOR=ID_PROVEEDOR AND pedidos.est_ped=1;");
 	$vertodo="False";
 } else {
-	$result=mysqli_query($conn,"SELECT id_ped,Fec_ped,can_ped,dir_ped,segNombre,prApellido,segApellido,est_ped FROM Pedidos,Proveedor,PEDIDO_PROVEEDOR WHERE PEDIDO_PROVEEDOR.FK_ID_PEDIDO=ID_PEDIDO AND PEDIDO_PROVEEDOR.FK_ID_PROVEEDOR=ID_PROVEEDOR;");
+	$result=mysqli_query($conn,"SELECT id_ped,Fec_ped,can_ped,dir_ped,segNombre,prApellido,segApellido,est_ped FROM Pedidos,Proveedor,PEDIDO_PROVEEDOR WHERE PEDIDO_PROVEEDOR.FK_ID_PEDIDO=id_ped AND PEDIDO_PROVEEDOR.FK_ID_PROVEEDOR=ID_PROVEEDOR;");
 	$vertodo="True";
 }		
 			while($fila=mysqli_fetch_array($result)){			
