@@ -39,7 +39,7 @@ var n5=$("#n5").val();
 var n6=$("#n6").val();
 var n7=$("#n7").val();
 var n8=$("#n8").val();
-
+console.log("here", n6, n7, n8);
 var n9=$("#n9").val();
 var n10=$("#n10").val();
 var n11=$("#n11").val();
@@ -94,7 +94,7 @@ var myLineChart = new Chart(ctx, {
           padding: 10,
           // Include a dollar sign in the ticks
           callback: function(value, index, values) {
-            return '$' + number_format(value);
+            return 'S/' + number_format(value);
           }
         },
         gridLines: {

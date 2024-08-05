@@ -42,13 +42,14 @@ try {
         $ids = $arreglo[$i]['Id'];
         $can = $arreglo[$i]['Cantidad'];
 
-        $actualizar = "UPDATE produccion 
+/*         $actualizar = "UPDATE produccion 
                        SET unidades = unidades - '$can'
                        WHERE FK_ID_CATPRODUCTO = '$ids'";
 
         if (!mysqli_query($conn, $actualizar)) {
             throw new Exception("Error en la actualización de unidades: " . mysqli_error($conn));
-        }
+        } */
+       
 		    // Actualizar la tabla Catproducto
     $actualizarCatproducto = "UPDATE Catproducto 
                               SET stock = stock - '$can'

@@ -108,7 +108,7 @@ CREATE TABLE `BODEGA_MATERIAPRIMA` (
 CREATE TABLE `CatProducto` (
   `ID_CATPRODUCTO` int(2) NOT NULL,
   `nombre` varchar(20) NOT NULL,
-  `descripcion` varchar(50) NOT NULL,
+  `descripcion` varchar(100) NOT NULL,
   `precio` int(6) NOT NULL,
   `stock` int(3) NOT NULL,
   `imagen` varchar(200) NOT NULL,
