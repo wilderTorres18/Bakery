@@ -117,8 +117,8 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
       <div class="w-full lg:w-1/2 px-6">
         <div class="bg-white p-8 rounded-lg shadow-lg">
           <h3 class="text-2xl font-bold text-gray-800 mb-6">Nuestra Ubicación</h3>
-          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15913.82878315453!2d-74.37047654999999!3d4.324887749999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2sco!4v1570575086503!5m2!1ses!2sco" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-        </div>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31693.284067843343!2d-80.7588793!3d-5.5713565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x902b9bfa58f50ffb%3A0x3ec408e19f74ae0e!2sSullana%2C%20Per%C3%BA!5e0!3m2!1ses!2sus!4v1628082079984!5m2!1ses!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
       </div>
     </div>
   </div>

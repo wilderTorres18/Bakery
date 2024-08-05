@@ -62,7 +62,7 @@ $codg2=1;
             <form action="../basededatos/agregapd.php" method="POST" enctype="multipart/form-data">
 
               <label for="inputName">Código del Producto</label>
-              <input type="number" name="cod" class="form-control" id="inputName" value="<?php echo $codg2; ?>" maxlength="11" readonly placeholder="">
+              <input type="number" name="cod" class="form-control" id="inputName" value="<?php echo $codg2; ?>" maxlength="11" style="display: none" readonly placeholder="">
 
               <div class="form-row">
                 <div class="form-group col-md-6">

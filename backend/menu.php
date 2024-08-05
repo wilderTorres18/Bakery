@@ -171,21 +171,7 @@ $rol = isset($_SESSION['cl']['rol']) ? $_SESSION['cl']['rol'] : null;
     </div>
   </li>
 
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHerramientas" aria-expanded="true" aria-controls="collapseCuentas">
-      <i class="fas fa-paste"></i>
-      <span>Herramientas</span>
-    </a>
-    <div id="collapseHerramientas" class="collapse" aria-labelledby="headingHerramientas" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <h6 class="collapse-header">Hojas:</h6>
-        <a class="collapse-item" href="Tools_Documentos.php">Documentos</a>
-        <a class="collapse-item" href="Tools_Calculo.php">Calculo</a>
-        <a class="collapse-item" href="Tools_Presentacion.php">Presentación</a>
-        <a class="collapse-item" href="Tools_Dibujo.php">Dibujo</a>
-      </div>
-    </div>
-  </li>
+
 <?php if($rol=='Administrador'){?>
   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseConfiguracion" aria-expanded="true" aria-controls="collapseCuentas">
@@ -201,6 +187,21 @@ $rol = isset($_SESSION['cl']['rol']) ? $_SESSION['cl']['rol'] : null;
     </div>
   </li>
 <?php } ?>
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHerramientas" aria-expanded="true" aria-controls="collapseCuentas">
+      <i class="fas fa-paste"></i>
+      <span>Manuales</span>
+    </a>
+    <div id="collapseHerramientas" class="collapse" aria-labelledby="headingHerramientas" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Hojas:</h6>
+        <a class="collapse-item" href="Tools_Documentos.php">Manual de Usuario</a>
+<!--         <a class="collapse-item" href="Tools_Calculo.php">Calculo</a>
+        <a class="collapse-item" href="Tools_Presentacion.php">Presentación</a>
+        <a class="collapse-item" href="Tools_Dibujo.php">Dibujo</a> -->
+      </div>
+    </div>
+  </li>
   <!-- Divider -->
   <hr class="sidebar-divider">
 

@@ -90,7 +90,7 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
     <div class="bg-yellow-400 py-12 bg-cover bg-center" style="background-image: url('/basededatos/fotos/portada.png');">
         <div class="container mx-auto text-center bg-opacity-75 bg-yellow-400 p-4 rounded-lg">
             <h1 class="text-4xl font-bold text-gray-800">"Los Gemelos"</h1>
-            <p class="mt-2 text-gray-700">Una panadería en Perú</p>
+            <p class="mt-2 text-gray-700">Del horno a tu mesa, frescura y calidad en cada bocado.</p>
 
             <form id="filterForm" class="relative mt-6 max-w-screen-md mx-auto">
     <div class="relative flex items-center">
