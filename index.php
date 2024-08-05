@@ -1,6 +1,7 @@
 <?php
 session_start();
 $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0;
+$busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -17,6 +18,9 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
     <link rel="icon" type="image/png" href="favicon.png" />
     <!-- SweetAlert2 -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Font awesome -->
+    <script src="https://kit.fontawesome.com/629388bad9.js" crossorigin="anonymous"></script>
+
     <title>Panadería "Los Gemelos"</title>
 </head>
 
@@ -87,15 +91,29 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
         <div class="container mx-auto text-center bg-opacity-75 bg-yellow-400 p-4 rounded-lg">
             <h1 class="text-4xl font-bold text-gray-800">"Los Gemelos"</h1>
             <p class="mt-2 text-gray-700">Una panadería en Perú</p>
-            <form action="" class="mt-6">
-                <input type="text" class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none" id="barra-busqueda" placeholder="¿Qué se te antoja hoy?">
-            </form>
+
+            <form id="filterForm" class="relative mt-6 max-w-screen-md mx-auto">
+    <div class="relative flex items-center">
+        <span class="absolute left-0 pl-3 flex items-center pointer-events-none">
+            <i class="fas fa-search text-gray-400"></i>
+        </span>
+        <input type="text" class="border-2 border-gray-300 bg-white h-10 pl-10 pr-10 rounded-lg text-sm focus:outline-none w-full" id="barra-busqueda" name="busqueda" placeholder="¿Qué se te antoja hoy?" value="<?php echo htmlspecialchars($busqueda); ?>">
+        <?php if ($busqueda != ''): ?>
+        <span class="absolute right-0 pr-3 flex items-center">
+            <button type="button" id="clearSearch" class="text-gray-400 focus:outline-none">
+                <i class="fas fa-times"></i>
+            </button>
+        </span>
+        <?php endif; ?>
+    </div>
+    <button type="submit" class="hidden"></button>
+</form>
+
+
             <div class="mt-4">
-                <a href="#" class="inline-block bg-white text-gray-800 py-2 px-4 rounded-lg shadow hover:bg-gray-200">Todos</a>
-                <a href="#" class="inline-block bg-white text-gray-800 py-2 px-4 rounded-lg shadow hover:bg-gray-200">Dulce</a>
-                <a href="#" class="inline-block bg-white text-gray-800 py-2 px-4 rounded-lg shadow hover:bg-gray-200">Salado</a>
-                <a href="#" class="inline-block bg-white text-gray-800 py-2 px-4 rounded-lg shadow hover:bg-gray-200">Postres</a>
-                <a href="#" class="inline-block bg-white text-gray-800 py-2 px-4 rounded-lg shadow hover:bg-gray-200">Tortas</a>
+                <button onclick="applyFilter('')" class="inline-block bg-white text-gray-800 py-2 px-4 rounded-lg shadow hover:bg-gray-200">Todos</button>
+                <button onclick="applyFilter('Dulce')" class="inline-block bg-white text-gray-800 py-2 px-4 rounded-lg shadow hover:bg-gray-200">Dulce</button>
+                <button onclick="applyFilter('Salado')" class="inline-block bg-white text-gray-800 py-2 px-4 rounded-lg shadow hover:bg-gray-200">Salado</button>
             </div>
         </div>
     </div>
@@ -106,7 +124,26 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
         <div class="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
             <?php
             require("basededatos/connectionbd.php");
-            $query = "SELECT stock, nombre, imagen, sabor, ID_CATPRODUCTO, descripcion, precio FROM catproducto";
+            $sabor = isset($_GET['sabor']) ? $_GET['sabor'] : '';
+            $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
+            
+
+            $query = "SELECT stock, nombre, imagen, sabor, ID_CATPRODUCTO, descripcion, precio FROM catproducto WHERE 1=1";
+
+            // Filtrar por sabor
+            if ($sabor != '') {
+                $query .= " AND sabor = '" . mysqli_real_escape_string($conn, $sabor) . "'";
+            }
+
+            // Filtrar por búsqueda
+            if ($busqueda != '') {
+                $query .= " AND (nombre LIKE '%" . mysqli_real_escape_string($conn, $busqueda) . "%' OR descripcion LIKE '%" . mysqli_real_escape_string($conn, $busqueda) . "%')";
+            }
+            // Filtrar por búsqueda
+if ($busqueda != '') {
+    $query .= " AND (nombre LIKE '%" . mysqli_real_escape_string($conn, $busqueda) . "%' OR descripcion LIKE '%" . mysqli_real_escape_string($conn, $busqueda) . "%')";
+}
+
             $result = mysqli_query($conn, $query);
             while ($fila = mysqli_fetch_array($result)) {
                 $Nom = $fila['nombre'];
@@ -213,6 +250,31 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
                 });
             }
         });
+
+        // Aplicar filtro basado en el sabor
+        function applyFilter(sabor) {
+            const urlParams = new URLSearchParams(window.location.search);
+            urlParams.set('sabor', sabor);
+            window.location.search = urlParams.toString();
+        }
+
+        document.getElementById('filterForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const busqueda = document.getElementById('barra-busqueda').value.trim();
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set('busqueda', busqueda);
+    urlParams.delete('sabor'); // Eliminar el parámetro sabor para hacer una búsqueda sin filtros
+    window.location.search = urlParams.toString();
+});
+
+document.getElementById('clearSearch').addEventListener('click', function() {
+    document.getElementById('barra-busqueda').value = '';
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.delete('busqueda');
+    window.location.search = urlParams.toString();
+});
+
+
     </script>
 </body>
 </html>

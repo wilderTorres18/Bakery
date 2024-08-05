@@ -46,7 +46,7 @@ session_start();
 
         <div class="form-row">
 
-          <iframe width="100%" height="540" frameborder="0" src="https://docs.google.com/document/u/0/create?usp=docs_home&ths=true"></iframe>
+          <iframe width="100%" height="540" frameborder="0" src="https://docs.google.com/viewer?url=https%3A%2F%2Fdocs.google.com%2Fdocument%2Fd%2F1pHNUs5WQnKnSdEgVMdUzsRmFBoFjTFVIigRXLwjksVA%2Fexport%3Fformat%3Dpdf&embedded=true"></iframe>
         </div>
         <!-- /.container-fluid -->
 

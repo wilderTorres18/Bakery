@@ -71,10 +71,14 @@ if(isset($_SESSION['carrito'])) {
         <?php foreach($_SESSION['carrito'] as $item): ?>
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-4">
-                    <img src="./basededatos/<?php echo $item['Imagen']; ?>" class="w-16 h-16 object-cover" alt="<?php echo $item['Nombre']; ?>">
+                    <a href="carritoindex.php">
+                        <img src="./basededatos/<?php echo $item['Imagen']; ?>" class="w-16 h-16 object-cover" alt="<?php echo $item['Nombre']; ?>">
+                    </a>
                     <div>
-                        <h3 class="text-lg font-semibold"><?php echo $item['Nombre']; ?></h3>
-                        <p>Cantidad: <input type="number" value="<?php echo $item['Cantidad']; ?>" data-id="<?php echo $item['Id']; ?>" class="cantidad border rounded w-16 text-center"></p>
+                        <a href="carritoindex.php">
+                            <h3 class="text-lg font-semibold text-black hover:text-blue-500"><?php echo $item['Nombre']; ?></h3>
+                        </a>
+                        <p>Cantidad: <input type="text" value="<?php echo $item['Cantidad']; ?>" data-id="<?php echo $item['Id']; ?>" class="cantidad border rounded w-16 text-center" readonly></p>
                     </div>
                 </div>
                 <div class="flex items-center space-x-4">
@@ -94,6 +98,7 @@ if(isset($_SESSION['carrito'])) {
         <p>No has añadido ningún producto.</p>
     <?php endif; ?>
 </div>
+
 
 <script>
 $(document).ready(function() {

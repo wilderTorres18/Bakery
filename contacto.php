@@ -93,24 +93,12 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
           <h3 class="text-2xl font-bold text-gray-800 mb-6">Envíanos un mensaje</h3>
           <form action="basededatos/agregarc2.php" method="POST">
             <div class="mb-4">
-              <label for="ced" class="block text-gray-600 font-bold mb-2">Número de Cedula</label>
-              <input type="number" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-yellow-500" id="ced" name="ced" placeholder="">
-            </div>
-            <div class="mb-4">
               <label for="tel" class="block text-gray-600 font-bold mb-2">Teléfono</label>
               <input type="number" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-yellow-500" id="tel" name="tel" placeholder="">
             </div>
             <div class="mb-4">
-              <label for="nom" class="block text-gray-600 font-bold mb-2">Nombre</label>
+              <label for="nom" class="block text-gray-600 font-bold mb-2">Nombres</label>
               <input type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-yellow-500" id="nom" name="nom" placeholder="">
-            </div>
-            <div class="mb-4">
-              <label for="a1" class="block text-gray-600 font-bold mb-2">Primer Apellido</label>
-              <input type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-yellow-500" id="a1" name="a1" placeholder="">
-            </div>
-            <div class="mb-4">
-              <label for="a2" class="block text-gray-600 font-bold mb-2">Segundo Apellido</label>
-              <input type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-yellow-500" id="a2" name="a2" placeholder="">
             </div>
             <div class="mb-4">
               <label for="dir" class="block text-gray-600 font-bold mb-2">Dirección</label>

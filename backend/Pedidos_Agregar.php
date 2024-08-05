@@ -36,7 +36,7 @@ session_start();
       <!-- Begin Page Content -->
       <div class="container-fluid">
         <?php require("../basededatos/connectionbd.php");
-        $query_lastid = "SELECT MAX(ID_PEDIDO) AS id FROM Pedido";
+        $query_lastid = "SELECT MAX(ID_PED) AS id FROM Pedidos";
         $result_lastid = mysqli_query($conn, $query_lastid);
         $fila_lastid = mysqli_fetch_array($result_lastid);
         if(empty($fila_lastid)){$last=1;}else{$last=$fila_lastid['id']+1;}
