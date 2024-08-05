@@ -39,8 +39,21 @@ if (isset($_POST['actualizar'])) {
     <!-- SweetAlert2 -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Carrito de Compras</title>
-</head>
-<style>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        .main-content {
+            flex: 1;
+        }
+        footer {
+            flex-shrink: 0;
+        }
         .cart-container {
             max-width: 900px;
             margin: auto;
@@ -84,13 +97,14 @@ if (isset($_POST['actualizar'])) {
             margin: 0;
         }
     </style>
+</head>
 <body class="bg-gray-100">
-    <!--Navigation-->
+    <!-- Navigation -->
     <nav class="bg-white shadow-md mb-8">
         <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
             <div class="relative flex items-center justify-between h-16">
                 <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                    <!-- Mobile menu button-->
+                    <!-- Mobile menu button -->
                     <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
                         <span class="sr-only">Open main menu</span>
                         <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -126,51 +140,67 @@ if (isset($_POST['actualizar'])) {
         </div>
     </nav>
 
-    <div class="cart-container">
-        <div class="cart-details">
-            <h2 class="text-2xl font-bold mb-4">Carrito de Compras</h2>
-            <form action="carritoindex.php" method="post">
-                <?php
-                $total = 0;
-                if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
-                    foreach ($_SESSION['carrito'] as $item) {
-                        $subtotal = $item['Precio'] * $item['Cantidad'];
-                        $total += $subtotal;
-                ?>
-                <div class="cart-item">
-                    <img src="basededatos/<?php echo $item['Imagen']; ?>" alt="<?php echo $item['Nombre']; ?>">
-                    <div>
-                        <p class="text-lg font-semibold"><?php echo $item['Nombre']; ?></p>
-                        <p class="text-sm text-gray-500">S/ <?php echo number_format($item['Precio'], 2); ?></p>
+    <div class="main-content">
+        <div class="cart-container">
+            <div class="cart-details">
+                <h2 class="text-2xl font-bold mb-4">Carrito de Compras</h2>
+                <form action="carritoindex.php" method="post">
+                    <?php
+                    $total = 0;
+                    if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
+                        foreach ($_SESSION['carrito'] as $item) {
+                            $subtotal = $item['Precio'] * $item['Cantidad'];
+                            $total += $subtotal;
+                    ?>
+                    <div class="cart-item">
+                        <img src="basededatos/<?php echo $item['Imagen']; ?>" alt="<?php echo $item['Nombre']; ?>">
+                        <div>
+                            <p class="text-lg font-semibold"><?php echo $item['Nombre']; ?></p>
+                            <p class="text-sm text-gray-500">S/ <?php echo number_format($item['Precio'], 2); ?></p>
+                        </div>
+                        <div>
+                            <input type="number" name="cantidad[<?php echo $item['Id']; ?>]" value="<?php echo $item['Cantidad']; ?>" class="w-12 text-center border rounded">
+                        </div>
+                        <p class="text-lg font-semibold">S/ <?php echo number_format($subtotal, 2); ?></p>
+                        <button type="submit" name="eliminar" value="<?php echo $item['Id']; ?>" class="text-red-600 hover:text-red-800"><i class="fas fa-trash-alt"></i></button>
                     </div>
-                    <div>
-                        <input type="number" name="cantidad[<?php echo $item['Id']; ?>]" value="<?php echo $item['Cantidad']; ?>" class="w-12 text-center border rounded">
-                    </div>
-                    <p class="text-lg font-semibold">S/ <?php echo number_format($subtotal, 2); ?></p>
-                    <button type="submit" name="eliminar" value="<?php echo $item['Id']; ?>" class="text-red-600 hover:text-red-800"><i class="fas fa-trash-alt"></i></button>
-                </div>
-                <?php
+                    <?php
+                        }
+                    } else {
+                        echo '<p class="text-center text-gray-600">No hay productos en el carrito.</p>';
                     }
-                } else {
-                    echo '<p class="text-center text-gray-600">No hay productos en el carrito.</p>';
-                }
-                ?>
-                <a href="index.php" class="text-blue-500 hover:underline mt-4 block">← Seguir comprando</a>
-        
-        </div>
-        <div class="cart-summary">
-            <h3 class="text-xl font-bold">Resumen del pedido</h3>
-            <div class="mt-4">
-                <p>Items: <?php echo isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0; ?></p>
-                <p class="text-lg font-bold">Total: S/ <?php echo number_format($total, 2); ?></p>
-                <button type="submit" name="actualizar" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mt-4">Actualizar</button>
-                <a href="compras/compras.php" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded mt-4 inline-block">Proceder a pagar</a>
+                    ?>
+                    <a href="index.php" class="text-blue-500 hover:underline mt-4 block">← Seguir comprando</a>
             </div>
+            <div class="cart-summary">
+                <h3 class="text-xl font-bold">Resumen del pedido</h3>
+                <div class="mt-4">
+                    <p>Items: <?php echo isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0; ?></p>
+                    <p class="text-lg font-bold">Total: S/ <?php echo number_format($total, 2); ?></p>
+                    <button type="submit" name="actualizar" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mt-4">Actualizar</button>
+                    <a href="compras/compras.php" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded mt-4 inline-block">Proceder a pagar</a>
+                </div>
+            </div>
+            </form>
         </div>
-        </form>
     </div>
 
-
+    <!-- Footer -->
+    <footer class="bg-gray-800 py-6 mt-12">
+        <div class="container mx-auto text-center text-white">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="#" class="text-white hover:text-gray-400">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="text-white hover:text-gray-400">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="#" class="text-white hover:text-gray-400">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+            <p>Sitio diseñado por <a href="#" class="underline">WJ SOFTWORKS</a> - <a href="#" class="underline">PIURA - PERU</a></p>
+        </div>
+    </footer>
 </body>
-
 </html>
