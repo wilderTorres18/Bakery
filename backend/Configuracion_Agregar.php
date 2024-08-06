@@ -60,8 +60,8 @@ $codg2=1;
           <div class="card-body">
             <!-- Aca se envian los datos a un archivo php ene el action="../basededatos/agregapd.php" -->
             <form action="../basededatos/agregarus.php" method="POST" enctype="multipart/form-data">
-              <label for="inputName">Codigo del Empleado</label>
-              <input type="number" name="cod" class="form-control" id="inputName" maxlength="11" oninput="maxlengthNumber(this)" value="<?php echo $codg2;?>" readonly="" onkeypress="return Num_1(event)" onpaste="return false" placeholder="">
+              <label for="inputName">DNI del Empleado</label>
+              <input type="number" name="cod" class="form-control" id="inputName" maxlength="8" oninput="maxlengthNumber(this)"  onkeypress="return Num_1(event)" onpaste="return false" placeholder="">
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="inputName">Nombre del Empleado</label>

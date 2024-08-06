@@ -64,7 +64,7 @@ $ape = $_SESSION['cl']['ape'];
                     <input type="text" name="tel" value="<?php echo $ape; ?>" readonly="" class="form-control" id="inputrice" placeholder="">
                   </div>
                   <div class="form-group col-md-4">
-                    <img src="../img/panadero.jpg" width="200" height="200" class="rounded-circle mx-auto d-block" alt="imagen del usuario">
+                    <img src="../img/profile.jpg" width="200" height="200" class="rounded-circle mx-auto d-block" alt="imagen del usuario">
                   </div>
                 </div>
 

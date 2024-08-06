@@ -134,7 +134,7 @@ $rol = isset($_SESSION['cl']['rol']) ? $_SESSION['cl']['rol'] : null;
     </div>
   </li>
 
-  <li class="nav-item">
+<!--   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCuentas" aria-expanded="true" aria-controls="collapseCuentas">
       <i class="far fa-calendar-alt"></i>
       <span>Pedidos</span>
@@ -155,9 +155,9 @@ $rol = isset($_SESSION['cl']['rol']) ? $_SESSION['cl']['rol'] : null;
       </div>
     </div>
   <?php } ?>
-  </li>
+  </li> -->
 
-  <li class="nav-item">
+<!--   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDevoluciones" aria-expanded="true" aria-controls="collapseDevoluciones">
       <i class="far fa-edit"></i>
       <span>Devoluciones</span>
@@ -170,7 +170,7 @@ $rol = isset($_SESSION['cl']['rol']) ? $_SESSION['cl']['rol'] : null;
       </div>
     </div>
   </li>
-
+ -->
 
 <?php if($rol=='Administrador'){?>
   <li class="nav-item">
@@ -196,6 +196,22 @@ $rol = isset($_SESSION['cl']['rol']) ? $_SESSION['cl']['rol'] : null;
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Hojas:</h6>
         <a class="collapse-item" href="Tools_Documentos.php">Manual de Usuario</a>
+<!--         <a class="collapse-item" href="Tools_Calculo.php">Calculo</a>
+        <a class="collapse-item" href="Tools_Presentacion.php">Presentación</a>
+        <a class="collapse-item" href="Tools_Dibujo.php">Dibujo</a> -->
+      </div>
+    </div>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHerramientas" aria-expanded="true" aria-controls="collapseCuentas">
+      <i class="fas fa-paste"></i>
+      <span>Historial</span>
+    </a>
+    <div id="collapseHerramientas" class="collapse" aria-labelledby="headingHerramientas" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Hojas:</h6>
+        <a class="collapse-item" href="log.php">Registro de actividades</a>
 <!--         <a class="collapse-item" href="Tools_Calculo.php">Calculo</a>
         <a class="collapse-item" href="Tools_Presentacion.php">Presentación</a>
         <a class="collapse-item" href="Tools_Dibujo.php">Dibujo</a> -->
