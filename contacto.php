@@ -17,7 +17,36 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
   <script src="https://kit.fontawesome.com/629388bad9.js" crossorigin="anonymous"></script>
   <!--Fonts-->
   <link href="css/font.css" rel="stylesheet">
-  <title>Freskypan - Panaderia en Fusagasuga</title>
+      <!-- Custom favicon for this template-->
+      <link rel="icon" type="image/png" href="logo.png" />
+  <title>Los Gemelos</title>
+
+  <style>
+        .banner-section {
+            position: relative;
+            background-image: url('img/banner.png'); /* Reemplaza con la ruta de tu imagen */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding: 2rem 0;
+            text-align: center;
+            color: white;
+        }
+
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Ajusta la transparencia aquí */
+        }
+
+        .banner-content {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
 </head>
 
 <body class="bg-gray-100">
@@ -39,7 +68,7 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
         </div>
         <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
           <a class="navbar-brand flex-shrink-0" href="#">
-            <img src="favicon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            <img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
           </a>
           <div class="hidden sm:block sm:ml-6">
             <div class="flex space-x-4">
@@ -84,9 +113,18 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
     </div>
   </nav>
 
+  <div class="banner-section">
+            <div class="banner-overlay"></div>
+            <div class="banner-content">
+                <div class="text-center">
+                    <h2 class="text-4xl font-bold text-white">Contáctanos</h2>
+                    <p class="mt-4 text-white">Ingresa tus datos y nosotros te llamamos</p>
+                </div>
+            </div>
+        </div>
+
   <!-- Contact Us Section -->
   <div class="container mx-auto px-6 py-16">
-    <h2 class="text-4xl font-bold text-center text-gray-800 mb-8">Contáctanos</h2>
     <div class="flex flex-wrap -mx-6">
       <div class="w-full lg:w-1/2 px-6 mb-12 lg:mb-0">
         <div class="bg-white p-8 rounded-lg shadow-lg">
@@ -137,7 +175,7 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
           <i class="fab fa-instagram"></i>
         </a>
       </div>
-      <p>Sitio diseñado por <a href="#" class="underline">2024</a> - <a href="#" class="underline">softwar </a></p>
+      <p>Sitio diseñado por <a href="#" class="underline">2024</a> - <a href="#" class="underline">software </a></p>
     </div>
   </footer>
 

@@ -15,7 +15,7 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
     <script src="https://kit.fontawesome.com/629388bad9.js" crossorigin="anonymous"></script>
 
     <!-- Custom favicon for this template-->
-    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="icon" type="image/png" href="logo.png" />
 
     <title>Panadería "Los Gemelos"</title>
     <style>
@@ -65,7 +65,7 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
                 </div>
                 <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                     <a class="navbar-brand flex-shrink-0" href="#">
-                        <img src="favicon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                        <img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
                     </a>
                     <div class="hidden sm:block sm:ml-6">
                         <div class="flex space-x-4">

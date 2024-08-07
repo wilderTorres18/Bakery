@@ -15,7 +15,7 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/629388bad9.js" crossorigin="anonymous"></script>
     <!-- Custom favicon for this template-->
-    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="icon" type="image/png" href="logo.png" />
     <!-- SweetAlert2 -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Font awesome -->
@@ -42,8 +42,8 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
                     </button>
                 </div>
                 <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                    <a class="navbar-brand flex-shrink-0" href="#">
-                        <img src="favicon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                    <a class="navbar-brand flex-shrink-0" href="index.php">
+                        <img src="logo.png" width="30" height="90" class="d-inline-block align-top" alt="">
                     </a>
                     <div class="hidden sm:block sm:ml-6">
                         <div class="flex space-x-4">

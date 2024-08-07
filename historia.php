@@ -15,9 +15,35 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
     <script src="https://kit.fontawesome.com/629388bad9.js" crossorigin="anonymous"></script>
 
     <!-- Custom favicon for this template-->
-    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="icon" type="image/png" href="logo.png" />
 
     <title>Panadería "Los Gemelos"</title>
+    <style>
+        .banner-section {
+            position: relative;
+            background-image: url('img/banner.png'); /* Reemplaza con la ruta de tu imagen */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding: 2rem 0;
+            text-align: center;
+            color: white;
+        }
+
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Ajusta la transparencia aquí */
+        }
+
+        .banner-content {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
 </head>
 
 <body class="bg-gray-100">
@@ -40,7 +66,7 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
                 </div>
                 <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                     <a class="navbar-brand flex-shrink-0" href="#">
-                        <img src="favicon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                        <img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
                     </a>
                     <div class="hidden sm:block sm:ml-6">
                         <div class="flex space-x-4">
@@ -95,6 +121,15 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
 
 <!-- Quiénes Somos -->
 <section class="py-2 bg-gray-100">
+<div class="banner-section">
+            <div class="banner-overlay"></div>
+            <div class="banner-content">
+                <div class="text-center">
+                    <h2 class="text-4xl font-bold text-white">Nuestra Historia</h2>
+                    <p class="mt-4 text-white">Conoce mas sobre nosotros</p>
+                </div>
+            </div>
+        </div>
     <div class="container mx-auto px-6">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div class="order-2 lg:order-1">
