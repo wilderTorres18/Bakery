@@ -21,55 +21,7 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
     <!-- Font awesome -->
     <script src="https://kit.fontawesome.com/629388bad9.js" crossorigin="anonymous"></script>
 
-<!-- Slick Carousel CSS -->
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
-
-<style>
-.slick-prev, .slick-next {
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-}
-
-.slick-dots li button:before {
-    color: #1C3A57; 
-    font-size: 12px;
-}
-
-.slick-prev:hover, .slick-next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-}
-.product-carousel img {
-    width: 100%;
-    height: 200px; /* Ajustar según tu diseño */
-    object-fit: cover; /* Para que las imágenes se recorten en lugar de estirarse */
-    border-radius: 8px;
-}
-.product-carousel .slick-slide {
-    margin: 0 10px; /* Ajustar el espacio entre los productos */
-}
-
-.product-carousel .slick-slide > div {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
-}
-
-.product-carousel .slick-slide > div:hover {
-    transform: scale(1.05); /* Aumenta el tamaño en hover */
-}
-
-</style>
-
-
     <title>Panadería "Los Gemelos"</title>
-
-    
 </head>
 
 <body class="bg-gray-100">
@@ -167,54 +119,71 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
         </div>
     </div>
 
-    <div class="container mx-auto py-8 px-8">
-    <div class="product-carousel">
-        <?php
-        // Conexión y consulta a la base de datos
-        require("basededatos/connectionbd.php");
-        $sabor = isset($_GET['sabor']) ? $_GET['sabor'] : '';
-        $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
+    <!--Grid Productos y Carrito de Compras-->
+    <div class="container mx-auto py-8 px-8 grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <!-- Productos -->
+        <div class="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+            <?php
+            require("basededatos/connectionbd.php");
+            $sabor = isset($_GET['sabor']) ? $_GET['sabor'] : '';
+            $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
+            
 
-        $query = "SELECT stock, nombre, imagen, sabor, ID_CATPRODUCTO, descripcion, precio FROM catproducto WHERE 1=1";
+            $query = "SELECT stock, nombre, imagen, sabor, ID_CATPRODUCTO, descripcion, precio FROM catproducto WHERE 1=1";
 
-        if ($sabor != '') {
-            $query .= " AND sabor = '" . mysqli_real_escape_string($conn, $sabor) . "'";
-        }
+            // Filtrar por sabor
+            if ($sabor != '') {
+                $query .= " AND sabor = '" . mysqli_real_escape_string($conn, $sabor) . "'";
+            }
 
-        if ($busqueda != '') {
-            $query .= " AND (nombre LIKE '%" . mysqli_real_escape_string($conn, $busqueda) . "%' OR descripcion LIKE '%" . mysqli_real_escape_string($conn, $busqueda) . "%')";
-        }
+            // Filtrar por búsqueda
+            if ($busqueda != '') {
+                $query .= " AND (nombre LIKE '%" . mysqli_real_escape_string($conn, $busqueda) . "%' OR descripcion LIKE '%" . mysqli_real_escape_string($conn, $busqueda) . "%')";
+            }
+            // Filtrar por búsqueda
+if ($busqueda != '') {
+    $query .= " AND (nombre LIKE '%" . mysqli_real_escape_string($conn, $busqueda) . "%' OR descripcion LIKE '%" . mysqli_real_escape_string($conn, $busqueda) . "%')";
+}
 
-        $result = mysqli_query($conn, $query);
-        while ($fila = mysqli_fetch_array($result)) {
-            $Nom = $fila['nombre'];
-            $cod = $fila['precio'];
-            $sab = $fila['sabor'];
-            $des = $fila['descripcion'];
-            $stock = $fila['stock'];
-            $id = $fila['ID_CATPRODUCTO'];
-            $img = $fila['imagen'];
-            if ($stock > 0) {
-        ?>
-        <div>
-            <div class="bg-white p-4 rounded-lg shadow-lg">
-                <img src="basededatos/<?php echo $img; ?>" alt="<?php echo $Nom; ?>" class="w-full h-48 object-cover rounded-lg mb-4">
-                <h2 class="text-xl font-bold text-gray-800"><?php echo $Nom; ?></h2>
-                <p class="text-gray-600"><?php echo $des; ?></p>
-                <div class="flex justify-between items-center mt-4">
-                    <span class="text-gray-800 font-bold">Precio: S/ <?php echo $cod; ?></span>
-                    <?php if (isset($_SESSION['cl'])) { ?>
-                    <a href="#" class="bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 add-to-cart" data-id="<?php echo $id; ?>">Añadir al carrito</a>
-                    <?php } ?>
+            $result = mysqli_query($conn, $query);
+            while ($fila = mysqli_fetch_array($result)) {
+                $Nom = $fila['nombre'];
+                $cod = $fila['precio'];
+                $sab = $fila['sabor'];
+                $des = $fila['descripcion'];
+                $stock = $fila['stock'];
+                $id = $fila['ID_CATPRODUCTO'];
+                $img = $fila['imagen'];
+                if ($stock > 0) {
+            ?>
+                <div class="bg-white p-4 rounded-lg shadow-lg mt-4" data-categoria="<?php echo $sab; ?>" data-etiquetas="<?php echo $sab; ?> <?php echo $Nom; ?>" data-descripcion="<?php echo $des; ?>">
+                    <img src="basededatos/<?php echo $img; ?>" alt="<?php echo $Nom; ?>" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h2 class="text-xl font-bold text-gray-800"><?php echo $Nom; ?></h2>
+                    <p class="text-gray-600"><?php echo $des; ?></p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-gray-800 font-bold">Precio: S/ <?php echo $cod; ?></span>
+                        <?php if (isset($_SESSION['cl'])) { ?>
+                            <a href="#" class="bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 add-to-cart" data-id="<?php echo $id; ?>">Añadir al carrito</a>
+                        <?php } ?>
+                    </div>
                 </div>
+            <?php  }
+            } ?>
+        </div>
+    </div>
+
+    <!-- Carrito Modal -->
+    <div id="carritoModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 hidden">
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold">Carrito de Compras</h2>
+                <button class="text-gray-600 hover:text-gray-800" id="closeCarritoModal">&times;</button>
+            </div>
+            <div id="carritoContent">
+                <!-- Contenido del carrito aquí -->
             </div>
         </div>
-        <?php
-            }
-        }
-        ?>
     </div>
-</div>
 
     <!--Footer-->
     <footer class="bg-gray-800 py-6 mt-12">
@@ -239,46 +208,74 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNddZrEvvOCcfjOgiWtLNwSEbCrsczx3phrrYsDAyzpCfwfjJrEMyuwYvJtbt3I" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.min.js" integrity="sha384-pP5pYqQn9l3Bbo1Mj4Ad5Nq1dhevhSiwAHuQPs6abQh4Jt5e1Lx6U5G78ycBocsr" crossorigin="anonymous"></script>
     <script>
-$(document).ready(function(){
-    $('.product-carousel').slick({
-        slidesToShow: 4,           // Número de productos visibles por vez
-        slidesToScroll: 1,         // Número de productos que se desplazan por vez
-        autoplay: true,            // Activa el desplazamiento automático
-        autoplaySpeed: 3000,       // Tiempo en milisegundos entre cada desplazamiento automático
-        dots: true,                // Muestra puntos de navegación
-        arrows: true,              // Muestra flechas de navegación
-        pauseOnHover: true,        // Pausa el autoplay cuando se pasa el ratón por encima
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 1,
-                    infinite: true,
-                    dots: true
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
+        $(document).ready(function() {
+            $('.add-to-cart').click(function(e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+                $.ajax({
+                    url: 'carritodecompras.php',
+                    method: 'GET',
+                    data: { id: id },
+                    success: function(response) {
+                        $('#carritoContent').html(response);
+                        $('#carritoModal').removeClass('hidden');
+                        updateCartCount();
+                    }
+                });
+            });
+
+            $('#carrito-btn').click(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: 'carritodecompras.php',
+                    method: 'GET',
+                    success: function(response) {
+                        $('#carritoContent').html(response);
+                        $('#carritoModal').removeClass('hidden');
+                    }
+                });
+            });
+
+            $('#closeCarritoModal').click(function() {
+                $('#carritoModal').addClass('hidden');
+            });
+
+            function updateCartCount() {
+                $.ajax({
+                    url: 'carritodecompras.php',
+                    method: 'POST',
+                    data: { action: 'count' },
+                    success: function(response) {
+                        $('#cart-count').text(response);
+                    }
+                });
             }
-        ]
-    });
+        });
+
+        // Aplicar filtro basado en el sabor
+        function applyFilter(sabor) {
+            const urlParams = new URLSearchParams(window.location.search);
+            urlParams.set('sabor', sabor);
+            window.location.search = urlParams.toString();
+        }
+
+        document.getElementById('filterForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const busqueda = document.getElementById('barra-busqueda').value.trim();
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set('busqueda', busqueda);
+    urlParams.delete('sabor'); // Eliminar el parámetro sabor para hacer una búsqueda sin filtros
+    window.location.search = urlParams.toString();
+});
+
+document.getElementById('clearSearch').addEventListener('click', function() {
+    document.getElementById('barra-busqueda').value = '';
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.delete('busqueda');
+    window.location.search = urlParams.toString();
 });
 
 
-</script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-
+    </script>
 </body>
 </html>
