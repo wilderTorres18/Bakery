@@ -77,7 +77,7 @@ $rol = isset($_SESSION['cl']['rol']) ? $_SESSION['cl']['rol'] : null;
     </div>
   </li>
 
-  <li class="nav-item">
+<!--   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInventarios" aria-expanded="true" aria-controls="collapseInventarios">
       <i class="fas fa-boxes"></i>
       <span>Inventario</span>
@@ -118,7 +118,7 @@ $rol = isset($_SESSION['cl']['rol']) ? $_SESSION['cl']['rol'] : null;
       </div>
     </div>
   <?php } ?>
-  </li>
+  </li> -->
 
   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseContacts" aria-expanded="true" aria-controls="collapseContacts">
