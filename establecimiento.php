@@ -158,6 +158,9 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
         </div>
     </section>
 
+    <!-- Whatsapp -->
+    <?php include 'whatsapp.php'; ?> 
+
     <!-- Footer -->
     <footer class="bg-gray-800 py-6 mt-12">
         <div class="container mx-auto text-center text-white">

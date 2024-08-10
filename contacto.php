@@ -17,36 +17,38 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
   <script src="https://kit.fontawesome.com/629388bad9.js" crossorigin="anonymous"></script>
   <!--Fonts-->
   <link href="css/font.css" rel="stylesheet">
-      <!-- Custom favicon for this template-->
-      <link rel="icon" type="image/png" href="logo.png" />
+  <!-- Custom favicon for this template-->
+  <link rel="icon" type="image/png" href="logo.png" />
   <title>Los Gemelos</title>
 
   <style>
-        .banner-section {
-            position: relative;
-            background-image: url('img/banner.png'); /* Reemplaza con la ruta de tu imagen */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            padding: 2rem 0;
-            text-align: center;
-            color: white;
-        }
+    .banner-section {
+      position: relative;
+      background-image: url('img/banner.png');
+      /* Reemplaza con la ruta de tu imagen */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      padding: 2rem 0;
+      text-align: center;
+      color: white;
+    }
 
-        .banner-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5); /* Ajusta la transparencia aquí */
-        }
+    .banner-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      /* Ajusta la transparencia aquí */
+    }
 
-        .banner-content {
-            position: relative;
-            z-index: 1;
-        }
-    </style>
+    .banner-content {
+      position: relative;
+      z-index: 1;
+    }
+  </style>
 </head>
 
 <body class="bg-gray-100">
@@ -96,9 +98,9 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
               <?php } ?>
             </div>
             <a href="carritoindex.php" id="carrito-btn" class="ml-4 text-gray-900 hover:text-gray-600 relative">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span id="cart-count" class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center"><?php echo $numero_productos; ?></span>
-                        </a>
+              <i class="fas fa-shopping-cart"></i>
+              <span id="cart-count" class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center"><?php echo $numero_productos; ?></span>
+            </a>
           </div>
         </div>
       </div>
@@ -115,14 +117,14 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
   </nav>
 
   <div class="banner-section">
-            <div class="banner-overlay"></div>
-            <div class="banner-content">
-                <div class="text-center">
-                    <h2 class="text-4xl font-bold text-white">Contáctanos</h2>
-                    <p class="mt-4 text-white">Ingresa tus datos y nosotros te llamamos</p>
-                </div>
-            </div>
-        </div>
+    <div class="banner-overlay"></div>
+    <div class="banner-content">
+      <div class="text-center">
+        <h2 class="text-4xl font-bold text-white">Contáctanos</h2>
+        <p class="mt-4 text-white">Ingresa tus datos y nosotros te llamamos</p>
+      </div>
+    </div>
+  </div>
 
   <!-- Contact Us Section -->
   <div class="container mx-auto px-6 py-16">
@@ -157,10 +159,13 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
         <div class="bg-white p-8 rounded-lg shadow-lg">
           <h3 class="text-2xl font-bold text-gray-800 mb-6">Nuestra Ubicación</h3>
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31693.284067843343!2d-80.7588793!3d-5.5713565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x902b9bfa58f50ffb%3A0x3ec408e19f74ae0e!2sSullana%2C%20Per%C3%BA!5e0!3m2!1ses!2sus!4v1628082079984!5m2!1ses!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-            </div>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- Whatsapp -->
+  <?php include 'whatsapp.php'; ?>
 
   <!--Footer-->
   <footer class="bg-gray-800 py-6 mt-12">
@@ -184,7 +189,7 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNddZrEvvOCcfjOgiWtLNwSEbCrsczx3phrrYsDAyzpCfwfjJrEMyuwYvJtbt3I" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.min.js" integrity="sha384-pP5pYqQn9l3Bbo1Mj4Ad5Nq1dhevhSiwAHuQPs6abQh4Jt5e1Lx6U5G78ycBocsr" crossorigin="anonymous"></script>
-  
+
 </body>
 
 </html>

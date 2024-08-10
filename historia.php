@@ -21,7 +21,8 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
     <style>
         .banner-section {
             position: relative;
-            background-image: url('img/banner.png'); /* Reemplaza con la ruta de tu imagen */
+            background-image: url('img/banner.png');
+            /* Reemplaza con la ruta de tu imagen */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -36,15 +37,14 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5); /* Ajusta la transparencia aquí */
+            background: rgba(0, 0, 0, 0.5);
+            /* Ajusta la transparencia aquí */
         }
 
         .banner-content {
             position: relative;
             z-index: 1;
         }
-
-        
     </style>
 </head>
 
@@ -74,10 +74,10 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
                         <div class="flex space-x-4">
                             <a href="index.php"
                                 class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Inicio</a>
-                                <a href="tienda.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Tienda</a>
+                            <a href="tienda.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Tienda</a>
                             <a href="historia.html"
                                 class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Historia</a>
-                                <a href="establecimiento.php"
+                            <a href="establecimiento.php"
                                 class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Establecimientos</a>
                             <a href="contacto.php"
                                 class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Contáctanos</a>
@@ -88,19 +88,19 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
                     <div class="flex items-center">
                         <div class="btn-group mr-2" role="group" aria-label="Second group">
                             <?php if (!(isset($_SESSION['cl']))) { ?>
-                            <a href="nuevo_cliente.php"
-                                class="btn bg-green-500 hover:bg-green-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Registrarse</a>
+                                <a href="nuevo_cliente.php"
+                                    class="btn bg-green-500 hover:bg-green-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Registrarse</a>
                             <?php } ?>
                         </div>
                         <div class="form-inline my-2 my-lg-0">
                             <?php if (!(isset($_SESSION['cl']))) { ?>
-                            <a href="login/"
-                                class="btn bg-blue-500 hover:bg-blue-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Iniciar
-                                sesión</a>
+                                <a href="login/"
+                                    class="btn bg-blue-500 hover:bg-blue-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Iniciar
+                                    sesión</a>
                             <?php } ?>
                             <?php if (isset($_SESSION['cl'])) { ?>
-                            <a href="salir.php"
-                                class="btn bg-red-500 hover:bg-red-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Salir</a>
+                                <a href="salir.php"
+                                    class="btn bg-red-500 hover:bg-red-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Salir</a>
                             <?php } ?>
                         </div>
                         <a href="carritoindex.php" id="carrito-btn" class="ml-4 text-gray-900 hover:text-gray-600 relative">
@@ -122,9 +122,9 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
         </div>
     </nav>
 
-<!-- Quiénes Somos -->
-<section class="py-2 bg-gray-100">
-<div class="banner-section">
+    <!-- Quiénes Somos -->
+    <section class="py-2 bg-gray-100">
+        <div class="banner-section">
             <div class="banner-overlay"></div>
             <div class="banner-content">
                 <div class="text-center">
@@ -133,61 +133,63 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
                 </div>
             </div>
         </div>
-    <div class="container mx-auto px-6">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            <div class="order-2 lg:order-1">
-                <div class="p-5">
-                    <h2 class="text-3xl font-bold text-gray-800">¿Quiénes somos?</h2>
-                    <p class="mt-4 text-gray-600">Somos "Los Gemelos", una empresa que nació en 2021 en la provincia de Sullana con el objetivo de satisfacer las necesidades de nuestros clientes con productos de alta calidad. Contamos con dos tiendas físicas ubicadas en la calle Benal y en la calle Víctor Raúl. Para expandir nuestra presencia y llegar a más clientes, hemos creado una página web. Nuestros clientes confían en nosotros por la variedad y calidad de nuestros panes.</p>
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="order-2 lg:order-1">
+                    <div class="p-5">
+                        <h2 class="text-3xl font-bold text-gray-800">¿Quiénes somos?</h2>
+                        <p class="mt-4 text-gray-600">Somos "Los Gemelos", una empresa que nació en 2021 en la provincia de Sullana con el objetivo de satisfacer las necesidades de nuestros clientes con productos de alta calidad. Contamos con dos tiendas físicas ubicadas en la calle Benal y en la calle Víctor Raúl. Para expandir nuestra presencia y llegar a más clientes, hemos creado una página web. Nuestros clientes confían en nosotros por la variedad y calidad de nuestros panes.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="order-1 lg:order-2">
-                <div class="p-5">
-                    <img class="w-full h-auto rounded-lg shadow-lg" src="img/somos.jpg" alt="¿Quiénes somos?">
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Misión -->
-<section class="py-2 bg-white">
-    <div class="container mx-auto px-6">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            <div>
-                <div class="p-5">
-                    <img class="w-full h-auto rounded-lg shadow-lg" src="img/mision.jpg" alt="Misión">
-                </div>
-            </div>
-            <div>
-                <div class="p-5">
-                    <h2 class="text-3xl font-bold text-gray-800">Misión</h2>
-                    <p class="mt-4 text-gray-600">Nuestra misión es hornear productos de la mejor calidad y frescura todos los días. Nos esforzamos por ofrecer una amplia variedad de panes que destacan por sus ingredientes de primera calidad. Además, facilitamos la entrega a domicilio para asegurar un servicio excelente y satisfacer a nuestra clientela.</p>
+                <div class="order-1 lg:order-2">
+                    <div class="p-5">
+                        <img class="w-full h-auto rounded-lg shadow-lg" src="img/somos.jpg" alt="¿Quiénes somos?">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Visión -->
-<section class="py-2 bg-gray-100">
-    <div class="container mx-auto px-6">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            <div class="order-2 lg:order-1">
-                <div class="p-5">
-                    <h2 class="text-3xl font-bold text-gray-800">Visión</h2>
-                    <p class="mt-4 text-gray-600">Nuestra visión es ser líderes en la industria panificadora, reconocidos por la excelencia de nuestros productos y el servicio excepcional que brindamos a nuestros clientes.</p>
+    <!-- Misión -->
+    <section class="py-2 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div>
+                    <div class="p-5">
+                        <img class="w-full h-auto rounded-lg shadow-lg" src="img/mision.jpg" alt="Misión">
+                    </div>
                 </div>
-            </div>
-            <div class="order-1 lg:order-2">
-                <div class="p-5">
-                    <img class="w-full h-auto rounded-lg shadow-lg" src="img/vision.jpg" alt="Visión">
+                <div>
+                    <div class="p-5">
+                        <h2 class="text-3xl font-bold text-gray-800">Misión</h2>
+                        <p class="mt-4 text-gray-600">Nuestra misión es hornear productos de la mejor calidad y frescura todos los días. Nos esforzamos por ofrecer una amplia variedad de panes que destacan por sus ingredientes de primera calidad. Además, facilitamos la entrega a domicilio para asegurar un servicio excelente y satisfacer a nuestra clientela.</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
+    <!-- Visión -->
+    <section class="py-2 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="order-2 lg:order-1">
+                    <div class="p-5">
+                        <h2 class="text-3xl font-bold text-gray-800">Visión</h2>
+                        <p class="mt-4 text-gray-600">Nuestra visión es ser líderes en la industria panificadora, reconocidos por la excelencia de nuestros productos y el servicio excepcional que brindamos a nuestros clientes.</p>
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2">
+                    <div class="p-5">
+                        <img class="w-full h-auto rounded-lg shadow-lg" src="img/vision.jpg" alt="Visión">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Whatsapp -->
+    <?php include 'whatsapp.php'; ?>
 
     <!-- Footer -->
     <footer class="bg-gray-800 py-6 mt-12">

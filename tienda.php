@@ -59,15 +59,15 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
                     <div class="flex items-center">
                         <div class="btn-group mr-2" role="group" aria-label="Second group">
                             <?php if (!(isset($_SESSION['cl']))) { ?>
-                            <a href="nuevo_cliente.php" class="btn bg-green-500 hover:bg-green-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Registrarse</a>
+                                <a href="nuevo_cliente.php" class="btn bg-green-500 hover:bg-green-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Registrarse</a>
                             <?php } ?>
                         </div>
                         <div class="form-inline my-2 my-lg-0">
                             <?php if (!(isset($_SESSION['cl']))) { ?>
-                            <a href="login/" class="btn bg-blue-500 hover:bg-blue-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Iniciar sesión</a>
+                                <a href="login/" class="btn bg-blue-500 hover:bg-blue-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Iniciar sesión</a>
                             <?php } ?>
                             <?php if (isset($_SESSION['cl'])) { ?>
-                            <a href="salir.php" class="btn bg-red-500 hover:bg-red-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Salir</a>
+                                <a href="salir.php" class="btn bg-red-500 hover:bg-red-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Salir</a>
                             <?php } ?>
                         </div>
                         <a href="carritoindex.php" id="carrito-btn" class="ml-4 text-gray-900 hover:text-gray-600 relative">
@@ -94,21 +94,21 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
             <p class="mt-2 text-gray-700">Del horno a tu mesa, frescura y calidad en cada bocado.</p>
 
             <form id="filterForm" class="relative mt-6 max-w-screen-md mx-auto">
-    <div class="relative flex items-center">
-        <span class="absolute left-0 pl-3 flex items-center pointer-events-none">
-            <i class="fas fa-search text-gray-400"></i>
-        </span>
-        <input type="text" class="border-2 border-gray-300 bg-white h-10 pl-10 pr-10 rounded-lg text-sm focus:outline-none w-full" id="barra-busqueda" name="busqueda" placeholder="¿Qué se te antoja hoy?" value="<?php echo htmlspecialchars($busqueda); ?>">
-        <?php if ($busqueda != ''): ?>
-        <span class="absolute right-0 pr-3 flex items-center">
-            <button type="button" id="clearSearch" class="text-gray-400 focus:outline-none">
-                <i class="fas fa-times"></i>
-            </button>
-        </span>
-        <?php endif; ?>
-    </div>
-    <button type="submit" class="hidden"></button>
-</form>
+                <div class="relative flex items-center">
+                    <span class="absolute left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-search text-gray-400"></i>
+                    </span>
+                    <input type="text" class="border-2 border-gray-300 bg-white h-10 pl-10 pr-10 rounded-lg text-sm focus:outline-none w-full" id="barra-busqueda" name="busqueda" placeholder="¿Qué se te antoja hoy?" value="<?php echo htmlspecialchars($busqueda); ?>">
+                    <?php if ($busqueda != ''): ?>
+                        <span class="absolute right-0 pr-3 flex items-center">
+                            <button type="button" id="clearSearch" class="text-gray-400 focus:outline-none">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </span>
+                    <?php endif; ?>
+                </div>
+                <button type="submit" class="hidden"></button>
+            </form>
 
 
             <div class="mt-4">
@@ -127,7 +127,7 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
             require("basededatos/connectionbd.php");
             $sabor = isset($_GET['sabor']) ? $_GET['sabor'] : '';
             $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
-            
+
 
             $query = "SELECT stock, nombre, imagen, sabor, ID_CATPRODUCTO, descripcion, precio FROM catproducto WHERE 1=1";
 
@@ -141,9 +141,9 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
                 $query .= " AND (nombre LIKE '%" . mysqli_real_escape_string($conn, $busqueda) . "%' OR descripcion LIKE '%" . mysqli_real_escape_string($conn, $busqueda) . "%')";
             }
             // Filtrar por búsqueda
-if ($busqueda != '') {
-    $query .= " AND (nombre LIKE '%" . mysqli_real_escape_string($conn, $busqueda) . "%' OR descripcion LIKE '%" . mysqli_real_escape_string($conn, $busqueda) . "%')";
-}
+            if ($busqueda != '') {
+                $query .= " AND (nombre LIKE '%" . mysqli_real_escape_string($conn, $busqueda) . "%' OR descripcion LIKE '%" . mysqli_real_escape_string($conn, $busqueda) . "%')";
+            }
 
             $result = mysqli_query($conn, $query);
             while ($fila = mysqli_fetch_array($result)) {
@@ -156,17 +156,17 @@ if ($busqueda != '') {
                 $img = $fila['imagen'];
                 if ($stock > 0) {
             ?>
-                <div class="bg-white p-4 rounded-lg shadow-lg mt-4" data-categoria="<?php echo $sab; ?>" data-etiquetas="<?php echo $sab; ?> <?php echo $Nom; ?>" data-descripcion="<?php echo $des; ?>">
-                    <img src="basededatos/<?php echo $img; ?>" alt="<?php echo $Nom; ?>" class="w-full h-48 object-cover rounded-lg mb-4">
-                    <h2 class="text-xl font-bold text-gray-800"><?php echo $Nom; ?></h2>
-                    <p class="text-gray-600"><?php echo $des; ?></p>
-                    <div class="flex justify-between items-center mt-4">
-                        <span class="text-gray-800 font-bold">Precio: S/ <?php echo $cod; ?></span>
-                        <?php if (isset($_SESSION['cl'])) { ?>
-                            <a href="#" class="bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 add-to-cart" data-id="<?php echo $id; ?>">Añadir al carrito</a>
-                        <?php } ?>
+                    <div class="bg-white p-4 rounded-lg shadow-lg mt-4" data-categoria="<?php echo $sab; ?>" data-etiquetas="<?php echo $sab; ?> <?php echo $Nom; ?>" data-descripcion="<?php echo $des; ?>">
+                        <img src="basededatos/<?php echo $img; ?>" alt="<?php echo $Nom; ?>" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <h2 class="text-xl font-bold text-gray-800"><?php echo $Nom; ?></h2>
+                        <p class="text-gray-600"><?php echo $des; ?></p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-gray-800 font-bold">Precio: S/ <?php echo $cod; ?></span>
+                            <?php if (isset($_SESSION['cl'])) { ?>
+                                <a href="#" class="bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 add-to-cart" data-id="<?php echo $id; ?>">Añadir al carrito</a>
+                            <?php } ?>
+                        </div>
                     </div>
-                </div>
             <?php  }
             } ?>
         </div>
@@ -184,6 +184,9 @@ if ($busqueda != '') {
             </div>
         </div>
     </div>
+
+    <!-- Whatsapp -->
+    <?php include 'whatsapp.php'; ?>
 
     <!--Footer-->
     <footer class="bg-gray-800 py-6 mt-12">
@@ -215,7 +218,9 @@ if ($busqueda != '') {
                 $.ajax({
                     url: 'carritodecompras.php',
                     method: 'GET',
-                    data: { id: id },
+                    data: {
+                        id: id
+                    },
                     success: function(response) {
                         $('#carritoContent').html(response);
                         $('#carritoModal').removeClass('hidden');
@@ -244,7 +249,9 @@ if ($busqueda != '') {
                 $.ajax({
                     url: 'carritodecompras.php',
                     method: 'POST',
-                    data: { action: 'count' },
+                    data: {
+                        action: 'count'
+                    },
                     success: function(response) {
                         $('#cart-count').text(response);
                     }
@@ -260,22 +267,21 @@ if ($busqueda != '') {
         }
 
         document.getElementById('filterForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const busqueda = document.getElementById('barra-busqueda').value.trim();
-    const urlParams = new URLSearchParams(window.location.search);
-    urlParams.set('busqueda', busqueda);
-    urlParams.delete('sabor'); // Eliminar el parámetro sabor para hacer una búsqueda sin filtros
-    window.location.search = urlParams.toString();
-});
+            e.preventDefault();
+            const busqueda = document.getElementById('barra-busqueda').value.trim();
+            const urlParams = new URLSearchParams(window.location.search);
+            urlParams.set('busqueda', busqueda);
+            urlParams.delete('sabor'); // Eliminar el parámetro sabor para hacer una búsqueda sin filtros
+            window.location.search = urlParams.toString();
+        });
 
-document.getElementById('clearSearch').addEventListener('click', function() {
-    document.getElementById('barra-busqueda').value = '';
-    const urlParams = new URLSearchParams(window.location.search);
-    urlParams.delete('busqueda');
-    window.location.search = urlParams.toString();
-});
-
-
+        document.getElementById('clearSearch').addEventListener('click', function() {
+            document.getElementById('barra-busqueda').value = '';
+            const urlParams = new URLSearchParams(window.location.search);
+            urlParams.delete('busqueda');
+            window.location.search = urlParams.toString();
+        });
     </script>
 </body>
+
 </html>
