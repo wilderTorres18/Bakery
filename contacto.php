@@ -168,23 +168,7 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
   <?php include 'whatsapp.php'; ?>
 
   <!--Footer-->
-  <footer class="bg-gray-800 py-6 mt-12">
-    <div class="container mx-auto text-center text-white">
-      <div class="flex justify-center space-x-6 mb-4">
-        <a href="#" class="text-white hover:text-gray-400">
-          <i class="fab fa-twitter"></i>
-        </a>
-        <a href="#" class="text-white hover:text-gray-400">
-          <i class="fab fa-facebook"></i>
-        </a>
-        <a href="#" class="text-white hover:text-gray-400">
-          <i class="fab fa-instagram"></i>
-        </a>
-      </div>
-      <p>Sitio diseñado por <a href="#" class="underline">2024</a> - <a href="#" class="underline">software </a></p>
-    </div>
-  </footer>
-
+  <?php include 'footer.php'; ?>
   <!--JavaScript-->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNddZrEvvOCcfjOgiWtLNwSEbCrsczx3phrrYsDAyzpCfwfjJrEMyuwYvJtbt3I" crossorigin="anonymous"></script>

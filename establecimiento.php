@@ -21,7 +21,8 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
     <style>
         .banner-section {
             position: relative;
-            background-image: url('img/banner.png'); /* Reemplaza con la ruta de tu imagen */
+            background-image: url('img/banner.png');
+            /* Reemplaza con la ruta de tu imagen */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -36,7 +37,8 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5); /* Ajusta la transparencia aquí */
+            background: rgba(0, 0, 0, 0.5);
+            /* Ajusta la transparencia aquí */
         }
 
         .banner-content {
@@ -71,7 +73,7 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
                         <div class="flex space-x-4">
                             <a href="index.php"
                                 class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Inicio</a>
-                                <a href="tienda.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Tienda</a>
+                            <a href="tienda.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Tienda</a>
                             <a href="historia.html"
                                 class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Historia</a>
 
@@ -86,19 +88,19 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
                     <div class="flex items-center">
                         <div class="btn-group mr-2" role="group" aria-label="Second group">
                             <?php if (!(isset($_SESSION['cl']))) { ?>
-                            <a href="nuevo_cliente.php"
-                                class="btn bg-green-500 hover:bg-green-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Registrarse</a>
+                                <a href="nuevo_cliente.php"
+                                    class="btn bg-green-500 hover:bg-green-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Registrarse</a>
                             <?php } ?>
                         </div>
                         <div class="form-inline my-2 my-lg-0">
                             <?php if (!(isset($_SESSION['cl']))) { ?>
-                            <a href="login/"
-                                class="btn bg-blue-500 hover:bg-blue-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Iniciar
-                                sesión</a>
+                                <a href="login/"
+                                    class="btn bg-blue-500 hover:bg-blue-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Iniciar
+                                    sesión</a>
                             <?php } ?>
                             <?php if (isset($_SESSION['cl'])) { ?>
-                            <a href="salir.php"
-                                class="btn bg-red-500 hover:bg-red-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Salir</a>
+                                <a href="salir.php"
+                                    class="btn bg-red-500 hover:bg-red-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Salir</a>
                             <?php } ?>
                         </div>
                         <a href="carritoindex.php" id="carrito-btn" class="ml-4 text-gray-900 hover:text-gray-600 relative">
@@ -159,25 +161,10 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
     </section>
 
     <!-- Whatsapp -->
-    <?php include 'whatsapp.php'; ?> 
+    <?php include 'whatsapp.php'; ?>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 py-6 mt-12">
-        <div class="container mx-auto text-center text-white">
-            <div class="flex justify-center space-x-6 mb-4">
-                <a href="#" class="text-white hover:text-gray-400">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="#" class="text-white hover:text-gray-400">
-                    <i class="fab fa-facebook"></i>
-                </a>
-                <a href="#" class="text-white hover:text-gray-400">
-                    <i class="fab fa-instagram"></i>
-                </a>
-            </div>
-            <p>Sitio diseñado por <a href="#" class="underline">2024</a> - <a href="#" class="underline">software </a></p>
-        </div>
-    </footer>
+    <?php include 'footer.php'; ?>
 
     <!--JavaScript-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>

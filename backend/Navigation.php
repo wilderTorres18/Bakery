@@ -1,89 +1,82 @@
 <!-- Topbar -->
 <?php
-        $fec=date('Y-m-d');
-        
-        $cli=$_SESSION['cl']['nom'];
-        $ape=$_SESSION['cl']['ape'];
-require ("../basededatos/connectionbd.php");
-$query="SELECT nombre FROM CatProducto WHERE stock=0 ";
-$result=mysqli_query($conn,$query);
+$fec = date('Y-m-d');
+
+$cli = $_SESSION['cl']['nom'];
+$ape = $_SESSION['cl']['ape'];
+require("../basededatos/connectionbd.php");
+$query = "SELECT nombre FROM CatProducto WHERE stock=0 ";
+$result = mysqli_query($conn, $query);
 $i = 0;
-$ind=100;
-$tar=0;  
-$flag=0; 
-$flag2=0; 
-$flag3=0;
-      while($fila=mysqli_fetch_array($result)){     
-        $nom = $fila['nombre'];
-$flag=1;
-        $i++; 
-        $tar=$tar+5;
+$ind = 100;
+$tar = 0;
+$flag = 0;
+$flag2 = 0;
+$flag3 = 0;
+while ($fila = mysqli_fetch_array($result)) {
+  $nom = $fila['nombre'];
+  $flag = 1;
+  $i++;
+  $tar = $tar + 5;
 }
 $query2 = "SELECT MAX(Venta.fecha) AS fecha, CatProducto.nombre, SUM(CatProducto.precio * VENTA_PRODUCCION.cantidad) AS tot FROM Venta, CatProducto, Produccion, VENTA_PRODUCCION WHERE Venta.ID_VENTA = VENTA_PRODUCCION.FK_ID_VENTA AND VENTA_PRODUCCION.FK_ID_PRODUCCION = Produccion.ID_PRODUCCION AND Produccion.FK_ID_CATPRODUCTO = CatProducto.ID_CATPRODUCTO GROUP BY CatProducto.nombre";
-$result2=mysqli_query($conn,$query2); //line 23
+$result2 = mysqli_query($conn, $query2); //line 23
 
-      
-      while($fila2=mysqli_fetch_array($result2)){     
-        $nom2 = $fila2['nombre'];
-        $gan=$fila2['tot'];
-          $i++; 
+
+while ($fila2 = mysqli_fetch_array($result2)) {
+  $nom2 = $fila2['nombre'];
+  $gan = $fila2['tot'];
+  $i++;
 }
-$query3="SELECT nombre FROM MateriaPrima WHERE stock=0 ";
-$result3=mysqli_query($conn,$query3);
+$query3 = "SELECT nombre FROM MateriaPrima WHERE stock=0 ";
+$result3 = mysqli_query($conn, $query3);
 
-      
-      while($fila3=mysqli_fetch_array($result3)){     
-        $nom3 = $fila3['nombre'];
-        $flag2=1;
-        $i++;
-       $tar=$tar+10;
-       
+
+while ($fila3 = mysqli_fetch_array($result3)) {
+  $nom3 = $fila3['nombre'];
+  $flag2 = 1;
+  $i++;
+  $tar = $tar + 10;
 }
-$query4="SELECT nombre FROM Insumo WHERE stock=0 ";
-$result4=mysqli_query($conn,$query4);
+$query4 = "SELECT nombre FROM Insumo WHERE stock=0 ";
+$result4 = mysqli_query($conn, $query4);
 
-      
-      while($fila4=mysqli_fetch_array($result4)){     
-        $nom4 = $fila4['nombre'];
-          $i++; 
-          $flag3=1;
-          $tar=$tar+10;
-       
+
+while ($fila4 = mysqli_fetch_array($result4)) {
+  $nom4 = $fila4['nombre'];
+  $i++;
+  $flag3 = 1;
+  $tar = $tar + 10;
 }
-$sd="";
-$query5="SELECT COUNT(*) as cont FROM Bodega";
-$result5=mysqli_query($conn,$query5);
+$sd = "";
+$query5 = "SELECT COUNT(*) as cont FROM Bodega";
+$result5 = mysqli_query($conn, $query5);
 
-      
-      while($fila5=mysqli_fetch_array($result5)){     
-        $bode = $fila5['cont'];
-       
+
+while ($fila5 = mysqli_fetch_array($result5)) {
+  $bode = $fila5['cont'];
 }
 
-$query6="SELECT COUNT(*) as cont FROM CatProducto WHERE estado=1";
-$result6=mysqli_query($conn,$query6);
+$query6 = "SELECT COUNT(*) as cont FROM CatProducto WHERE estado=1";
+$result6 = mysqli_query($conn, $query6);
 
-      
-      while($fila6=mysqli_fetch_array($result6)){     
-        $prod = $fila6['cont'];
-       
-       
-}
-$query7="SELECT COUNT(*) as cont FROM Agenda";
-$result7=mysqli_query($conn,$query7);
 
-      
-      while($fila7=mysqli_fetch_array($result7)){     
-        $item = $fila7['cont'];
-        
-       
+while ($fila6 = mysqli_fetch_array($result6)) {
+  $prod = $fila6['cont'];
 }
-if($tar>100){
-$veri=0;
-}else if($tar<100){
- $veri=$ind-$tar; 
+$query7 = "SELECT COUNT(*) as cont FROM Agenda";
+$result7 = mysqli_query($conn, $query7);
+
+
+while ($fila7 = mysqli_fetch_array($result7)) {
+  $item = $fila7['cont'];
 }
-        ?>
+if ($tar > 100) {
+  $veri = 0;
+} else if ($tar < 100) {
+  $veri = $ind - $tar;
+}
+?>
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
   <!-- Sidebar Toggle (Topbar) -->
@@ -93,16 +86,16 @@ $veri=0;
 
   <!-- Topbar Search -->
   <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-  <div class="input-group">
-    <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar por..."
-      aria-label="Buscar" aria-describedby="basic-addon2">
-    <div class="input-group-append">
-      <button class="btn btn-primary" type="button">
-        <i class="fas fa-search fa-sm"></i>
-      </button>
+    <div class="input-group">
+      <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar por..."
+        aria-label="Buscar" aria-describedby="basic-addon2">
+      <div class="input-group-append">
+        <button class="btn btn-primary" type="button">
+          <i class="fas fa-search fa-sm"></i>
+        </button>
+      </div>
     </div>
-  </div>
-</form>
+  </form>
 
   <!-- Topbar Navbar -->
   <ul class="navbar-nav ml-auto">
@@ -128,14 +121,14 @@ $veri=0;
     </li>
 
     <!-- Nav Item - Calendar -->
-    <li class="nav-item dropdown no-arrow mx-1">
+    <!--     <li class="nav-item dropdown no-arrow mx-1">
       <a class="nav-link dropdown-toggle" href="calendario/" id="alertsDropdown" role="button">
-        <i class="far fa-calendar-alt"></i>
+        <i class="far fa-calendar-alt"></i> -->
 
-        <!-- Counter - Alerts -->
-        <span class="badge badge-danger badge-counter"><?php echo $item;?>+</span>
+    <!-- Counter - Alerts -->
+    <!--         <span class="badge badge-danger badge-counter"><?php echo $item; ?>+</span>
       </a>
-    </li>
+    </li> -->
 
     <!-- Nav Item - Alerts -->
     <li class="nav-item dropdown no-arrow mx-1">
@@ -147,7 +140,7 @@ $veri=0;
       <!-- Dropdown - Alerts -->
       <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
         <h6 class="dropdown-header">
-          Centro de Alertas 
+          Centro de Alertas
         </h6>
 
         <a class="dropdown-item d-flex align-items-center" href="#">
@@ -158,9 +151,9 @@ $veri=0;
           </div>
           <div>
             <div class="small text-gray-500"><?php echo $fec; ?></div>
-            <?php if($flag==1){ ?>
-            <span class="font-weight-bold">Alerta: Fabricar <?php echo $nom; ?></span>
-          <?php }?>
+            <?php if ($flag == 1) { ?>
+              <span class="font-weight-bold">Alerta: Fabricar <?php echo $nom; ?></span>
+            <?php } ?>
           </div>
         </a>
         <a class="dropdown-item d-flex align-items-center" href="#">
@@ -182,9 +175,9 @@ $veri=0;
           </div>
           <div>
             <div class="small text-gray-500"><?php echo $fec; ?></div>
-            <?php if($flag2==1){ ?>
-            Alerta Roja: No hay <?php echo $nom3; ?> .
-          <?php } ?>
+            <?php if ($flag2 == 1) { ?>
+              Alerta Roja: No hay <?php echo $nom3; ?> .
+            <?php } ?>
           </div>
         </a>
         <a class="dropdown-item text-center small text-gray-500" href="calendario/">Mostrar Todo</a>
@@ -209,9 +202,9 @@ $veri=0;
             <div class="status-indicator bg-success"></div>
           </div>
           <div class="font-weight-bold">
- <?php if($flag3==1){ ?>
-            <div class="text-truncate">Se agoto el Insumo: <?php echo $nom4; ?>.</div>
-          <?php }?>
+            <?php if ($flag3 == 1) { ?>
+              <div class="text-truncate">Se agoto el Insumo: <?php echo $nom4; ?>.</div>
+            <?php } ?>
             <div class="small text-gray-500">Sistema · 1m</div>
           </div>
         </a>
@@ -274,7 +267,7 @@ $veri=0;
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="../salir.php" data-toggle="modal" data-target="#logoutModal">
           <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-          Salir 
+          Salir
         </a>
       </div>
     </li>

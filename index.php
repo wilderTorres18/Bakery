@@ -237,27 +237,14 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
             <p class="text-xl text-gray-700">No solo los ingredientes hacen que el pan sea rico, el amor con el que lo hacemos le da un toque especial.</p>
         </div>
     </div>
-    
+
     <!-- Whatsapp -->
     <?php include 'whatsapp.php'; ?>
 
     <!--Footer-->
-    <footer class="bg-gray-800 py-6 mt-12">
-        <div class="container mx-auto text-center text-white">
-            <div class="flex justify-center space-x-6 mb-4">
-                <a href="#" class="text-white hover:text-gray-400">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="#" class="text-white hover:text-gray-400">
-                    <i class="fab fa-facebook"></i>
-                </a>
-                <a href="#" class="text-white hover:text-gray-400">
-                    <i class="fab fa-instagram"></i>
-                </a>
-            </div>
-            <p>Sitio diseñado por <a href="#" class="underline">WJ SOFTWORKS</a> - <a href="#" class="underline">PIURA - PERU</a></p>
-        </div>
-    </footer>
+    <?php include 'footer.php'; ?>
+
+
     <!--JavaScript-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNddZrEvvOCcfjOgiWtLNwSEbCrsczx3phrrYsDAyzpCfwfjJrEMyuwYvJtbt3I" crossorigin="anonymous"></script>
@@ -300,7 +287,6 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
         });
     </script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-
 </body>
 
 </html>

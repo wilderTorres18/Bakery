@@ -28,6 +28,7 @@ if (isset($_POST['actualizar'])) {
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,20 +41,25 @@ if (isset($_POST['actualizar'])) {
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Carrito de Compras</title>
     <style>
-        html, body {
+        html,
+        body {
             height: 100%;
             margin: 0;
         }
+
         body {
             display: flex;
             flex-direction: column;
         }
+
         .main-content {
             flex: 1;
         }
+
         footer {
             flex-shrink: 0;
         }
+
         .cart-container {
             max-width: 900px;
             margin: auto;
@@ -64,40 +70,50 @@ if (isset($_POST['actualizar'])) {
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        .cart-details, .cart-summary {
+
+        .cart-details,
+        .cart-summary {
             background: #fff;
             border-radius: 10px;
             padding: 20px;
         }
+
         .cart-details {
             width: 60%;
         }
+
         .cart-summary {
             width: 35%;
         }
+
         .cart-summary p {
             margin: 5px 0;
         }
+
         .cart-item {
             display: flex;
             justify-content: space-between;
             margin-bottom: 15px;
         }
+
         .cart-item img {
             width: 70px;
             height: 70px;
             object-fit: cover;
             border-radius: 5px;
         }
+
         .cart-item div {
             flex: 1;
             margin-left: 10px;
         }
+
         .cart-item p {
             margin: 0;
         }
     </style>
 </head>
+
 <body class="bg-gray-100">
     <!-- Navigation -->
     <nav class="bg-white shadow-md mb-8">
@@ -152,18 +168,18 @@ if (isset($_POST['actualizar'])) {
                             $subtotal = $item['Precio'] * $item['Cantidad'];
                             $total += $subtotal;
                     ?>
-                    <div class="cart-item">
-                        <img src="basededatos/<?php echo $item['Imagen']; ?>" alt="<?php echo $item['Nombre']; ?>">
-                        <div>
-                            <p class="text-lg font-semibold"><?php echo $item['Nombre']; ?></p>
-                            <p class="text-sm text-gray-500">S/ <?php echo number_format($item['Precio'], 2); ?></p>
-                        </div>
-                        <div>
-                            <input type="number" name="cantidad[<?php echo $item['Id']; ?>]" value="<?php echo $item['Cantidad']; ?>" class="w-12 text-center border rounded">
-                        </div>
-                        <p class="text-lg font-semibold">S/ <?php echo number_format($subtotal, 2); ?></p>
-                        <button type="submit" name="eliminar" value="<?php echo $item['Id']; ?>" class="text-red-600 hover:text-red-800"><i class="fas fa-trash-alt"></i></button>
-                    </div>
+                            <div class="cart-item">
+                                <img src="basededatos/<?php echo $item['Imagen']; ?>" alt="<?php echo $item['Nombre']; ?>">
+                                <div>
+                                    <p class="text-lg font-semibold"><?php echo $item['Nombre']; ?></p>
+                                    <p class="text-sm text-gray-500">S/ <?php echo number_format($item['Precio'], 2); ?></p>
+                                </div>
+                                <div>
+                                    <input type="number" name="cantidad[<?php echo $item['Id']; ?>]" value="<?php echo $item['Cantidad']; ?>" class="w-12 text-center border rounded">
+                                </div>
+                                <p class="text-lg font-semibold">S/ <?php echo number_format($subtotal, 2); ?></p>
+                                <button type="submit" name="eliminar" value="<?php echo $item['Id']; ?>" class="text-red-600 hover:text-red-800"><i class="fas fa-trash-alt"></i></button>
+                            </div>
                     <?php
                         }
                     } else {
@@ -186,21 +202,7 @@ if (isset($_POST['actualizar'])) {
     </div>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 py-6 mt-12">
-        <div class="container mx-auto text-center text-white">
-            <div class="flex justify-center space-x-6 mb-4">
-                <a href="#" class="text-white hover:text-gray-400">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="#" class="text-white hover:text-gray-400">
-                    <i class="fab fa-facebook"></i>
-                </a>
-                <a href="#" class="text-white hover:text-gray-400">
-                    <i class="fab fa-instagram"></i>
-                </a>
-            </div>
-            <p>Sitio diseñado por <a href="#" class="underline">WJ SOFTWORKS</a> - <a href="#" class="underline">PIURA - PERU</a></p>
-        </div>
-    </footer>
+    <?php include 'footer.php'; ?>
 </body>
+
 </html>
