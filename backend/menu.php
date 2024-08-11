@@ -232,7 +232,7 @@ $rol = isset($_SESSION['cl']['rol']) ? $_SESSION['cl']['rol'] : null;
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Opciones:</h6>
         <a class="collapse-item" href="Redes_Ver.php">Ver</a>
-        <a class="collapse-item" href="Redes_Crear.php">Registrar</a>
+        <a class="collapse-item" href="Redes_Agregar.php">Registrar</a>
       </div>
     </div>
   </li>
