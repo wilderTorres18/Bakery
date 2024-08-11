@@ -192,36 +192,66 @@ $rol = isset($_SESSION['cl']['rol']) ? $_SESSION['cl']['rol'] : null;
     </li>
   <?php } ?>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHerramientas" aria-expanded="true" aria-controls="collapseCuentas">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseManuales" aria-expanded="true" aria-controls="collapseManuales">
       <i class="fas fa-paste"></i>
       <span>Manuales</span>
     </a>
-    <div id="collapseHerramientas" class="collapse" aria-labelledby="headingHerramientas" data-parent="#accordionSidebar">
+    <div id="collapseManuales" class="collapse" aria-labelledby="headingManuales" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Hojas:</h6>
         <a class="collapse-item" href="Tools_Documentos.php">Manual de Usuario</a>
         <!--         <a class="collapse-item" href="Tools_Calculo.php">Calculo</a>
-        <a class="collapse-item" href="Tools_Presentacion.php">Presentación</a>
-        <a class="collapse-item" href="Tools_Dibujo.php">Dibujo</a> -->
+            <a class="collapse-item" href="Tools_Presentacion.php">Presentación</a>
+            <a class="collapse-item" href="Tools_Dibujo.php">Dibujo</a> -->
       </div>
     </div>
   </li>
 
   <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHerramientas" aria-expanded="true" aria-controls="collapseCuentas">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHistorial" aria-expanded="true" aria-controls="collapseHistorial">
       <i class="fas fa-paste"></i>
       <span>Historial</span>
     </a>
-    <div id="collapseHerramientas" class="collapse" aria-labelledby="headingHerramientas" data-parent="#accordionSidebar">
+    <div id="collapseHistorial" class="collapse" aria-labelledby="headingHistorial" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Hojas:</h6>
         <a class="collapse-item" href="log.php">Registro de actividades</a>
         <!--         <a class="collapse-item" href="Tools_Calculo.php">Calculo</a>
-        <a class="collapse-item" href="Tools_Presentacion.php">Presentación</a>
-        <a class="collapse-item" href="Tools_Dibujo.php">Dibujo</a> -->
+            <a class="collapse-item" href="Tools_Presentacion.php">Presentación</a>
+            <a class="collapse-item" href="Tools_Dibujo.php">Dibujo</a> -->
       </div>
     </div>
   </li>
+  <!-- Sección Redes Sociales -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRedesSociales" aria-expanded="true" aria-controls="collapseRedesSociales">
+      <i class="fas fa-share-alt"></i>
+      <span>Redes Sociales</span>
+    </a>
+    <div id="collapseRedesSociales" class="collapse" aria-labelledby="headingRedesSociales" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Opciones:</h6>
+        <a class="collapse-item" href="Redes_Ver.php">Ver</a>
+        <a class="collapse-item" href="Redes_Crear.php">Registrar</a>
+      </div>
+    </div>
+  </li>
+
+  <!-- Sección Mensajes -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMensajes" aria-expanded="true" aria-controls="collapseMensajes">
+      <i class="fas fa-envelope"></i>
+      <span>Mensajes</span>
+    </a>
+    <div id="collapseMensajes" class="collapse" aria-labelledby="headingMensajes" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Opciones:</h6>
+        <a class="collapse-item" href="Mensajes_Ver.php">Ver</a>
+      </div>
+    </div>
+  </li>
+
+
   <!-- Divider -->
   <hr class="sidebar-divider">
 

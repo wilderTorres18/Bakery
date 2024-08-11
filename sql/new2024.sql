@@ -597,3 +597,14 @@ CREATE TABLE mensaje (
     telefono VARCHAR(20) NULL,
     dirección VARCHAR(300) NULL
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE redes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    red_social VARCHAR(255) NOT NULL,
+    url VARCHAR(255) DEFAULT NULL,
+    estado TINYINT(1) DEFAULT 1
+);
+
+INSERT INTO redes (red_social, url, estado) VALUES
+('Facebook', NULL, 1),
+('WhatsApp', NULL, 1);

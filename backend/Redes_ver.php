@@ -6,7 +6,7 @@ if ((isset($_SESSION['cl']))) { ?>
 
     <head>
         <meta charset="utf-8">
-        <title>Ver Clientes registrados en Ecommerce</title>
+        <title>Ver Redes sociales</title>
 
         <!-- Style -->
         <?php
@@ -39,7 +39,7 @@ if ((isset($_SESSION['cl']))) { ?>
 
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Clientes</h1>
+                            <h1 class="h3 mb-0 text-gray-800">Redes Sociales</h1>
                             <button type="button" class="btn btn-default dropdown-toggle d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="dropdown"><i class="fas fa-download fa-sm text-white-50"></i> Generar Reporte</button>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="#" class="dropdown-item" onClick="doExport('#dataTable', {type: 'txt'});"><img src='icons/txt.png' alt="TXT" style="width:24px">TXT</a></li>
@@ -56,24 +56,20 @@ if ((isset($_SESSION['cl']))) { ?>
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Clientes:</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Redes:</h6>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <table class="table table-bordered" id="dataTable" width="90%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>DNI</th>
-                                                <th>Nombre</th>
-                                                <th>Primer Apellido</th>
-                                                <th>Segundo Apellido</th>
-                                                <th>Telefono</th>
-                                                <th>Dirección</th>
+                                                <th>Red Social</th>
+                                                <th>url</th>
                                                 <th>Modificar</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php require("../basededatos/listaclientes_Ecom.php"); ?>
+                                            <?php require("../basededatos/lista_Redes.php"); ?>
                                         </tbody>
                                     </table>
                                 </div>

@@ -12,7 +12,7 @@
   <script src="js/629388bad9.js"></script>
   <!--Fonts-->
   <link href="css/font.css" rel="stylesheet">
-  <title>Freskypan - Panaderia en Fusagasuga</title>
+  <title>Freskypan - Panaderia "Los Gemelos"</title>
 </head>
 
 <body>

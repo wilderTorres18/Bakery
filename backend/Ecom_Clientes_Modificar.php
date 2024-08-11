@@ -79,7 +79,7 @@ if ((isset($_SESSION['cl']))) { ?>
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputPrice">Telefono</label>
-                                                <input type="number" value="<?php echo $tel; ?>" name="tel" class="form-control" id="inputrice" maxlength="15" oninput="return maxlengthNumber(this)" onkeypress="return numTel(event)" onepaste="return false" placeholder="Telefono">
+                                                <input type="number" value="<?php echo $tel; ?>" name="tel" class="form-control" id="inputrice" maxlength="9" oninput="return maxlengthNumber(this)" onkeypress="return numTel(event)" onepaste="return false" placeholder="Telefono">
                                             </div>
                                         </div>
                                         <div class="form-row">
@@ -113,8 +113,8 @@ if ((isset($_SESSION['cl']))) { ?>
                                             </div>
                                         </div>
                                     <?php } ?>
-                                    <button type="submit" class="btn btn-primary float-right">Actualizar</button>
                                     <button type="button" class="btn btn-danger float-right" style="margin-right: 10px;" onclick="window.location.href='../backend/Ecom_Clientes_Ver.php';">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary float-right">Actualizar</button>
                                     </form>
                                     <!--End  Add Example -->
                             </div>
