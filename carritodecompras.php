@@ -4,12 +4,12 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 require("basededatos/connectionbd.php");
 
-if(isset($_POST['action']) && $_POST['action'] === 'count') {
+if (isset($_POST['action']) && $_POST['action'] === 'count') {
     echo isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0;
     exit;
 }
 
-if(isset($_GET['id'])) {
+if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $producto = obtenerProductoPorId($conn, $id);
 
@@ -23,10 +23,10 @@ if(isset($_GET['id'])) {
     $imagen = $producto['imagen'];
     $encontrado = false;
 
-    if(isset($_SESSION['carrito'])) {
+    if (isset($_SESSION['carrito'])) {
         $arreglo = $_SESSION['carrito'];
         foreach ($arreglo as $key => $item) {
-            if($item['Id'] == $idProducto) {
+            if ($item['Id'] == $idProducto) {
                 $arreglo[$key]['Cantidad']++;
                 $encontrado = true;
                 break;
@@ -50,7 +50,8 @@ if(isset($_GET['id'])) {
     $_SESSION['carrito'] = $arreglo;
 }
 
-function obtenerProductoPorId($conn, $id) {
+function obtenerProductoPorId($conn, $id)
+{
     $stmt = $conn->prepare("SELECT nombre, precio, imagen FROM catproducto WHERE ID_CATPRODUCTO = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
@@ -58,17 +59,17 @@ function obtenerProductoPorId($conn, $id) {
 }
 
 $total = 0;
-if(isset($_SESSION['carrito'])) {
+if (isset($_SESSION['carrito'])) {
     $datos = $_SESSION['carrito'];
-    foreach($datos as $item) {
+    foreach ($datos as $item) {
         $total += $item['Cantidad'] * $item['Precio'];
     }
 }
 ?>
 
 <div class="space-y-4">
-    <?php if(isset($_SESSION['carrito'])): ?>
-        <?php foreach($_SESSION['carrito'] as $item): ?>
+    <?php if (isset($_SESSION['carrito'])): ?>
+        <?php foreach ($_SESSION['carrito'] as $item): ?>
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-4">
                     <a href="carritoindex.php">
@@ -101,40 +102,44 @@ if(isset($_SESSION['carrito'])) {
 
 
 <script>
-$(document).ready(function() {
-    // Eliminar producto
-    $(".eliminar").click(function() {
-        var id = $(this).data('id');
-        $.ajax({
-            url: 'eliminarproducto.php',
-            method: 'POST',
-            data: { id: id },
-            success: function(response) {
-                $('#carritoContent').html(response);
-                updateCartCount();
-            }
+    $(document).ready(function() {
+        // Eliminar producto
+        $(".eliminar").click(function() {
+            var id = $(this).data('id');
+            $.ajax({
+                url: 'eliminarproducto.php',
+                method: 'POST',
+                data: {
+                    id: id
+                },
+                success: function(response) {
+                    $('#carritoContent').html(response);
+                    updateCartCount();
+                }
+            });
         });
-    });
 
-    // Seguir comprando
-    $("#seguirComprando").click(function() {
-        $('#carritoModal').addClass('hidden');
-    });
-
-    // Comprar
-    $("#comprar").click(function() {
-        window.location.href = './compras/compras.php';
-    });
-
-    function updateCartCount() {
-        $.ajax({
-            url: 'carritodecompras.php',
-            method: 'POST',
-            data: { action: 'count' },
-            success: function(response) {
-                $('#cart-count').text(response);
-            }
+        // Seguir comprando
+        $("#seguirComprando").click(function() {
+            $('#carritoModal').addClass('hidden');
         });
-    }
-});
+
+        // Comprar
+        $("#comprar").click(function() {
+            window.location.href = './compras/compras.php';
+        });
+
+        function updateCartCount() {
+            $.ajax({
+                url: 'carritodecompras.php',
+                method: 'POST',
+                data: {
+                    action: 'count'
+                },
+                success: function(response) {
+                    $('#cart-count').text(response);
+                }
+            });
+        }
+    });
 </script>

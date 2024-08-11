@@ -1,6 +1,6 @@
 <?php
 if (session_status() == PHP_SESSION_NONE) {
-    session_start();
+  session_start();
 }
 $rol = isset($_SESSION['cl']['rol']) ? $_SESSION['cl']['rol'] : null;
 ?>
@@ -77,14 +77,14 @@ $rol = isset($_SESSION['cl']['rol']) ? $_SESSION['cl']['rol'] : null;
     </div>
   </li>
 
-<!--   <li class="nav-item">
+  <!--   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInventarios" aria-expanded="true" aria-controls="collapseInventarios">
       <i class="fas fa-boxes"></i>
       <span>Inventario</span>
     </a>
     <div id="collapseInventarios" class="collapse" aria-labelledby="headingBodegas" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        <?php if($rol=='Administrador'){?>
+        <?php if ($rol == 'Administrador') { ?>
         <h6 class="collapse-header">Bodega:</h6>
         <a class="collapse-item" href="Bodegas_Agregar.php">Agregar</a>
         <a class="collapse-item" href="Bodegas_Ver.php">Ver</a>
@@ -94,7 +94,7 @@ $rol = isset($_SESSION['cl']['rol']) ? $_SESSION['cl']['rol'] : null;
     <div id="collapseInventarios" class="collapse" aria-labelledby="headingMateria" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Materia Prima:</h6>
-        <?php if($rol=='Administrador'){ ?>
+        <?php if ($rol == 'Administrador') { ?>
         <a class="collapse-item" href="Materia_Agregar.php">Agregar</a>
       <?php } ?>
         <a class="collapse-item" href="Materia_Ver.php">Ver</a>
@@ -103,13 +103,13 @@ $rol = isset($_SESSION['cl']['rol']) ? $_SESSION['cl']['rol'] : null;
     <div id="collapseInventarios" class="collapse" aria-labelledby="headingInsumos" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Insumo:</h6>
-        <?php if($rol=='Administrador'){?>
+        <?php if ($rol == 'Administrador') { ?>
         <a class="collapse-item" href="Insumo_Agregar.php">Agregar</a>
       <?php } ?>
         <a class="collapse-item" href="Insumo_Ver.php">Ver</a>
       </div>
     </div>
-    <?php if($rol=='Administrador'){?>
+    <?php if ($rol == 'Administrador') { ?>
     <div id="collapseInventarios" class="collapse" aria-labelledby="headingInsumos" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Suministro:</h6>
@@ -134,7 +134,7 @@ $rol = isset($_SESSION['cl']['rol']) ? $_SESSION['cl']['rol'] : null;
     </div>
   </li>
 
-<!--   <li class="nav-item">
+  <!--   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCuentas" aria-expanded="true" aria-controls="collapseCuentas">
       <i class="far fa-calendar-alt"></i>
       <span>Pedidos</span>
@@ -146,7 +146,7 @@ $rol = isset($_SESSION['cl']['rol']) ? $_SESSION['cl']['rol'] : null;
         <a class="collapse-item" href="Pedidos_Ver.php">Ver</a>
       </div>
     </div>
-    <?php if($rol=='Administrador'){?>
+    <?php if ($rol == 'Administrador') { ?>
     <div id="collapseCuentas" class="collapse" aria-labelledby="headingCuentas" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Facturas:</h6>
@@ -157,7 +157,7 @@ $rol = isset($_SESSION['cl']['rol']) ? $_SESSION['cl']['rol'] : null;
   <?php } ?>
   </li> -->
 
-<!--   <li class="nav-item">
+  <!--   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDevoluciones" aria-expanded="true" aria-controls="collapseDevoluciones">
       <i class="far fa-edit"></i>
       <span>Devoluciones</span>
@@ -172,22 +172,26 @@ $rol = isset($_SESSION['cl']['rol']) ? $_SESSION['cl']['rol'] : null;
   </li>
  -->
 
-<?php if($rol=='Administrador'){?>
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseConfiguracion" aria-expanded="true" aria-controls="collapseCuentas">
-      <i class="fas fa-users-cog"></i>
-      <span>Usuarios</span>
-    </a>
-    <div id="collapseConfiguracion" class="collapse" aria-labelledby="headingConfiguracion" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <h6 class="collapse-header">Usuarios:</h6>
-        <a class="collapse-item" href="Configuracion_Agregar.php">Agregar</a>
-        <a class="collapse-item" href="Configuracion_Ver.php">Ver</a>
+  <?php if ($rol == 'Administrador') { ?>
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseConfiguracion" aria-expanded="true" aria-controls="collapseCuentas">
+        <i class="fas fa-users-cog"></i>
+        <span>Usuarios</span>
+      </a>
+      <div id="collapseConfiguracion" class="collapse" aria-labelledby="headingConfiguracion" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Usuarios:</h6>
+          <a class="collapse-item" href="Configuracion_Agregar.php">Agregar</a>
+          <a class="collapse-item" href="Configuracion_Ver.php">Ver</a>
+        </div>
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Clientes:</h6>
+          <a class="collapse-item" href="Ecom_clientes_Ver.php">Ver</a>
+        </div>
       </div>
-    </div>
-  </li>
-<?php } ?>
-<li class="nav-item">
+    </li>
+  <?php } ?>
+  <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHerramientas" aria-expanded="true" aria-controls="collapseCuentas">
       <i class="fas fa-paste"></i>
       <span>Manuales</span>
@@ -196,7 +200,7 @@ $rol = isset($_SESSION['cl']['rol']) ? $_SESSION['cl']['rol'] : null;
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Hojas:</h6>
         <a class="collapse-item" href="Tools_Documentos.php">Manual de Usuario</a>
-<!--         <a class="collapse-item" href="Tools_Calculo.php">Calculo</a>
+        <!--         <a class="collapse-item" href="Tools_Calculo.php">Calculo</a>
         <a class="collapse-item" href="Tools_Presentacion.php">Presentación</a>
         <a class="collapse-item" href="Tools_Dibujo.php">Dibujo</a> -->
       </div>
@@ -212,7 +216,7 @@ $rol = isset($_SESSION['cl']['rol']) ? $_SESSION['cl']['rol'] : null;
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Hojas:</h6>
         <a class="collapse-item" href="log.php">Registro de actividades</a>
-<!--         <a class="collapse-item" href="Tools_Calculo.php">Calculo</a>
+        <!--         <a class="collapse-item" href="Tools_Calculo.php">Calculo</a>
         <a class="collapse-item" href="Tools_Presentacion.php">Presentación</a>
         <a class="collapse-item" href="Tools_Dibujo.php">Dibujo</a> -->
       </div>
