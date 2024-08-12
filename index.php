@@ -230,6 +230,19 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
         </div>
     </div>
 
+        <!-- Carrito Modal -->
+    <div id="carritoModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75  hidden">
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold">Carrito de Compras</h2>
+                <button class="text-gray-600 hover:text-gray-800" id="closeCarritoModal">&times;</button>
+            </div>
+            <div id="carritoContent">
+                <!-- Contenido del carrito aquí -->
+            </div>
+        </div>
+    </div>
+
     <!-- Frase del Día -->
     <div class="bg-yellow-400 py-8">
         <div class="container mx-auto text-center">
@@ -285,6 +298,51 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
                 ]
             });
         });
+        $('.add-to-cart').click(function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            $.ajax({
+                url: 'carritodecompras.php',
+                method: 'GET',
+                data: {
+                    id: id
+                },
+                success: function(response) {
+                    $('#carritoContent').html(response);
+                    $('#carritoModal').removeClass('hidden');
+                    updateCartCount();
+                }
+            });
+        });
+
+        $('#carrito-btn').click(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: 'carritodecompras.php',
+                method: 'GET',
+                success: function(response) {
+                    $('#carritoContent').html(response);
+                    $('#carritoModal').removeClass('hidden');
+                }
+            });
+        });
+
+        $('#closeCarritoModal').click(function() {
+            $('#carritoModal').addClass('hidden');
+        });
+
+        function updateCartCount() {
+            $.ajax({
+                url: 'carritodecompras.php',
+                method: 'POST',
+                data: {
+                    action: 'count'
+                },
+                success: function(response) {
+                    $('#cart-count').text(response);
+                }
+            });
+        }
     </script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 </body>

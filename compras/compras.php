@@ -1,6 +1,6 @@
 <?php
 session_start();
-require ("../basededatos/connectionbd.php");
+require("../basededatos/connectionbd.php");
 
 echo "<!DOCTYPE html>
 <html lang='es'>
@@ -8,13 +8,34 @@ echo "<!DOCTYPE html>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <meta http-equiv='X-UA-Compatible' content='ie=edge'>
-    <!-- Incluir SweetAlert2 -->
+    <!-- Incluir Bootstrap y SweetAlert2 -->
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css' rel='stylesheet'>
     <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
     <title>Proceso de Compra</title>
 </head>
 <body>";
 
 try {
+    // Obtener el número de teléfono de WhatsApp desde la tabla 'redes'
+    $query = "SELECT url FROM redes WHERE red_social = 'WhatsApp' AND estado = 1";
+    $result = mysqli_query($conn, $query);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $telefono = $row['url']; // Este es el número de teléfono de WhatsApp
+    } else {
+        $telefono = null; // Si no se encuentra el número, manejarlo de alguna manera
+    }
+
+    // Construir la URL de WhatsApp con el número obtenido
+    if ($telefono) {
+        $whatsapp_url = "https://wa.me/+51" . $telefono;
+    } else {
+        // URL predeterminada o mensaje de error si no hay número
+        $whatsapp_url = "#"; // o puedes redirigir a otra página
+    }
+
+    // Procesar el pedido
     $arreglo = $_SESSION['carrito'];
     $cl = $_SESSION['cl'];
 
@@ -23,18 +44,18 @@ try {
     $m = $todayh['mon'];
     $y = $todayh['year'];
 
-    $fec = $y."-".$m."-".$d;
+    $fec = $y . "-" . $m . "-" . $d;
     for ($i = 0; $i < count($arreglo); $i++) {
         $insertPedido = "INSERT INTO pedidos (Fec_ped, can_ped, dir_ped, des_ped, cod_pro, dni_cl, est_ped) VALUES (
             '$fec',
-            '".$arreglo[$i]['Cantidad']."',
-            '".$cl['dircl']."',
-            '".$cl['descl']."',
-            '".$arreglo[$i]['Id']."',
-            '".$cl['dnicl']."',
+            '" . $arreglo[$i]['Cantidad'] . "',
+            '" . $cl['dircl'] . "',
+            '" . $cl['descl'] . "',
+            '" . $arreglo[$i]['Id'] . "',
+            '" . $cl['dnicl'] . "',
             '1'
         )";
-        
+
         if (!mysqli_query($conn, $insertPedido)) {
             throw new Exception("Error en la inserción del pedido: " . mysqli_error($conn));
         }
@@ -42,33 +63,22 @@ try {
         $ids = $arreglo[$i]['Id'];
         $can = $arreglo[$i]['Cantidad'];
 
-/*         $actualizar = "UPDATE produccion 
-                       SET unidades = unidades - '$can'
-                       WHERE FK_ID_CATPRODUCTO = '$ids'";
+        $actualizarCatproducto = "UPDATE Catproducto 
+                                  SET stock = stock - '$can'
+                                  WHERE ID_CATPRODUCTO = '$ids'";
 
-        if (!mysqli_query($conn, $actualizar)) {
-            throw new Exception("Error en la actualización de unidades: " . mysqli_error($conn));
-        } */
-       
-		    // Actualizar la tabla Catproducto
-    $actualizarCatproducto = "UPDATE Catproducto 
-                              SET stock = stock - '$can'
-                              WHERE ID_CATPRODUCTO = '$ids'";
-
-    if (!mysqli_query($conn, $actualizarCatproducto)) {
-        throw new Exception("Error en la actualización del stock en Catproducto: " . mysqli_error($conn));
-    }
-
+        if (!mysqli_query($conn, $actualizarCatproducto)) {
+            throw new Exception("Error en la actualización del stock en Catproducto: " . mysqli_error($conn));
+        }
     }
 
     unset($_SESSION['carrito']);
-    
-    // Si todo es correcto, mostrar una alerta de éxito con tiempo de espera y luego una alerta de pago exitoso
+
+    // Modal con QR y opción de enviar captura a WhatsApp
     echo "<script>
-            let timerInterval;
             Swal.fire({
                 title: '¡Pedido exitoso!',
-                html: 'Redirigiendo en <b></b> milisegundos.',
+                html: '<b>Tu pedido ha sido registrado con éxito.</b><br>Generando código QR para el pago...',
                 timer: 1300,
                 timerProgressBar: true,
                 didOpen: () => {
@@ -83,24 +93,18 @@ try {
                 }
             }).then((result) => {
                 if (result.dismiss === Swal.DismissReason.timer) {
-                    Swal.fire({
-                        title: '¡Pago Exitoso!',
-                        text: 'Gracias por tu compra. Tu compra ha sido procesado correctamente.',
-                        icon: 'success',
-                        confirmButtonText: 'Aceptar'
-                    }).then(() => {
-                        window.location.href = '../index.php';
-                    });
+                    // Abrir el modal con el QR
+                    var qrModal = new bootstrap.Modal(document.getElementById('qrModal'));
+                    qrModal.show();
                 }
             });
           </script>";
-
 } catch (Exception $e) {
     // Mostrar alerta de error con tiempo de espera
     echo "<script>
             Swal.fire({
                 title: 'Error',
-                html: '".$e->getMessage()."<br>Redirigiendo en <b></b> milisegundos.',
+                html: '" . $e->getMessage() . "<br>Redirigiendo en <b></b> milisegundos.',
                 icon: 'error',
                 timer: 1500,
                 timerProgressBar: true,
@@ -124,3 +128,27 @@ try {
 
 echo "</body></html>";
 ?>
+
+<!-- Modal de QR -->
+<div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="qrModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="qrModalLabel">Paga con el código QR</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <!-- Aquí va la imagen del QR -->
+                <img src="../basededatos/fotos/yape.jpg" alt="QR para pago" class="img-fluid mb-3">
+                <p>Por favor, realiza el pago escaneando el código QR. Luego, envía la captura de pantalla del pago a través de WhatsApp.</p>
+                <a href="<?php echo $whatsapp_url; ?>" class="btn btn-success" target="_blank">Enviar Captura por WhatsApp</a>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='/tienda.php';">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Incluir Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
