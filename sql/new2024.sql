@@ -595,7 +595,7 @@ CREATE TABLE mensaje (
     fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     nombre VARCHAR(300) NULL,
     telefono VARCHAR(20) NULL,
-    dirección VARCHAR(300) NULL
+    direccion VARCHAR(300) NULL
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE redes (

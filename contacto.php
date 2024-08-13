@@ -132,11 +132,13 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
       <div class="w-full lg:w-1/2 px-6 mb-12 lg:mb-0">
         <div class="bg-white p-8 rounded-lg shadow-lg">
           <h3 class="text-2xl font-bold text-gray-800 mb-6">Envíanos un mensaje</h3>
-          <form action="basededatos/agregarc2.php" method="POST">
+          <form action="basededatos/agregarMensaje.php" method="POST">
             <div class="mb-4">
               <label for="tel" class="block text-gray-600 font-bold mb-2">Teléfono</label>
-              <input type="number" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-yellow-500" id="tel" name="tel" placeholder="">
+              <input type="tel" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-yellow-500" id="tel" name="tel" placeholder="" maxlength="9" minlength="9" pattern="\d{9}" required oninput="validateTel(this)">
+              <span id="telError" class="text-red-500 text-sm hidden">Debe ser un número de 9 dígitos.</span>
             </div>
+
             <div class="mb-4">
               <label for="nom" class="block text-gray-600 font-bold mb-2">Nombres</label>
               <input type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-yellow-500" id="nom" name="nom" placeholder="">
@@ -147,7 +149,7 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
             </div>
             <div class="mb-4">
               <label for="des" class="block text-gray-600 font-bold mb-2">Mensaje</label>
-              <textarea class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-yellow-500" id="des" name="des" rows="7" placeholder=""></textarea>
+              <textarea class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-yellow-500" id="des" name="des" rows="4" placeholder=""></textarea>
             </div>
             <div class="text-right">
               <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg">Enviar</button>
@@ -173,6 +175,43 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNddZrEvvOCcfjOgiWtLNwSEbCrsczx3phrrYsDAyzpCfwfjJrEMyuwYvJtbt3I" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.min.js" integrity="sha384-pP5pYqQn9l3Bbo1Mj4Ad5Nq1dhevhSiwAHuQPs6abQh4Jt5e1Lx6U5G78ycBocsr" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+    $(document).ready(function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const status = urlParams.get('status');
+
+      if (status === 'success') {
+        Swal.fire({
+          title: 'Mensaje enviado',
+          text: 'Tu mensaje ha sido enviado exitosamente.',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+      } else if (status === 'error') {
+        Swal.fire({
+          title: 'Error',
+          text: 'Hubo un problema al enviar tu mensaje. Por favor, intenta de nuevo.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+      }
+    });
+
+    function validateTel(input) {
+      const telError = document.getElementById('telError');
+      if (input.value.length === 9 && /^\d{9}$/.test(input.value)) {
+        telError.classList.add('hidden');
+        input.classList.remove('border-red-500');
+        input.classList.add('border-yellow-500');
+      } else {
+        telError.classList.remove('hidden');
+        input.classList.remove('border-yellow-500');
+        input.classList.add('border-red-500');
+      }
+    }
+  </script>
 
 </body>
 
