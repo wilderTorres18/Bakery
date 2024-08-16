@@ -70,7 +70,7 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
                                 <a href="salir.php" class="btn bg-red-500 hover:bg-red-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Salir</a>
                             <?php } ?>
                         </div>
-                        <a href="carritoindex.php" id="carrito-btn" class="ml-4 text-gray-900 hover:text-gray-600 relative">
+                        <a href="./carrito/CarIndex.php" id="carrito-btn" class="ml-4 text-gray-900 hover:text-gray-600 relative">
                             <i class="fas fa-shopping-cart"></i>
                             <span id="cart-count" class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center"><?php echo $numero_productos; ?></span>
                         </a>
@@ -82,13 +82,13 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
         <div class="sm:hidden" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1">
                 <a href="#" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Inicio</a>
-                <a href="historia.html" class="text-gray-900 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Historia</a>
+                <a href="historia.php" class="text-gray-900 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Historia</a>
                 <a href="contacto.php" class="text-gray-900 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contáctanos</a>
             </div>
         </div>
     </nav>
     <!--Header-->
-    <div class="bg-yellow-400 py-12 bg-cover bg-center" style="background-image: url('/basededatos/fotos/portada.png');">
+    <div class="bg-yellow-400 py-12 bg-cover bg-center" style="background-image: url('/img/portada.png');">
         <div class="container mx-auto text-center bg-opacity-75 bg-yellow-400 p-4 rounded-lg">
             <h1 class="text-4xl font-bold text-gray-800">"Los Gemelos"</h1>
             <p class="mt-2 text-gray-700">Del horno a tu mesa, frescura y calidad en cada bocado.</p>
@@ -201,7 +201,7 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
                 e.preventDefault();
                 var id = $(this).data('id');
                 $.ajax({
-                    url: 'carritodecompras.php',
+                    url: '../carrito/CarModal.php',
                     method: 'GET',
                     data: {
                         id: id
@@ -217,7 +217,7 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
             $('#carrito-btn').click(function(e) {
                 e.preventDefault();
                 $.ajax({
-                    url: 'carritodecompras.php',
+                    url: '../carrito/CarModal.php',
                     method: 'GET',
                     success: function(response) {
                         $('#carritoContent').html(response);
@@ -232,7 +232,7 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
 
             function updateCartCount() {
                 $.ajax({
-                    url: 'carritodecompras.php',
+                    url: '../carrito/CarModal.php',
                     method: 'POST',
                     data: {
                         action: 'count'

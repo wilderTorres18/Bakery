@@ -239,7 +239,7 @@ CREATE TABLE `CatProducto` (
   `ID_CATPRODUCTO` int(2) NOT NULL,
   `nombre` varchar(20) NOT NULL,
   `descripcion` varchar(100) NOT NULL,
-  `precio` int(6) NOT NULL,
+  `precio` DECIMAL(10, 2) NOT NULL,
   `stock` int(3) NOT NULL,
   `imagen` varchar(200) NOT NULL,
   `duracion` int(2) NOT NULL,
@@ -608,3 +608,25 @@ CREATE TABLE redes (
 INSERT INTO redes (red_social, url, estado) VALUES
 ('Facebook', NULL, 1),
 ('WhatsApp', NULL, 1);
+
+
+INSERT INTO tipoproducto (ID_TIPOPRODUCTO, nombre) VALUES
+(1, 'Panadería'),
+(2, 'Cafetería'),
+(3, 'Pastelería'),
+(4, 'Chocolate y tipoproductoBombones'),
+(5, 'Dulces y Caramelos'),
+(6, 'Bollería salada'),
+(7, 'Bollería dulce');
+
+
+INSERT INTO subtipoproducto (ID_SUBTIPOPRODUCTO, nombre, FK_ID_TIPOPRODUCTO) VALUES
+(1, 'Pan crujiente', 1),
+(2, 'Panes Regionales', 1),
+(3, 'PANES BLANCOS', 1),
+(4, 'PANES INTEGRALES', 1),
+(5, 'PANES ESPECIALES', 1),
+(6, 'PANES PLANOS', 1),
+(7, 'PANES ENRIQUECIDOS', 1),
+(8, 'PANES DULCES', 1),
+(9, 'PAN DE AJO', 1);

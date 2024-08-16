@@ -1,13 +1,15 @@
 <?php
+require($_SERVER['DOCUMENT_ROOT'] . '/basededatos/connectionbd.php');
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-if(isset($_POST['id'])) {
+if (isset($_POST['id'])) {
     $id = $_POST['id'];
-    if(isset($_SESSION['carrito'])) {
+    if (isset($_SESSION['carrito'])) {
         $arreglo = $_SESSION['carrito'];
         foreach ($arreglo as $key => $item) {
-            if($item['Id'] == $id) {
+            if ($item['Id'] == $id) {
                 unset($arreglo[$key]);
                 break;
             }
@@ -16,10 +18,9 @@ if(isset($_POST['id'])) {
     }
 }
 $total = 0;
-if(isset($_SESSION['carrito'])) {
-    foreach($_SESSION['carrito'] as $item) {
+if (isset($_SESSION['carrito'])) {
+    foreach ($_SESSION['carrito'] as $item) {
         $total += $item['Cantidad'] * $item['Precio'];
     }
 }
-include 'carritodecompras.php';
-?>
+include '../carrito/CarModal.php';

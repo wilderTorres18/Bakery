@@ -2,7 +2,8 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-require("basededatos/connectionbd.php");
+require($_SERVER['DOCUMENT_ROOT'] . '/basededatos/connectionbd.php');
+
 
 if (isset($_POST['action']) && $_POST['action'] === 'count') {
     echo isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0;
@@ -107,7 +108,7 @@ if (isset($_SESSION['carrito'])) {
         $(".eliminar").click(function() {
             var id = $(this).data('id');
             $.ajax({
-                url: 'eliminarproducto.php',
+                url: '../carrito/eliminarproducto.php',
                 method: 'POST',
                 data: {
                     id: id
@@ -131,7 +132,7 @@ if (isset($_SESSION['carrito'])) {
 
         function updateCartCount() {
             $.ajax({
-                url: 'carritodecompras.php',
+                url: '../carrito/CarModal.php',
                 method: 'POST',
                 data: {
                     action: 'count'
