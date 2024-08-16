@@ -1,6 +1,6 @@
 <?php
 session_start();
-require("basededatos/connectionbd.php");
+require($_SERVER['DOCUMENT_ROOT'] . '/basededatos/connectionbd.php');
 
 // Eliminar producto del carrito
 if (isset($_POST['eliminar'])) {
@@ -133,20 +133,21 @@ if (isset($_POST['actualizar'])) {
                 </div>
                 <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                     <a class="navbar-brand flex-shrink-0" href="#">
-                        <img src="favicon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                        <img src="../logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
                     </a>
                     <div class="hidden sm:block sm:ml-6">
                         <div class="flex space-x-4">
-                            <a href="index.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Inicio</a>
-                            <a href="historia.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Historia</a>
-                            <a href="establecimiento.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Establecimientos</a>
-                            <a href="contacto.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Contáctanos</a>
+                            <a href="../index.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Inicio</a>
+                            <a href="../tienda.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Tienda</a>
+                            <a href="../historia.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Historia</a>
+                            <a href="../establecimiento.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Establecimientos</a>
+                            <a href="../contacto.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Contáctanos</a>
                         </div>
                     </div>
                 </div>
                 <div class="hidden sm:block">
                     <div class="flex items-center">
-                        <a href="carritoindex.php" id="carrito-btn" class="ml-4 text-gray-900 hover:text-gray-600 relative">
+                        <a href="../carrito/CarIndex.php" id="carrito-btn" class="ml-4 text-gray-900 hover:text-gray-600 relative">
                             <i class="fas fa-shopping-cart"></i>
                             <span class="ml-1 bg-red-500 text-white rounded-full px-2 py-1 text-xs absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2"><?php echo isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0; ?></span>
                         </a>
@@ -160,7 +161,7 @@ if (isset($_POST['actualizar'])) {
         <div class="cart-container">
             <div class="cart-details">
                 <h2 class="text-2xl font-bold mb-4">Carrito de Compras</h2>
-                <form action="carritoindex.php" method="post">
+                <form action="../carrito/CarIndex.php" method="post">
                     <?php
                     $total = 0;
                     if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
@@ -169,7 +170,7 @@ if (isset($_POST['actualizar'])) {
                             $total += $subtotal;
                     ?>
                             <div class="cart-item">
-                                <img src="basededatos/<?php echo $item['Imagen']; ?>" alt="<?php echo $item['Nombre']; ?>">
+                                <img src="../basededatos/<?php echo $item['Imagen']; ?>" alt="<?php echo $item['Nombre']; ?>">
                                 <div>
                                     <p class="text-lg font-semibold"><?php echo $item['Nombre']; ?></p>
                                     <p class="text-sm text-gray-500">S/ <?php echo number_format($item['Precio'], 2); ?></p>
@@ -186,7 +187,7 @@ if (isset($_POST['actualizar'])) {
                         echo '<p class="text-center text-gray-600">No hay productos en el carrito.</p>';
                     }
                     ?>
-                    <a href="index.php" class="text-blue-500 hover:underline mt-4 block">← Seguir comprando</a>
+                    <a href="../index.php" class="text-blue-500 hover:underline mt-4 block">← Seguir comprando</a>
             </div>
             <div class="cart-summary">
                 <h3 class="text-xl font-bold">Resumen del pedido</h3>
@@ -194,7 +195,7 @@ if (isset($_POST['actualizar'])) {
                     <p>Items: <?php echo isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0; ?></p>
                     <p class="text-lg font-bold">Total: S/ <?php echo number_format($total, 2); ?></p>
                     <button type="submit" name="actualizar" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mt-4">Actualizar</button>
-                    <a href="compras/compras.php" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded mt-4 inline-block">Proceder a pagar</a>
+                    <a href="../compras/compras.php" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded mt-4 inline-block">Proceder a pagar</a>
                 </div>
             </div>
             </form>
@@ -202,7 +203,7 @@ if (isset($_POST['actualizar'])) {
     </div>
 
     <!-- Footer -->
-    <?php include 'footer.php'; ?>
+    <?php include '../footer.php'; ?>
 </body>
 
 </html>
