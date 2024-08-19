@@ -1,6 +1,6 @@
 <?php
 $actua = date("Y-m-d");
-$fecha = date("Y-m-d", strtotime($actua . " - 1 days"));
+$fecha = date("Y-m-d", strtotime($actua));
 $horario = new DateTime("now", new DateTimeZone('America/Lima'));
 $hora = "" . $horario->format('H:i');
 $dura = date("Y-m-d", strtotime($fec . "+ " . $dur . " days"));

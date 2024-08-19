@@ -3,7 +3,7 @@ session_start();
 if ((isset($_SESSION['cl']))) {
   $rol = $_SESSION['cl']['rol'];
   // Definimos nuestra zona horaria
-  date_default_timezone_set("America/Bogota");
+  date_default_timezone_set("America/Lima");
 
   // incluimos el archivo de funciones
   include 'funciones.php';
@@ -66,7 +66,7 @@ if ((isset($_SESSION['cl']))) {
 
       $ids = $_SESSION['cl']['id_u'];
       $actua = date("Y-m-d");
-      $fecha = date("Y-m-d", strtotime($actua . " - 1 days"));
+      $fecha = date("Y-m-d", strtotime($actua));
       $horario = new DateTime("now", new DateTimeZone('America/Lima'));
       $hora = "" . $horario->format('H:i');
       $desc = "Se ha añadido un nuevo evento con el titulo " . $titulo;

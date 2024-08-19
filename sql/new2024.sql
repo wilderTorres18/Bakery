@@ -260,15 +260,20 @@ CREATE TABLE `CatProducto` (
 
 CREATE TABLE `pedidos` (
   `Id_ped` int(3) NOT NULL AUTO_INCREMENT,
+  `cod_ped` VARCHAR(20) COLLATE utf8_spanish_ci NULL, -- Código de pedido
   `Fec_ped` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
+  `hora_ped` TIME NULL, -- Hora en que se realizó el pedido
   `can_ped` int(11) NOT NULL,
   `dir_ped` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `des_ped` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `cod_pro` int NOT NULL,
   `dni_cl` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
   `est_ped` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  `fecha_act` DATE NULL, -- Fecha de última actualización del estado
+  `hora_act` TIME NULL, -- Hora de última actualización del estado
   PRIMARY KEY (`Id_ped`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
 
 -- --------------------------------------------------------
 

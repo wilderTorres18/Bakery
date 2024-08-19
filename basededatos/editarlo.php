@@ -16,7 +16,7 @@ while ($fila20 = mysqli_fetch_array($result89)) {
 }
 $id90 = $_SESSION['cl']['id_u'];
 $actua = date("Y-m-d");
-$fecha = date("Y-m-d", strtotime($actua . " - 1 days"));
+$fecha = date("Y-m-d", strtotime($actua));
 $horario = new DateTime("now", new DateTimeZone('America/Lima'));
 $hora = "" . $horario->format('H:i');
 $desc = "Se ha editado el lote del producto " . $nombr . " nuevas unidades son " . $can;

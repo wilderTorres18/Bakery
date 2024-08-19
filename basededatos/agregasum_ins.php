@@ -5,9 +5,9 @@ $can_agr= $_POST['can_ins'];
 $fec_agr= $_POST['fec_ins'];		
 $codm_agr= $_POST['ins_r'];	
 $codb_agr= $_POST['bod_r'];	
-$mDate = new DateTime('now', new DateTimeZone('America/Bogota'));
+$mDate = new DateTime('now', new DateTimeZone('America/Lima'));
 $hoy=$mDate->format("H:i");
-$fecha=date("Y-n-j",new DateTimeZone('America/Bogota'));
+$fecha=date("Y-n-j",new DateTimeZone('America/Lima'));
 echo $fecha;
 
 $sql_ins="SELECT nombre FROM Insumo WHERE ID_INSUMO='$codm_agr';";

@@ -54,6 +54,13 @@ $rol = isset($_SESSION['cl']['rol']) ? $_SESSION['cl']['rol'] : null;
         <a class="collapse-item" href="TipoP_Ver.php">Ver</a>
       </div>
     </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Categoria de Productos:</h6>
+        <a class="collapse-item" href="CategoriaP_Agregar.php">Agregar</a>
+        <a class="collapse-item" href="CategoriaP_Ver.php">Ver</a>
+      </div>
+    </div>
   </li>
 
   <li class="nav-item">
@@ -133,6 +140,27 @@ $rol = isset($_SESSION['cl']['rol']) ? $_SESSION['cl']['rol'] : null;
       </div>
     </div>
   </li>
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEcommerce" aria-expanded="true" aria-controls="collapseEcommerce">
+      <i class="fas fa-shopping-cart"></i>
+      <span>Ecommerce</span>
+    </a>
+    <div id="collapseEcommerce" class="collapse" aria-labelledby="headingEcommerce" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Pedidos:</h6>
+        <a class="collapse-item" href="Ecom_Pedidos_Ver.php">Ver</a>
+      </div>
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Clientes:</h6>
+        <a class="collapse-item" href="Ecom_clientes_Ver.php">Ver</a>
+      </div>
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Mensajes:</h6>
+        <a class="collapse-item" href="Mensajes_Ver.php">Ver</a>
+      </div>
+    </div>
+  </li>
+
 
   <!--   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCuentas" aria-expanded="true" aria-controls="collapseCuentas">
@@ -183,10 +211,6 @@ $rol = isset($_SESSION['cl']['rol']) ? $_SESSION['cl']['rol'] : null;
           <h6 class="collapse-header">Usuarios:</h6>
           <a class="collapse-item" href="Configuracion_Agregar.php">Agregar</a>
           <a class="collapse-item" href="Configuracion_Ver.php">Ver</a>
-        </div>
-        <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Clientes:</h6>
-          <a class="collapse-item" href="Ecom_clientes_Ver.php">Ver</a>
         </div>
       </div>
     </li>

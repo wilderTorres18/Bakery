@@ -15,7 +15,7 @@ $query = "UPDATE clientes SET nombre='$nom',apellido_1='$ap1',apellido_2='$ap2',
 $query2 = "UPDATE telcl set tel_cl='$tel' where dni='$dni'";
 $id90 = $_SESSION['cl']['id_u'];
 $actua = date("Y-m-d");
-$fecha = date("Y-m-d", strtotime($actua . " - 1 days"));
+$fecha = date("Y-m-d", strtotime($actua));
 $horario = new DateTime("now", new DateTimeZone('America/Lima'));
 $hora = "" . $horario->format('H:i');
 $desc = "Se ha modificado al cliente : " . $nom . " con el id : " . $dni;

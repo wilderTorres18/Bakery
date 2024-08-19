@@ -35,19 +35,30 @@ try {
         $whatsapp_url = "#"; // o puedes redirigir a otra página
     }
 
+    // Generar un código de pedido aleatorio para la compra actual
+    $cod_ped = strtoupper(uniqid('PED-'));
+
+    // Obtener la fecha y hora actual
+    $today = getdate();
+    $d = $today['mday'];
+    $m = $today['mon'];
+    $y = $today['year'];
+    $h = $today['hours'];
+    $min = $today['minutes'];
+    $s = $today['seconds'];
+
+    $fec = $y . "-" . $m . "-" . $d;
+    $hora_ped = $h . ":" . $min . ":" . $s;
+
     // Procesar el pedido
     $arreglo = $_SESSION['carrito'];
     $cl = $_SESSION['cl'];
 
-    $todayh = getdate();
-    $d = $todayh['mday'];
-    $m = $todayh['mon'];
-    $y = $todayh['year'];
-
-    $fec = $y . "-" . $m . "-" . $d;
     for ($i = 0; $i < count($arreglo); $i++) {
-        $insertPedido = "INSERT INTO pedidos (Fec_ped, can_ped, dir_ped, des_ped, cod_pro, dni_cl, est_ped) VALUES (
+        $insertPedido = "INSERT INTO pedidos (cod_ped, Fec_ped, hora_ped, can_ped, dir_ped, des_ped, cod_pro, dni_cl, est_ped) VALUES (
+            '$cod_ped',
             '$fec',
+            '$hora_ped',
             '" . $arreglo[$i]['Cantidad'] . "',
             '" . $cl['dircl'] . "',
             '" . $cl['descl'] . "',
