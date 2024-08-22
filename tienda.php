@@ -131,7 +131,7 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
             $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
 
 
-            $query = "SELECT stock, nombre, imagen, sabor, ID_CATPRODUCTO, descripcion, precio FROM catproducto WHERE 1=1";
+            $query = "SELECT stock, nombre, imagen, sabor, ID_CATPRODUCTO, descripcion, precio, estado FROM catproducto WHERE 1=1";
 
             // Filtrar por sabor
             if ($sabor != '') {
@@ -156,7 +156,8 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
                 $stock = $fila['stock'];
                 $id = $fila['ID_CATPRODUCTO'];
                 $img = $fila['imagen'];
-                if ($stock > 0) {
+                $estado = $fila['estado'];
+                if ($stock > 0 && $estado > 0) {
             ?>
                     <div class="bg-white p-4 rounded-lg shadow-lg mt-4" data-categoria="<?php echo $sab; ?>" data-etiquetas="<?php echo $sab; ?> <?php echo $Nom; ?>" data-descripcion="<?php echo $des; ?>">
                         <img src="basededatos/<?php echo $img; ?>" alt="<?php echo $Nom; ?>" class="w-full h-48 object-cover rounded-lg mb-4">

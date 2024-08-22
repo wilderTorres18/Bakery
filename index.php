@@ -24,7 +24,7 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
 
     <style>
         nav.bg-white {
-            background-color: #FFFFFF ;
+            background-color: #FFFFFF;
             /* Color de fondo */
             box-shadow: none;
             /* Elimina la sombra */
@@ -153,7 +153,7 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
         <!-- Mobile menu, show/hide based on menu state. -->
         <div class="sm:hidden" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1">
-            <a href="index.php" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Inicio</a>
+                <a href="index.php" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Inicio</a>
                 <a href="tienda.php" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Tienda</a>
                 <a href="historia.php" class="text-gray-900 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Historia</a>
                 <a href="establecimiento.php" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Establecimientos</a>
@@ -196,7 +196,7 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
             $sabor = isset($_GET['sabor']) ? $_GET['sabor'] : '';
             $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
 
-            $query = "SELECT stock, nombre, imagen, sabor, ID_CATPRODUCTO, descripcion, precio FROM catproducto WHERE 1=1";
+            $query = "SELECT stock, nombre, imagen, sabor, ID_CATPRODUCTO, descripcion, precio, estado FROM catproducto WHERE 1=1";
             if ($busqueda != '') {
                 $query .= " AND (nombre LIKE '%" . mysqli_real_escape_string($conn, $busqueda) . "%' OR descripcion LIKE '%" . mysqli_real_escape_string($conn, $busqueda) . "%')";
             }
@@ -210,7 +210,8 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
                 $stock = $fila['stock'];
                 $id = $fila['ID_CATPRODUCTO'];
                 $img = $fila['imagen'];
-                if ($stock > 0) {
+                $estado = $fila['estado'];
+                if ($stock > 0 && $estado > 0) {
             ?>
                     <div>
                         <div class="bg-white p-4 rounded-lg shadow-lg">
