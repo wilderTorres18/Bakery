@@ -90,12 +90,13 @@ if (isset($_SESSION['carrito'])) {
             </div>
         <?php endforeach; ?>
         <div class="flex justify-between items-center mt-4">
-            <h3 class="text-xl font-bold">Total: S/ <?php echo number_format($total, 2); ?></h3>
+            <h3 class="text-xl font-bold mb-16">Total: S/ <?php echo number_format($total, 2); ?></h3>
             <div class="flex space-x-4">
                 <button id="seguirComprando" class="bg-green-500 text-white px-4 py-2 rounded">Seguir Comprando</button>
                 <button id="comprar" class="bg-blue-500 text-white px-4 py-2 rounded">Comprar</button>
             </div>
         </div>
+
     <?php else: ?>
         <p>No has añadido ningún producto.</p>
     <?php endif; ?>

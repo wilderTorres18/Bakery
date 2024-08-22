@@ -237,7 +237,7 @@ CREATE TABLE `SubtipoProducto` (
 --
 CREATE TABLE `CatProducto` (
   `ID_CATPRODUCTO` int(2) NOT NULL,
-  `nombre` varchar(20) NOT NULL,
+  `nombre` varchar(60) NOT NULL,
   `descripcion` varchar(100) NOT NULL,
   `precio` DECIMAL(10, 2) NOT NULL,
   `stock` int(3) NOT NULL,
@@ -635,3 +635,10 @@ INSERT INTO subtipoproducto (ID_SUBTIPOPRODUCTO, nombre, FK_ID_TIPOPRODUCTO) VAL
 (7, 'PANES ENRIQUECIDOS', 1),
 (8, 'PANES DULCES', 1),
 (9, 'PAN DE AJO', 1);
+
+
+ALTER TABLE `pedidos`
+ADD COLUMN `cod_ped` VARCHAR(20) COLLATE utf8_spanish_ci NULL,
+ADD COLUMN `hora_ped` TIME NULL,
+ADD COLUMN `fecha_act` DATE NULL,
+ADD COLUMN `hora_act` TIME NULL;

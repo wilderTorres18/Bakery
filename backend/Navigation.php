@@ -180,7 +180,7 @@ if ($tar > 100) {
             <?php } ?>
           </div>
         </a>
-        <a class="dropdown-item text-center small text-gray-500" href="calendario/">Mostrar Todo</a>
+        <!--  <a class="dropdown-item text-center small text-gray-500" href="calendario/">Mostrar Todo</a> -->
       </div>
     </li>
 
@@ -238,7 +238,7 @@ if ($tar > 100) {
             <div class="small text-gray-500">Chicken the Dog · 2w</div>
           </div>
         </a>
-        <a class="dropdown-item text-center small text-gray-500" href="calendario/">Leer Mas</a>
+        <!--        <a class="dropdown-item text-center small text-gray-500" href="calendario/">Leer Mas</a> -->
       </div>
     </li>
 

@@ -73,7 +73,7 @@ if ((isset($_SESSION['cl']))) { ?>
 
                     <div class="form-group col-md-6">
                       <label for="inputName">Nombre del Producto</label>
-                      <input type="text" value="<?php echo $Nom; ?>" class="form-control" name="nom" id="inputName" maxlength="11" onkeypress="return texto_1(event)" onpaste="return false" placeholder="">
+                      <input type="text" value="<?php echo $Nom; ?>" class="form-control" name="nom" id="inputName" maxlength="60" onkeypress="return texto_1(event)" onpaste="return false" placeholder="">
                     </div>
                     <div class="form-group col-md-6">
                       <label for="inputPrice">Precio</label>

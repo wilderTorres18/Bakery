@@ -66,6 +66,9 @@ foreach ($pedidos as $codigo => $clientes) {
     foreach ($clientes as $dni => $detalles) {
         $i++;
         $cliente = reset($detalles); // Obtenemos los datos del cliente para el modal
+        // Comprueba si 'codigo_pedido' está definido
+        $codigo_pedido = isset($cliente['codigo_pedido']) ? $cliente['codigo_pedido'] : 'No definido';
+
         $estado_options = [
             1 => "Pendiente",
             0 => "Cancelado",
@@ -93,7 +96,7 @@ foreach ($pedidos as $codigo => $clientes) {
                     </button>
                 </td>
                 <td>
-                    <select class='form-select estado-pedido' data-pedido-id='$i' data-cod-ped='{$cliente['codigo_pedido']}'>
+                    <select class='form-select estado-pedido' data-pedido-id='$i' data-cod-ped='$codigo_pedido'> 
                         " . generateEstadoOptions($cliente['estado'], $estado_options) . "
                     </select>
                 </td>

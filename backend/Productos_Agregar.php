@@ -67,7 +67,7 @@ if ((isset($_SESSION['cl']))) {
                   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="inputName">Nombre del Producto</label>
-                      <input type="text" name="nom" class="form-control" id="inputName" maxlength="20" placeholder="">
+                      <input type="text" name="nom" class="form-control" id="inputName" maxlength="60" placeholder="">
                     </div>
                     <div class="form-group col-md-6">
                       <label for="inputPrice">Precio</label>
