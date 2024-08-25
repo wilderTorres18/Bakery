@@ -62,6 +62,7 @@ if ((isset($_SESSION['cl']))) { ?>
                                     $tel = $fila['tel_cl'];
                                     $dir = $fila['direccion'];
                                     $est = $fila['estado'];
+                                    $pass = $fila['password'];
                                     $val = "";
                                     if ($est == "1") {
                                         $val = "Activado";
@@ -107,8 +108,11 @@ if ((isset($_SESSION['cl']))) { ?>
                                                     <option value="1">Activo</option>
                                                     <option value="0">Suspendido</option>
                                                 </select>
+                                                <div class="space-small"></div>
+                                                <label for="exampleFormControlTextarea1">Contraseña</label>
+                                                <input type="password" name="pass" class="form-control" id="inputName" placeholder="" required="" value="<?php echo $pass; ?>">
                                             </div>
-                                            <div class="form-group col-md-6 text-center">
+                                            <div classA="form-group col-md-6 text-center">
                                                 <img src="../img/bot.jpg">
                                             </div>
                                         </div>

@@ -314,9 +314,9 @@ CREATE TABLE `Factura` (
 
 CREATE TABLE `Usuario` (
   `ID_USUARIO` int(11) NOT NULL,
-  `prNombre` varchar(10) NOT NULL,
-  `prApellido` varchar(10) NOT NULL,
-  `contrasena` varchar(25) NOT NULL,
+  `prNombre` varchar(50) NOT NULL,
+  `prApellido` varchar(50) NOT NULL,
+  `contrasena` varchar(15) NOT NULL,
   `rol` varchar(20) NOT NULL,
   PRIMARY KEY (`ID_USUARIO`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

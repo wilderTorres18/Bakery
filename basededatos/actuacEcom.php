@@ -8,10 +8,11 @@ $ap1 = $_POST['ap1'];
 $ap2 = $_POST['ap2'];
 $dir = $_POST['dir'];
 $est = $_POST['est'];
+$pass = $_POST['pass'];
 
 
 
-$query = "UPDATE clientes SET nombre='$nom',apellido_1='$ap1',apellido_2='$ap2',direccion='$dir',estado='$est' WHERE dni='$dni'";
+$query = "UPDATE clientes SET nombre='$nom',apellido_1='$ap1',apellido_2='$ap2',direccion='$dir',estado='$est', `password`=$pass  WHERE dni='$dni'";
 $query2 = "UPDATE telcl set tel_cl='$tel' where dni='$dni'";
 $id90 = $_SESSION['cl']['id_u'];
 $actua = date("Y-m-d");
