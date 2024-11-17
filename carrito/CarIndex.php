@@ -1,6 +1,6 @@
 <?php
 session_start();
-require($_SERVER['DOCUMENT_ROOT'] . '/basededatos/connectionbd.php');
+require(__DIR__ . '/../basededatos/connectionbd.php');
 
 // Eliminar producto del carrito
 if (isset($_POST['eliminar'])) {

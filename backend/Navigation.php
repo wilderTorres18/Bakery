@@ -2,8 +2,14 @@
 <?php
 $fec = date('Y-m-d');
 
+/* echo "<pre>";
+var_dump($_SESSION);
+echo "</pre>"; */
+
 $cli = $_SESSION['cl']['nom'];
 $ape = $_SESSION['cl']['ape'];
+
+
 require("../basededatos/connectionbd.php");
 $query = "SELECT nombre FROM CatProducto WHERE stock=0 ";
 $result = mysqli_query($conn, $query);
