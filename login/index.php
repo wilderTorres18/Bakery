@@ -63,7 +63,7 @@
           <button type="submit" class="block w-full bg-indigo-600 mt-5 py-2 rounded-2xl hover:bg-indigo-700 hover:-translate-y-1 transition-all duration-500 text-white font-semibold mb-2">Iniciar Sesión</button>
           <div class="flex justify-between mt-4">
             <a href="../cambia_pass.php" class="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all">¿olvidé mi contraseña?</a>
-            <a href="../cambia_pass.php" class="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all">Soy administrador</a>
+            <a href="./adminLogin.php" class="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all">Soy administrador</a>
 
             <a href="../nuevo_cliente.php" class="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all">¿No tengo una cuenta?</a>
           </div>
