@@ -113,79 +113,176 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
                         </svg>
                     </button>
                 </div>
-                <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+                <div class="flex-1 flex items-center justify-between sm:items-stretch sm:justify-start">
                     <a class="navbar-brand flex-shrink-0" href="index.php">
-                        <img src="logo.png" width="30" height="90" class="d-inline-block align-top" alt="">
+                        <img src="logo.png" width="45" height="90" class="d-inline-block align-top" alt="">
                     </a>
                     <div class="hidden sm:block sm:ml-6">
                         <div class="flex space-x-4">
-                            <a href="index.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Inicio</a>
-                            <a href="tienda.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Tienda</a>
-                            <a href="historia.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Historia</a>
-                            <a href="establecimiento.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Establecimientos</a>
-                            <a href="contacto.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Contáctanos</a>
+                            <a href="index.php" class="text-white bg-yellow-700 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Inicio</a>
+                            <a href="tienda.php" class="text-white bg-yellow-700 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Tienda</a>
+                            <a href="historia.php" class="text-white bg-yellow-700 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Historia</a>
+                            <a href="establecimiento.php" class="text-white bg-yellow-700 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Establecimientos</a>
+                            <a href="contacto.php" class="text-white bg-yellow-700 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Contáctanos</a>
+                        </div>
+                    </div>
+                    <form id="filterForm" class="relative mt-0 max-w-screen-md mx-auto flex items-center">
+                        <div class="relative flex items-center">
+                            <span class="absolute left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-search text-gray-400"></i>
+                            </span>
+                            <input type="text" class="border-2 border-gray-300 bg-white h-10 pl-10 pr-10 rounded-lg text-sm focus:outline-none w-full" id="barra-busqueda" name="busqueda" placeholder="¿Qué se te antoja hoy?" value="<?php echo htmlspecialchars($busqueda); ?>">
+                            <?php if ($busqueda != ''): ?>
+                                <span class="absolute right-0 pr-3 flex items-center">
+                                    <button type="buton" id="clearSearch" class="text-gray-400 focus:outline-none">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </span>
+                            <?php endif; ?>
+                        </div>
+
+                    </form>
+                    <script>
+                        function clearSearch() {
+                            document.getElementById('barra-busqueda').value = ''; // Limpiar el campo de búsqueda
+                            // Aquí puedes agregar cualquier lógica adicional, como reenviar el formulario si es necesario.
+                        }
+                    </script>
+
+                    <div class="hidden sm:block">
+                        <div class="flex items-center">
+                            <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                <?php if (!(isset($_SESSION['cl']))) { ?>
+                                    <a href="nuevo_cliente.php" class="btn bg-green-500 hover:bg-green-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Registrarse</a>
+                                <?php } ?>
+                            </div>
+                            <div class="form-inline my-2 my-lg-0">
+                                <?php if (!(isset($_SESSION['cl']))) { ?>
+                                    <a href="login/" class="btn bg-blue-500 hover:bg-blue-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Iniciar sesión</a>
+                                <?php } ?>
+                                <?php if (isset($_SESSION['cl'])) { ?>
+                                    <a href="salir.php" class="btn bg-red-500 hover:bg-red-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Salir</a>
+                                <?php } ?>
+                            </div>
+                            <a href="./carrito/CarIndex.php" id="carrito-btn" class="ml-4 text-gray-900 hover:text-gray-600 relative">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span id="cart-count" class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center"><?php echo $numero_productos; ?></span>
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="hidden sm:block">
-                    <div class="flex items-center">
-                        <div class="btn-group mr-2" role="group" aria-label="Second group">
-                            <?php if (!(isset($_SESSION['cl']))) { ?>
-                                <a href="nuevo_cliente.php" class="btn bg-green-500 hover:bg-green-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Registrarse</a>
-                            <?php } ?>
-                        </div>
-                        <div class="form-inline my-2 my-lg-0">
-                            <?php if (!(isset($_SESSION['cl']))) { ?>
-                                <a href="login/" class="btn bg-blue-500 hover:bg-blue-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Iniciar sesión</a>
-                            <?php } ?>
-                            <?php if (isset($_SESSION['cl'])) { ?>
-                                <a href="salir.php" class="btn bg-red-500 hover:bg-red-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Salir</a>
-                            <?php } ?>
-                        </div>
-                        <a href="./carrito/CarIndex.php" id="carrito-btn" class="ml-4 text-gray-900 hover:text-gray-600 relative">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span id="cart-count" class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center"><?php echo $numero_productos; ?></span>
-                        </a>
+                <!-- Mobile menu, show/hide based on menu state. -->
+                <div class="sm:hidden" id="mobile-menu">
+                    <div class="px-2 pt-2 pb-3 space-y-1">
+                        <a href="index.php" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Inicio</a>
+                        <a href="tienda.php" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Tienda</a>
+                        <a href="historia.php" class="text-gray-900 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Historia</a>
+                        <a href="establecimiento.php" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Establecimientos</a>
+                        <a href="contacto.php" class="text-gray-900 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contáctanos</a>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- Mobile menu, show/hide based on menu state. -->
-        <div class="sm:hidden" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="index.php" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Inicio</a>
-                <a href="tienda.php" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Tienda</a>
-                <a href="historia.php" class="text-gray-900 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Historia</a>
-                <a href="establecimiento.php" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Establecimientos</a>
-                <a href="contacto.php" class="text-gray-900 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contáctanos</a>
-            </div>
-        </div>
     </nav>
+    <!-- Banner de Imagenes -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Estilos para el carrusel */
+        .carousel {
+            position: relative;
+            overflow: hidden;
+        }
 
-    <!--Header-->
-    <div class="bg-yellow-400 py-12 bg-cover bg-center" style="background-image: url('./img/portada.png');">
-        <div class="container mx-auto text-center bg-opacity-75 p-4 rounded-lg">
-            <h1 class="header-text">"Los Gemelos"</h1>
-            <p class="header-subtext">Del horno a tu mesa, frescura y calidad en cada bocado.</p>
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
 
-            <form id="filterForm" class="relative mt-6 max-w-screen-md mx-auto">
-                <div class="relative flex items-center">
-                    <span class="absolute left-0 pl-3 flex items-center pointer-events-none">
-                        <i class="fas fa-search text-gray-400"></i>
-                    </span>
-                    <input type="text" class="border-2 border-gray-300 bg-white h-10 pl-10 pr-10 rounded-lg text-sm focus:outline-none w-full" id="barra-busqueda" name="busqueda" placeholder="¿Qué se te antoja hoy?" value="<?php echo htmlspecialchars($busqueda); ?>">
-                    <?php if ($busqueda != ''): ?>
-                        <span class="absolute right-0 pr-3 flex items-center">
-                            <button type="button" id="clearSearch" class="text-gray-400 focus:outline-none">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </span>
-                    <?php endif; ?>
-                </div>
-                <button type="submit" class="hidden"></button>
-            </form>
+        .carousel-item {
+            min-width: 100%;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .carousel {
+            width: 100%;
+        }
+
+        @media (min-width: 1280px) {
+            .container {
+                max-width: 1380px;
+            }
+        }
+    </style>
+    </head>
+    <div class="carousel relative">
+        <div class="carousel-inner" id="carouselInner">
+            <div class="carousel-item">
+                <img src="img/panaderia.png" alt="Imagen 1" class="w-full h-auto">
+            </div>
+            <div class="carousel-item">
+                <img src="img/Panaderia1.png" alt="Imagen 2" class="w-full h-auto">
+            </div>
+            <div class="carousel-item">
+                <img src="img/Panaderia2.png" alt="Imagen 3" class="w-full h-auto">
+            </div>
         </div>
+        <button class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:bg-gray-200" id="prevBtn">
+            &#10094;
+        </button>
+        <button class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:bg-gray-200" id="nextBtn">
+            &#10095;
+        </button>
     </div>
+    <div class="flex justify-center space-x-2 mt-4">
+        <button class="w-3 h-3 bg-gray-400 rounded-full" onclick="goToSlide(0)"></button>
+        <button class="w-3 h-3 bg-gray-400 rounded-full" onclick="goToSlide(1)"></button>
+        <button class="w-3 h-3 bg-gray-400 rounded-full" onclick="goToSlide(2)"></button>
+    </div>
+    </div>
+
+    <script>
+        const carouselInner = document.getElementById('carouselInner');
+        const totalSlides = document.querySelectorAll('.carousel-item').length;
+        let currentSlide = 0;
+
+        function showSlide(slideIndex) {
+            carouselInner.style.transform = `translateX(-${slideIndex * 100}%)`;
+            currentSlide = slideIndex;
+            updateIndicators();
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                showSlide(currentSlide + 1);
+            } else {
+                showSlide(0);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            } else {
+                showSlide(totalSlides - 1);
+            }
+        }
+
+        function goToSlide(slideIndex) {
+            showSlide(slideIndex);
+        }
+
+        // Intervalo automático
+        setInterval(nextSlide, 3000);
+
+        document.getElementById('nextBtn').onclick = nextSlide;
+        document.getElementById('prevBtn').onclick = prevSlide;
+
+        function updateIndicators() {
+            const indicators = document.querySelectorAll('.flex > button');
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('bg-gray-800', index === currentSlide);
+                indicator.classList.toggle('bg-gray-400', index !== currentSlide);
+            });
+        }
+    </script>
 
     <!-- Carrusel de Productos -->
     <div class="container mx-auto py-8 px-8">
@@ -247,12 +344,83 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
     </div>
 
     <!-- Frase del Día -->
-    <div class="bg-yellow-400 py-8">
+    <div class="bg-yellow-700 py-8">
         <div class="container mx-auto text-center">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">FRASE DEL DÍA</h2>
-            <p class="text-xl text-gray-700">No solo los ingredientes hacen que el pan sea rico, el amor con el que lo hacemos le da un toque especial.</p>
+            <h2 class="text-2xl font-bold text-white mb-4">FRASE DEL DÍA</h2>
+            <p class="text-xl text-white">No solo los ingredientes hacen que el pan sea rico, el amor con el que lo hacemos le da un toque especial.</p>
         </div>
     </div>
+
+
+    <style>
+        /* Estilo para la imagen ampliada */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+    </style>
+    <br><br>
+    <h1 class="text-3xl font-bold text-center mb-8">Nuestros Productos</h1>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div class="bg-white rounded-lg shadow overflow-hidden cursor-pointer" onclick="openModal('login/images/img-02.jpg')">
+            <img src="login/images/img-02.jpg" alt="Imagen 1" class="w-full h-48 object-cover">
+        </div>
+        <div class="bg-white rounded-lg shadow overflow-hidden cursor-pointer" onclick="openModal('login/images/img-02.jpg')">
+            <img src="login/images/img-02.jpg" alt="Imagen 2" class="w-full h-48 object-cover">
+        </div>
+        <div class="bg-white rounded-lg shadow overflow-hidden cursor-pointer" onclick="openModal('login/images/img-02.jpg')">
+            <img src="login/images/img-02.jpg" alt="Imagen 3" class="w-full h-48 object-cover">
+        </div>
+        <div class="bg-white rounded-lg shadow overflow-hidden cursor-pointer" onclick="openModal('login/images/img-02.jpg')">
+            <img src="login/images/img-02.jpg" alt="Imagen 4" class="w-full h-48 object-cover">
+        </div>
+        <div class="bg-white rounded-lg shadow overflow-hidden cursor-pointer" onclick="openModal('login/images/img-02.jpg')">
+            <img src="login/images/img-02.jpg" alt="Imagen 5" class="w-full h-48 object-cover">
+        </div>
+        <div class="bg-white rounded-lg shadow overflow-hidden cursor-pointer" onclick="openModal('login/images/img-02.jpg')">
+            <img src="login/images/img-02.jpg" alt="Imagen 6" class="w-full h-48 object-cover">
+        </div>
+        <div class="bg-white rounded-lg shadow overflow-hidden cursor-pointer" onclick="openModal('login/images/img-02.jpg')">
+            <img src="login/images/img-02.jpg" alt="Imagen 7" class="w-full h-48 object-cover">
+        </div>
+        <div class="bg-white rounded-lg shadow overflow-hidden cursor-pointer" onclick="openModal('login/images/img-02.jpg')">
+            <img src="login/images/img-02.jpg" alt="Imagen 8" class="w-full h-48 object-cover">
+        </div>
+    </div>
+
+    <!-- Modal para la imagen ampliada -->
+    <div class="modal" id="modal" onclick="closeModal()">
+        <img id="modal-image" src="" alt="Imagen ampliada">
+    </div>
+
+    <script>
+        // Función para abrir el modal
+        function openModal(imageSrc) {
+            const modal = document.getElementById('modal');
+            const modalImage = document.getElementById('modal-image');
+            modalImage.src = imageSrc;
+            modal.style.display = 'flex';
+        }
+
+        // Función para cerrar el modal
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.style.display = 'none';
+        }
+    </script>
 
     <!-- Whatsapp -->
     <?php include 'whatsapp.php'; ?>
@@ -305,7 +473,7 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
             e.preventDefault();
             var id = $(this).data('id');
             $.ajax({
-                url: '../carrito/CarModal.php',
+                url: './carrito/CarModal.php',
                 method: 'GET',
                 data: {
                     id: id
@@ -321,7 +489,7 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
         $('#carrito-btn').click(function(e) {
             e.preventDefault();
             $.ajax({
-                url: '../carrito/CarModal.php',
+                url: './carrito/CarModal.php',
                 method: 'GET',
                 success: function(response) {
                     $('#carritoContent').html(response);
@@ -336,7 +504,7 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
 
         function updateCartCount() {
             $.ajax({
-                url: '../carrito/CarModal.php',
+                url: './carrito/CarModal.php',
                 method: 'POST',
                 data: {
                     action: 'count'

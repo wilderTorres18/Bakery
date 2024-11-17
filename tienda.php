@@ -43,15 +43,15 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
                 </div>
                 <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                     <a class="navbar-brand flex-shrink-0" href="index.php">
-                        <img src="logo.png" width="30" height="90" class="d-inline-block align-top" alt="">
+                        <img src="logo.png" width="45" height="90" class="d-inline-block align-top" alt="">
                     </a>
                     <div class="hidden sm:block sm:ml-6">
                         <div class="flex space-x-4">
-                            <a href="index.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Inicio</a>
-                            <a href="tienda.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Tienda</a>
-                            <a href="historia.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Historia</a>
-                            <a href="establecimiento.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Establecimientos</a>
-                            <a href="contacto.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Contáctanos</a>
+                            <a href="index.php" class="text-white bg-yellow-700 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Inicio</a>
+                            <a href="tienda.php" class="text-white bg-yellow-700 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Tienda</a>
+                            <a href="historia.php" class="text-white bg-yellow-700 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Historia</a>
+                            <a href="establecimiento.php" class="text-white bg-yellow-700 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Establecimientos</a>
+                            <a href="contacto.php" class="text-white bg-yellow-700 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Contáctanos</a>
                         </div>
                     </div>
                 </div>
@@ -90,7 +90,7 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
         </div>
     </nav>
     <!--Header-->
-    <div class="bg-yellow-400 py-12 bg-cover bg-center" style="background-image: url('/img/portada.png');">
+    <div class="bg-yellow-400 py-12 bg-cover bg-center" style="background-image: url('./img/portada.png');">
         <div class="container mx-auto text-center bg-opacity-75 bg-yellow-400 p-4 rounded-lg">
             <h1 class="text-4xl font-bold text-gray-800">"Los Gemelos"</h1>
             <p class="mt-2 text-gray-700">Del horno a tu mesa, frescura y calidad en cada bocado.</p>
@@ -204,7 +204,7 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
                 e.preventDefault();
                 var id = $(this).data('id');
                 $.ajax({
-                    url: '../carrito/CarModal.php',
+                    url: './carrito/CarModal.php',
                     method: 'GET',
                     data: {
                         id: id
@@ -220,7 +220,7 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
             $('#carrito-btn').click(function(e) {
                 e.preventDefault();
                 $.ajax({
-                    url: '../carrito/CarModal.php',
+                    url: './carrito/CarModal.php',
                     method: 'GET',
                     success: function(response) {
                         $('#carritoContent').html(response);
@@ -235,7 +235,7 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
 
             function updateCartCount() {
                 $.ajax({
-                    url: '../carrito/CarModal.php',
+                    url: './carrito/CarModal.php',
                     method: 'POST',
                     data: {
                         action: 'count'

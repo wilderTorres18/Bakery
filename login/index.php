@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login V1</title>
+  <title>Inicio a tienda</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
@@ -45,7 +45,7 @@
     <div class="flex w-full lg:w-1/2 justify-center items-center bg-white space-y-8">
       <div class="w-full px-8 md:px-32 lg:px-24">
         <form class="bg-white rounded-md shadow-2xl p-5" action="../basededatos/login.php" method="post">
-          <h1 class="text-gray-800 font-bold text-2xl mb-1">Inicio de Sesión</h1>
+          <h1 class="text-gray-800 font-bold text-2xl mb-1">Inicio de Sesión (Clientes)</h1>
           <p class="text-sm font-normal text-gray-600 mb-8">Bienvenido</p>
           <div class="flex items-center border-2 mb-8 py-2 px-3 rounded-2xl">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -62,7 +62,8 @@
           </div>
           <button type="submit" class="block w-full bg-indigo-600 mt-5 py-2 rounded-2xl hover:bg-indigo-700 hover:-translate-y-1 transition-all duration-500 text-white font-semibold mb-2">Iniciar Sesión</button>
           <div class="flex justify-between mt-4">
-            <!-- <a href="../cambia_pass.php" class="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all">¿olvidé mi contraseña?</a> -->
+            <a href="../cambia_pass.php" class="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all">¿olvidé mi contraseña?</a>
+            <a href="../cambia_pass.php" class="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all">Soy administrador</a>
 
             <a href="../nuevo_cliente.php" class="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all">¿No tengo una cuenta?</a>
           </div>

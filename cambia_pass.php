@@ -5,134 +5,124 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <!-- CSS-->
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="login/vendor/bootstrap/css/bootstrap.min.css" crossorigin="anonymous">
-  <!--FontAwesome-->
-  <script src="js/629388bad9.js"></script>
-  <!--Fonts-->
-  <link href="css/font.css" rel="stylesheet">
-  <title>Freskypan - Panaderia "Los Gemelos"</title>
+  <title>Freskypan - Panadería en Fusagasugá</title>
+
+  <!-- Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- FontAwesome -->
+  <script src="https://kit.fontawesome.com/629388bad9.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+    :root {
+      --primary-light: #d4a373;
+      --primary-dark: #c59462;
+      --secondary-light: #4A90E2;
+      --secondary-dark: #357ABD;
+    }
+
+    .bg-custom {
+      background-image: url('./backend/img/2024/vision.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-light);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .btn-secondary {
+      background-color: var(--secondary-light);
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--secondary-dark);
+    }
+  </style>
 </head>
 
-<body>
-  <!--Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="../FreskyPan">
-      <img src="favicon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+<body class="bg-gray-100">
 
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse"
-      data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-      aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <?php
+  if (isset($_GET['status']) && isset($_GET['message'])) {
+    $status = $_GET['status'];
+    $message = urldecode($_GET['message']);  // Decodificar el mensaje
+    echo "<script>
+                Swal.fire({
+                    icon: '$status',
+                    title: '$status' === 'success' ? '¡Éxito!' : 'Error',
+                    text: '$message'
+                }).then(() => {
+                    if ('$status' === 'success') {
+                        // Redirigir después de 2 segundos si es exitoso
+                        setTimeout(() => {
+                            window.location.href = './login/'; // Redirigir al login
+                        }, 800);
+                    }
+                });
+              </script>";
+  }
+  ?>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="index.php">Inicio <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="historia.html">Historia</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="contacto.html">Contactanos</a>
-        </li>
+  <!-- Página principal -->
+  <main class="min-h-screen bg-custom flex justify-center items-center p-4">
+    <section class="bg-gray-50 dark:bg-gray-900 w-full max-w-md p-6 rounded-lg shadow-md dark:bg-gray-800">
+      <!-- Logo -->
+      <div class="flex justify-center mb-6">
+        <img class="w-12 h-12" src="logo.png" alt="Logo Los gemelos">
+      </div>
 
-      </ul>
+      <!-- Título -->
+      <h2 class="text-xl font-bold leading-tight text-gray-900 md:text-2xl dark:text-white text-center">
+        Restablecer contraseña <span class="text-sm font-normal">(Clientes)</span>
+      </h2>
 
-      <form class="form-inline my-2 my-lg-0">
+      <!-- Formulario -->
+      <form class="space-y-4 mt-4" action="basededatos/actuac_pass.php" method="POST">
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-900 dark:text-white">DNI</label>
+          <input type="text" name="dni" id="dni" placeholder="" required
+            class="w-full bg-gray-50 border border-gray-300 text-sm rounded-lg p-2.5 focus:ring-primary-600 focus:border-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+        </div>
 
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-900 dark:text-white">Nueva contraseña</label>
+          <input type="password" name="password" id="password" placeholder="••••••••" required
+            class="w-full bg-gray-50 border border-gray-300 text-sm rounded-lg p-2.5 focus:ring-primary-600 focus:border-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+        </div>
 
-        <a href="login/" class="btn btn-success my-2 my-sm-0">Iniciar sesión</a>
+        <div>
+          <label for="confirm-password" class="block text-sm font-medium text-gray-900 dark:text-white">Confirmar
+            contraseña</label>
+          <input type="password" name="confirm-password" id="confirm-password" placeholder="••••••••" required
+            class="w-full bg-gray-50 border border-gray-300 text-sm rounded-lg p-2.5 focus:ring-primary-600 focus:border-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+        </div>
 
+        <div class="flex items-start">
+          <input id="terms" type="checkbox" required
+            class="w-4 h-4 rounded border border-gray-300 bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600">
+          <label for="terms" class="ml-2 text-sm text-gray-500 dark:text-gray-300">Acepto los <a href="#"
+              class="text-primary-600 hover:underline dark:text-primary-500">Términos y condiciones</a></label>
+        </div>
+
+        <button type="submit"
+          class="w-full btn-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center hover:bg-primary-dark focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-800">
+          Restablecer contraseña
+        </button>
+        <a href="../index.php"
+          class="w-full inline-block text-center btn-secondary font-medium rounded-lg text-sm px-5 py-2.5 mt-4 hover:bg-secondary-dark focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-800">
+          Continuar como invitado
+        </a>
       </form>
-    </div>
-  </nav>
-
-  <!--Header-->
-  <div class="container-fluid">
-
-    <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Buscar cliente</h1>
-
-
-    <!-- DataTales Example -->
-    <div class="card shadow mb-4">
-      <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Clientes</h6>
-      </div>
-      <div class="card-body">
-        <!-- Add Example -->
-        <form action="basededatos/actuac2.php" method="POST">
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="inputCantidad">Digite una nueva contraseña</label>
-              <input type="text" name="pas" class="form-control" id="inputCantidad" placeholder="" required="">
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-10">
-                <?php if ((isset($_GET['id']))) { ?>
-                  <input type="hidden" value="<?php echo $_GET['id']; ?>" class="form-control" id="inputName" name="ced" placeholder="">
-                <?php } ?>
-              </div>
-            </div>
-
-          </div>
-
-
-
-
-
-
-          <button type="submit" class="btn btn-primary">Validar</button>
-        </form>
-
-        <!--End  Add Example -->
-      </div>
-    </div>
-
-  </div>
-
-  <!--Footer-->
-  <footer class="contenedor">
-    <div class="redes-sociales">
-      <div class="contenedor-icono">
-        <a href="#" target="_blank" class="twitter">
-          <i class="fab fa-twitter"></i>
-        </a>
-      </div>
-      <div class="contenedor-icono">
-        <a href="#" target="_blank" class="facebook">
-          <i class="fab fa-facebook"></i>
-        </a>
-      </div>
-      <div class="contenedor-icono">
-        <a href="#" target="_blank" class="instagram">
-          <i class="fab fa-instagram"></i>
-        </a>
-      </div>
-    </div>
-    <div class="creado-por">
-
-    </div>
-  </footer>
-
-  <!--JavaScript-->
-  <!--Muuri-->
-  <script src="js/web-animations.min.js"></script>
-  <script src="js/muuri.min.js"></script>
-  <!--JQuery-->
-  <script src="js/jquery-3.3.1.slim.min.js" crossorigin="anonymous">
-  </script>
-  <script src="js/popper.min.js" crossorigin="anonymous">
-  </script>
-  <script src="js/bootstrap.min.js" crossorigin="anonymous">
-  </script>
-
-  <script src="js/main.js"></script>
-
+    </section>
+  </main>
 </body>
 
 </html>
