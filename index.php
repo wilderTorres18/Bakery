@@ -2,6 +2,9 @@
 session_start();
 $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0;
 $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
+
+$nomcl = isset($_SESSION['cl']['nomcl']) ? $_SESSION['cl']['nomcl'] : 'Usuario';
+$fotoPerfil = isset($_SESSION['fotoPerfil']) ? $_SESSION['fotoPerfil'] : './img/userYellow2.png';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -160,14 +163,32 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
                                 <?php if (!(isset($_SESSION['cl']))) { ?>
                                     <a href="login/" class="btn bg-blue-500 hover:bg-blue-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Iniciar sesión</a>
                                 <?php } ?>
-                                <?php if (isset($_SESSION['cl'])) { ?>
+                                <!--                        <?php if (isset($_SESSION['cl'])) { ?>
                                     <a href="salir.php" class="btn bg-red-500 hover:bg-red-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Salir</a>
-                                <?php } ?>
+                                <?php } ?> -->
                             </div>
                             <a href="./carrito/CarIndex.php" id="carrito-btn" class="ml-4 text-gray-900 hover:text-gray-600 relative">
-                                <i class="fas fa-shopping-cart"></i>
+                                <i class="fas fa-shopping-cart fa-2x"></i>
                                 <span id="cart-count" class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center"><?php echo $numero_productos; ?></span>
                             </a>
+
+                            <!-- Información del usuario -->
+                            <?php if (isset($_SESSION['cl'])) { ?>
+                                <div class="relative ml-4">
+                                    <div class="flex items-center cursor-pointer" onclick="toggleDropdown()">
+                                        <img class="w-10 h-10 rounded-full border-2 border-gray-300" src="<?php echo $fotoPerfil; ?>" alt="Foto de perfil">
+                                        <span class="ml-3 text-gray-700 font-medium"><?php echo $nomcl ?></span>
+                                        <i class="fas fa-chevron-down ml-2 text-gray-500"></i>
+                                    </div>
+                                    <!-- Dropdown -->
+                                    <div id="userDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg overflow-hidden z-10">
+                                        <a href="Perfil.php" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Perfil</a>
+                                        <a href="Pedidos.php" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Pedidos</a>
+                                        <div class="border-t border-gray-200"></div>
+                                        <a href="salir.php" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Cerrar sesión</a>
+                                    </div>
+                                </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -513,6 +534,11 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
                     $('#cart-count').text(response);
                 }
             });
+        }
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById('userDropdown');
+            dropdown.classList.toggle('hidden');
         }
     </script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
