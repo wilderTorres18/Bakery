@@ -73,11 +73,11 @@ if (isset($_SESSION['carrito'])) {
         <?php foreach ($_SESSION['carrito'] as $item): ?>
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-4">
-                    <a href="../carrito/CarIndex.php">
+                    <a href="../CarIndex.php">
                         <img src="./basededatos/<?php echo $item['Imagen']; ?>" class="w-16 h-16 object-cover" alt="<?php echo $item['Nombre']; ?>">
                     </a>
                     <div>
-                        <a href="../carrito/CarIndex.php">
+                        <a href="../CarIndex.php">
                             <h3 class="text-lg font-semibold text-black hover:text-blue-500"><?php echo $item['Nombre']; ?></h3>
                         </a>
                         <p>Cantidad: <input type="text" value="<?php echo $item['Cantidad']; ?>" data-id="<?php echo $item['Id']; ?>" class="cantidad border rounded w-16 text-center" readonly></p>
@@ -93,7 +93,7 @@ if (isset($_SESSION['carrito'])) {
             <h3 class="text-xl font-bold mb-16">Total: S/ <?php echo number_format($total, 2); ?></h3>
             <div class="flex space-x-4">
                 <button id="seguirComprando" class="bg-green-500 text-white px-4 py-2 rounded">Seguir Comprando</button>
-                <button id="comprar" class="bg-blue-500 text-white px-4 py-2 rounded">Comprar</button>
+                <a href="../CarIndex.php" class="bg-blue-500 text-white px-4 py-2 rounded">Comprar</a>
             </div>
         </div>
 

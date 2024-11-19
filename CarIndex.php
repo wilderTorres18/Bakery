@@ -1,6 +1,6 @@
 <?php
 session_start();
-require(__DIR__ . '/../basededatos/connectionbd.php');
+require(__DIR__ . '/basededatos/connectionbd.php');
 
 // Eliminar producto del carrito
 if (isset($_POST['eliminar'])) {
@@ -116,52 +116,13 @@ if (isset($_POST['actualizar'])) {
 
 <body class="bg-gray-100">
     <!-- Navigation -->
-    <nav class="bg-white shadow-md mb-8">
-        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-            <div class="relative flex items-center justify-between h-16">
-                <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                    <!-- Mobile menu button -->
-                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                        </svg>
-                        <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-                <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                    <a class="navbar-brand flex-shrink-0" href="#">
-                        <img src="../logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                    </a>
-                    <div class="hidden sm:block sm:ml-6">
-                        <div class="flex space-x-4">
-                            <a href="../index.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Inicio</a>
-                            <a href="../tienda.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Tienda</a>
-                            <a href="../historia.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Historia</a>
-                            <a href="../establecimiento.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Establecimientos</a>
-                            <a href="../contacto.php" class="text-gray-900 bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Contáctanos</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="hidden sm:block">
-                    <div class="flex items-center">
-                        <a href="../carrito/CarIndex.php" id="carrito-btn" class="ml-4 text-gray-900 hover:text-gray-600 relative">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span class="ml-1 bg-red-500 text-white rounded-full px-2 py-1 text-xs absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2"><?php echo isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0; ?></span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <?php include 'navigation.php'; ?>
 
     <div class="main-content">
         <div class="cart-container">
             <div class="cart-details">
                 <h2 class="text-2xl font-bold mb-4">Carrito de Compras</h2>
-                <form action="../carrito/CarIndex.php" method="post">
+                <form action="CarIndex.php" method="post">
                     <?php
                     $total = 0;
                     if (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) {
@@ -199,11 +160,32 @@ if (isset($_POST['actualizar'])) {
                 </div>
             </div>
             </form>
+
+            <!-- Bloque de selección de Método de Envío -->
+            <div class="mt-8 p-6 bg-white shadow-md rounded-md">
+                <h2 class="text-lg font-bold mb-4">¿Cómo quieres recibir tus productos?</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <!-- Opción: Entrega a domicilio -->
+                    <div class="flex flex-col items-center p-4 border rounded-md cursor-pointer hover:bg-yellow-100 envio-opcion" data-envio="domicilio">
+                        <i class="fas fa-truck text-3xl text-yellow-500 mb-2"></i>
+                        <span class="font-medium">Entrega a domicilio</span>
+                        <input type="radio" name="metodo_envio" value="domicilio" class="hidden">
+                    </div>
+                    <!-- Opción: Recojo en tienda -->
+                    <div class="flex flex-col items-center p-4 border rounded-md cursor-pointer hover:bg-yellow-100 envio-opcion" data-envio="tienda">
+                        <i class="fas fa-store text-3xl text-yellow-500 mb-2"></i>
+                        <span class="font-medium">Recojo en tienda</span>
+                        <input type="radio" name="metodo_envio" value="tienda" class="hidden">
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </div>
 
     <!-- Footer -->
-    <?php include '../footer.php'; ?>
+    <?php include 'footer.php'; ?>
 </body>
 
 </html>
