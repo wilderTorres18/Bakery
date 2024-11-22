@@ -120,6 +120,25 @@ if (isset($_POST['actualizar'])) {
 
     <div class="main-content">
         <div class="cart-container">
+            <!-- Bloque de selección de Método de Envío -->
+            <div class="mt-8 p-6 bg-white shadow-md rounded-md">
+                <h2 class="text-lg font-bold mb-4">¿Cómo quieres recibir tus productos?</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <!-- Opción: Entrega a domicilio -->
+                    <div class="flex flex-col items-center p-4 border rounded-md cursor-pointer hover:bg-yellow-100 envio-opcion" data-envio="domicilio">
+                        <i class="fas fa-truck text-3xl text-yellow-500 mb-2"></i>
+                        <span class="font-medium">Entrega a domicilio</span>
+                        <input type="radio" name="metodo_envio" value="domicilio" class="hidden">
+                    </div>
+                    <!-- Opción: Recojo en tienda -->
+                    <div class="flex flex-col items-center p-4 border rounded-md cursor-pointer hover:bg-yellow-100 envio-opcion" data-envio="tienda">
+                        <i class="fas fa-store text-3xl text-yellow-500 mb-2"></i>
+                        <span class="font-medium">Recojo en tienda</span>
+                        <input type="radio" name="metodo_envio" value="tienda" class="hidden">
+                    </div>
+                </div>
+            </div>
+
             <div class="cart-details">
                 <h2 class="text-2xl font-bold mb-4">Carrito de Compras</h2>
                 <form action="CarIndex.php" method="post">
@@ -160,32 +179,77 @@ if (isset($_POST['actualizar'])) {
                 </div>
             </div>
             </form>
-
-            <!-- Bloque de selección de Método de Envío -->
-            <div class="mt-8 p-6 bg-white shadow-md rounded-md">
-                <h2 class="text-lg font-bold mb-4">¿Cómo quieres recibir tus productos?</h2>
-                <div class="grid grid-cols-2 gap-4">
-                    <!-- Opción: Entrega a domicilio -->
-                    <div class="flex flex-col items-center p-4 border rounded-md cursor-pointer hover:bg-yellow-100 envio-opcion" data-envio="domicilio">
-                        <i class="fas fa-truck text-3xl text-yellow-500 mb-2"></i>
-                        <span class="font-medium">Entrega a domicilio</span>
-                        <input type="radio" name="metodo_envio" value="domicilio" class="hidden">
-                    </div>
-                    <!-- Opción: Recojo en tienda -->
-                    <div class="flex flex-col items-center p-4 border rounded-md cursor-pointer hover:bg-yellow-100 envio-opcion" data-envio="tienda">
-                        <i class="fas fa-store text-3xl text-yellow-500 mb-2"></i>
-                        <span class="font-medium">Recojo en tienda</span>
-                        <input type="radio" name="metodo_envio" value="tienda" class="hidden">
-                    </div>
-                </div>
-            </div>
-
-
         </div>
     </div>
 
-    <!-- Footer -->
-    <?php include 'footer.php'; ?>
+    <!-- Modal para Entrega a Domicilio -->
+    <div id="modal-domicilio" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg w-96 p-6 relative">
+            <button onclick="cerrarModal('domicilio')" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 class="text-xl font-bold mb-4">Entrega a Domicilio</h2>
+            <p class="text-sm text-gray-600 mb-4">Por favor, confirma tu dirección para la entrega:</p>
+            <form>
+                <label for="direccion" class="block text-sm font-medium">Dirección:</label>
+                <input type="text" id="direccion" class="w-full border rounded px-3 py-2 mb-4" placeholder="Ingrese su dirección">
+                <label for="referencia" class="block text-sm font-medium">Referencia:</label>
+                <input type="text" id="referencia" class="w-full border rounded px-3 py-2 mb-4" placeholder="Ingrese una referencia (opcional)">
+                <div class="mt-4 bg-yellow-100 text-yellow-800 p-3 rounded-md">
+                    <p class="text-sm font-semibold">¿Tus datos personales están actualizados?</p>
+                    <a href="Perfil.php" class="text-blue-500 hover:underline text-sm">Valida tus datos personales aquí</a>
+                </div>
+                <button type="button" onclick="cerrarModal('domicilio')" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded mt-4">Confirmar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para Recojo en Tienda -->
+    <div id="modal-tienda" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg w-96 p-6 relative">
+            <button onclick="cerrarModal('tienda')" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 class="text-xl font-bold mb-4">Recojo en Tienda</h2>
+            <p class="text-sm text-gray-600 mb-4">Por favor, selecciona la tienda donde deseas recoger tu pedido:</p>
+            <form>
+                <label for="tienda" class="block text-sm font-medium">Seleccionar tienda:</label>
+                <select id="tienda" class="w-full border rounded px-3 py-2 mb-4">
+                    <option value="">Seleccione una tienda</option>
+                    <option value="tienda1">Tienda 1 - Lima Centro</option>
+                    <option value="tienda2">Tienda 2 - Miraflores</option>
+                    <option value="tienda3">Tienda 3 - San Isidro</option>
+                </select>
+                <div class="mt-4 bg-yellow-100 text-yellow-800 p-3 rounded-md">
+                    <p class="text-sm font-semibold">¿Tus datos personales están actualizados?</p>
+                    <a href="Perfil.php" class="text-blue-500 hover:underline text-sm">Valida tus datos personales aquí</a>
+                </div>
+                <button type="button" onclick="cerrarModal('tienda')" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded mt-4">Confirmar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Mostrar modal
+        document.querySelectorAll('.envio-opcion').forEach(opcion => {
+            opcion.addEventListener('click', function() {
+                const tipo = this.getAttribute('data-envio');
+                mostrarModal(tipo);
+            });
+        });
+
+        function mostrarModal(tipo) {
+            const modalId = `modal-${tipo}`;
+            document.getElementById(modalId).classList.remove('hidden');
+        }
+
+        // Cerrar modal
+        function cerrarModal(tipo) {
+            const modalId = `modal-${tipo}`;
+            document.getElementById(modalId).classList.add('hidden');
+        }
+    </script>
 </body>
 
 </html>

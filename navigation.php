@@ -67,7 +67,7 @@ $fotoPerfil = isset($_SESSION['fotoPerfil']) ? $_SESSION['fotoPerfil'] : './img/
                             <!-- Dropdown -->
                             <div id="userDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg overflow-hidden z-10">
                                 <a href="Perfil.php" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Perfil</a>
-                                <a href="Pedidos.php" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Pedidos</a>
+                                <a href="verPedido.php" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Pedidos</a>
                                 <div class="border-t border-gray-200"></div>
                                 <a href="salir.php" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Cerrar sesión</a>
                             </div>
