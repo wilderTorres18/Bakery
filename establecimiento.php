@@ -53,7 +53,7 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
     <?php include 'navigation.php'; ?>
 
     <!-- Establecimientos -->
-    <section class="py-16 bg-gray-100">
+    <section class="bg-gray-100">
         <div class="banner-section">
             <div class="banner-overlay"></div>
             <div class="banner-content">
@@ -89,7 +89,6 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
             </div>
         </div>
     </section>
-
     <!-- Whatsapp -->
     <?php include 'whatsapp.php'; ?>
 

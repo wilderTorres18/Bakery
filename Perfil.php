@@ -12,7 +12,6 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
 
 // Obtener el dni_cl del cliente logueado
 $dni_cl = $_SESSION['cl']['dnicl'];
-
 ?>
 
 <!DOCTYPE html>
@@ -52,38 +51,37 @@ $dni_cl = $_SESSION['cl']['dnicl'];
                     <div>
                         <label for="nomcl" class="block text-sm font-medium text-gray-700">Nombre</label>
                         <input type="text" id="nomcl" name="nomcl" value="<?php echo $_SESSION['cl']['nomcl']; ?>"
-                            class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-yellow-500 focus:border-yellow-500">
+                            class="mt-1 block w-full sm:w-80 p-2 border border-gray-300 rounded-md focus:ring-yellow-500 focus:border-yellow-500">
                     </div>
                     <!-- Apellido Paterno -->
                     <div>
                         <label for="ape1" class="block text-sm font-medium text-gray-700">Apellido Paterno</label>
                         <input type="text" id="ape1" name="ape1" value="<?php echo $_SESSION['cl']['ape1']; ?>"
-                            class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-yellow-500 focus:border-yellow-500">
+                            class="mt-1 block w-full sm:w-80 p-2 border border-gray-300 rounded-md focus:ring-yellow-500 focus:border-yellow-500">
                     </div>
                     <!-- Apellido Materno -->
                     <div>
                         <label for="ape2" class="block text-sm font-medium text-gray-700">Apellido Materno</label>
                         <input type="text" id="ape2" name="ape2" value="<?php echo $_SESSION['cl']['ape2']; ?>"
-                            class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-yellow-500 focus:border-yellow-500">
+                            class="mt-1 block w-full sm:w-80 p-2 border border-gray-300 rounded-md focus:ring-yellow-500 focus:border-yellow-500">
                     </div>
                     <!-- DNI -->
                     <div>
                         <label for="dnicl" class="block text-sm font-medium text-gray-700">DNI</label>
                         <input type="text" id="dnicl" name="dnicl" value="<?php echo $_SESSION['cl']['dnicl']; ?>"
-                            class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-yellow-500 focus:border-yellow-500" readonly>
+                            class="mt-1 block w-full sm:w-80 p-2 border border-gray-300 rounded-md focus:ring-yellow-500 focus:border-yellow-500" readonly>
                     </div>
-
                 </div>
             </div>
 
             <!-- Tarjeta de Dirección -->
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h2 class="text-xl font-semibold text-gray-800 mb-4">Dirección</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 gap-4">
                     <div>
                         <label for="dircl" class="block text-sm font-medium text-gray-700">Dirección</label>
                         <input type="text" id="dircl" name="dircl" value="<?php echo $_SESSION['cl']['dircl']; ?>"
-                            class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-yellow-500 focus:border-yellow-500">
+                            class="mt-1 block w-full sm:w-80 p-2 border border-gray-300 rounded-md focus:ring-yellow-500 focus:border-yellow-500">
                     </div>
                 </div>
             </div>
@@ -93,7 +91,7 @@ $dni_cl = $_SESSION['cl']['dnicl'];
                 <h2 class="text-xl font-semibold text-gray-800 mb-4">Descripción</h2>
                 <div class="grid grid-cols-1 gap-4">
                     <textarea id="descl" name="descl" rows="4"
-                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-yellow-500 focus:border-yellow-500"><?php echo $_SESSION['cl']['descl']; ?></textarea>
+                        class="mt-1 block w-full sm:w-80 p-2 border border-gray-300 rounded-md focus:ring-yellow-500 focus:border-yellow-500"><?php echo $_SESSION['cl']['descl']; ?></textarea>
                 </div>
             </div>
 
@@ -107,8 +105,6 @@ $dni_cl = $_SESSION['cl']['dnicl'];
         </form>
     </div>
 
-
-
     <!-- Whatsapp -->
     <?php include 'whatsapp.php'; ?>
 
@@ -119,6 +115,29 @@ $dni_cl = $_SESSION['cl']['dnicl'];
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNddZrEvvOCcfjOgiWtLNwSEbCrsczx3phrrYsDAyzpCfwfjJrEMyuwYvJtbt3I" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.min.js" integrity="sha384-pP5pYqQn9l3Bbo1Mj4Ad5Nq1dhevhSiwAHuQPs6abQh4Jt5e1Lx6U5G78ycBocsr" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
+
+<script>
+    $(document).ready(function() {
+        if (<?php echo isset($_SESSION['status']) ? json_encode($_SESSION['status']) : 'null'; ?> === 'success') {
+            Swal.fire({
+                title: '¡Éxito!',
+                text: 'Tus datos han sido actualizados correctamente.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+            <?php unset($_SESSION['status']); ?> // Limpiar el estado después de mostrarlo
+        } else if (<?php echo isset($_SESSION['status']) ? json_encode($_SESSION['status']) : 'null'; ?> === 'error') {
+            Swal.fire({
+                title: 'Error',
+                text: 'Hubo un problema al actualizar tus datos. Por favor, inténtalo de nuevo.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            <?php unset($_SESSION['status']); ?> // Limpiar el estado después de mostrarlo
+        }
+    });
+</script>

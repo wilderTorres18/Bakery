@@ -2,9 +2,6 @@
 <?php
 $fec = date('Y-m-d');
 
-/* echo "<pre>";
-var_dump($_SESSION);
-echo "</pre>"; */
 
 $cli = $_SESSION['cl']['nom'];
 $ape = $_SESSION['cl']['ape'];

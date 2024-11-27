@@ -118,7 +118,8 @@ if (isset($_POST['actualizar'])) {
     <!-- Navigation -->
     <?php include 'navigation.php'; ?>
 
-    <div class="main-content">
+    <!-- Ajuste de margen superior para la barra de navegación -->
+    <div class="main-content mt-8"> <!-- Se añadió la clase mt-8 para el margen superior -->
         <div class="cart-container">
             <!-- Bloque de selección de Método de Envío -->
             <div class="mt-8 p-6 bg-white shadow-md rounded-md">
@@ -229,6 +230,9 @@ if (isset($_POST['actualizar'])) {
         </div>
     </div>
 
+    <!--Footer-->
+    <?php include 'footer.php'; ?>
+
     <!-- Scripts -->
     <script>
         // Mostrar modal
@@ -251,5 +255,6 @@ if (isset($_POST['actualizar'])) {
         }
     </script>
 </body>
+
 
 </html>
