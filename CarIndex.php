@@ -24,8 +24,8 @@ if (isset($_POST['actualizar'])) {
         }
     }
 }
-?>
 
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -193,7 +193,13 @@ if (isset($_POST['actualizar'])) {
             <p class="text-sm text-gray-600 mb-4">Por favor, confirma tu dirección para la entrega:</p>
             <form>
                 <label for="direccion" class="block text-sm font-medium">Dirección:</label>
-                <input type="text" id="direccion" class="w-full border rounded px-3 py-2 mb-4" placeholder="Ingrese su dirección">
+                <input
+                    type="text"
+                    id="direccion"
+                    name="direccion"
+                    class="w-full border rounded px-3 py-2 mb-4"
+                    placeholder="Ingrese su dirección"
+                    value="<?php echo isset($_SESSION['cl']['dircl']) ? htmlspecialchars($_SESSION['cl']['dircl'], ENT_QUOTES, 'UTF-8') : ''; ?>">
                 <label for="referencia" class="block text-sm font-medium">Referencia:</label>
                 <input type="text" id="referencia" class="w-full border rounded px-3 py-2 mb-4" placeholder="Ingrese una referencia (opcional)">
                 <div class="mt-4 bg-yellow-100 text-yellow-800 p-3 rounded-md">
@@ -217,9 +223,8 @@ if (isset($_POST['actualizar'])) {
                 <label for="tienda" class="block text-sm font-medium">Seleccionar tienda:</label>
                 <select id="tienda" class="w-full border rounded px-3 py-2 mb-4">
                     <option value="">Seleccione una tienda</option>
-                    <option value="tienda1">Tienda 1 - Lima Centro</option>
-                    <option value="tienda2">Tienda 2 - Miraflores</option>
-                    <option value="tienda3">Tienda 3 - San Isidro</option>
+                    <option value="tienda1">Calle Vernal</option>
+                    <option value="tienda2">Calle Victor Raul</option>
                 </select>
                 <div class="mt-4 bg-yellow-100 text-yellow-800 p-3 rounded-md">
                     <p class="text-sm font-semibold">¿Tus datos personales están actualizados?</p>

@@ -53,13 +53,18 @@ try {
     // Procesar el pedido
     $arreglo = $_SESSION['carrito'];
     $cl = $_SESSION['cl'];
+    var_dump($arreglo);
 
     for ($i = 0; $i < count($arreglo); $i++) {
-        $insertPedido = "INSERT INTO pedidos (cod_ped, Fec_ped, hora_ped, can_ped, dir_ped, des_ped, cod_pro, dni_cl, est_ped) VALUES (
+        $total = $arreglo[$i]['Cantidad'] * $arreglo[$i]['Precio'];
+
+        $insertPedido = "INSERT INTO pedidos (cod_ped, Fec_ped, hora_ped, can_ped, precio_unit,total,dir_ped, des_ped, cod_pro, dni_cl, est_ped) VALUES (
             '$cod_ped',
             '$fec',
             '$hora_ped',
             '" . $arreglo[$i]['Cantidad'] . "',
+            '" . $arreglo[$i]['Precio'] . "',
+            '$total',
             '" . $cl['dircl'] . "',
             '" . $cl['descl'] . "',
             '" . $arreglo[$i]['Id'] . "',
