@@ -51,14 +51,28 @@ try {
     $hora_ped = $h . ":" . $min . ":" . $s;
 
     // Procesar el pedido
+    $envio = $_SESSION['envio'];
     $arreglo = $_SESSION['carrito'];
     $cl = $_SESSION['cl'];
-    var_dump($arreglo);
+
+    // Asegúrate de que los valores de $envio que son NULL no se pasen tal cual en la consulta
+    $referencia = isset($envio['referencia']) ? "'" . mysqli_real_escape_string($conn, $envio['referencia']) . "'" : "NULL";
+    $direccion = isset($envio['direccion']) ? "'" . mysqli_real_escape_string($conn, $envio['direccion']) . "'" : "NULL";
+    $fecha_recojo = isset($envio['fecha_recojo']) ? "'" . mysqli_real_escape_string($conn, $envio['fecha_recojo']) . "'" : "NULL";
+    $hora_recojo = isset($envio['hora_recojo']) ? "'" . mysqli_real_escape_string($conn, $envio['hora_recojo']) . "'" : "NULL";
+    $metodo = isset($envio['metodo']) ? "'" . mysqli_real_escape_string($conn, $envio['metodo']) . "'" : "NULL";
+
+
+    // Verificar si 'fecha_act' tiene un valor, si no, asignar NULL
+    $fecha_act = !empty($fec) ? "'" . mysqli_real_escape_string($conn, $fec) . "'" : "NULL";
+    $hora_act = !empty($hora_ped) ? "'" . mysqli_real_escape_string($conn, $hora_ped) . "'" : "NULL";
 
     for ($i = 0; $i < count($arreglo); $i++) {
         $total = $arreglo[$i]['Cantidad'] * $arreglo[$i]['Precio'];
 
-        $insertPedido = "INSERT INTO pedidos (cod_ped, Fec_ped, hora_ped, can_ped, precio_unit,total,dir_ped, des_ped, cod_pro, dni_cl, est_ped) VALUES (
+        // Construir la consulta SQL
+        $insertPedido = "INSERT INTO pedidos (cod_ped, Fec_ped, hora_ped, can_ped, precio_unit, total, dir_ped, des_ped, cod_pro, dni_cl, est_ped, referencia_opc, fecha_act, hora_act, fecha_recojo, hora_recojo, tipo_envio) 
+        VALUES (
             '$cod_ped',
             '$fec',
             '$hora_ped',
@@ -69,13 +83,21 @@ try {
             '" . $cl['descl'] . "',
             '" . $arreglo[$i]['Id'] . "',
             '" . $cl['dnicl'] . "',
-            '1'
+            '1',
+            $referencia,
+            $fecha_act,
+            $hora_act,
+            $fecha_recojo,
+            $hora_recojo,
+            $metodo
         )";
 
+        // Ejecutar la consulta SQL
         if (!mysqli_query($conn, $insertPedido)) {
             throw new Exception("Error en la inserción del pedido: " . mysqli_error($conn));
         }
 
+        // Actualizar el stock de los productos
         $ids = $arreglo[$i]['Id'];
         $can = $arreglo[$i]['Cantidad'];
 
@@ -88,7 +110,10 @@ try {
         }
     }
 
+    // Limpiar el carrito después de la inserción
     unset($_SESSION['carrito']);
+    unset($_SESSION['envio']);
+
 
     // Modal con QR y opción de enviar captura a WhatsApp
     echo "<script>
@@ -146,12 +171,12 @@ echo "</body></html>";
 ?>
 
 <!-- Modal de QR -->
-<div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="qrModalLabel" aria-hidden="true">
+<div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="qrModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="qrModalLabel">Paga con el código QR</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" aria-label="Close" onclick="window.location.href='/tienda.php';"></button>
             </div>
             <div class="modal-body text-center">
                 <!-- Aquí va la imagen del QR -->
@@ -166,5 +191,13 @@ echo "</body></html>";
     </div>
 </div>
 
+
 <!-- Incluir Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    var myModal = new bootstrap.Modal(document.getElementById('qrModal'), {
+        backdrop: 'static',
+        keyboard: false
+    });
+    myModal.show();
+</script>

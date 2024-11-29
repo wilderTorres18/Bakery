@@ -1,6 +1,5 @@
 <?php
 session_start();
-require(__DIR__ . '/basededatos/connectionbd.php');
 
 // Eliminar producto del carrito
 if (isset($_POST['eliminar'])) {
@@ -25,6 +24,30 @@ if (isset($_POST['actualizar'])) {
     }
 }
 
+if (isset($_POST['confirmar_envio'])) {
+    $_SESSION['envio'] = [
+        'metodo' => $_POST['metodo_envio'],
+        'direccion' => $_POST['direccion'] ?? null,
+        'referencia' => $_POST['referencia'] ?? null,
+        'fecha_recojo' => $_POST['fecha_recojo'] ?? null,
+        'hora_recojo' => $_POST['hora_recojo'] ?? null,
+    ];
+    // Redirigir o procesar el siguiente paso
+    header("Location: CarIndex.php"); // Redirigir al mismo lugar para mostrar el cambio
+    exit;
+}
+
+
+if (isset($_POST['eliminar_envio']) && $_POST['eliminar_envio'] === 'true') {
+    unset($_SESSION['envio']);
+    header("Location: CarIndex.php"); // Redirigir para actualizar la página
+    exit;
+}
+
+/* echo "<pre>";
+var_dump($_SESSION['envio']);
+echo "</pre>";
+ */
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -118,30 +141,11 @@ if (isset($_POST['actualizar'])) {
     <!-- Navigation -->
     <?php include 'navigation.php'; ?>
 
-    <!-- Ajuste de margen superior para la barra de navegación -->
-    <div class="main-content mt-8"> <!-- Se añadió la clase mt-8 para el margen superior -->
-        <div class="cart-container">
-            <!-- Bloque de selección de Método de Envío -->
-            <div class="mt-8 p-6 bg-white shadow-md rounded-md">
-                <h2 class="text-lg font-bold mb-4">¿Cómo quieres recibir tus productos?</h2>
-                <div class="grid grid-cols-2 gap-4">
-                    <!-- Opción: Entrega a domicilio -->
-                    <div class="flex flex-col items-center p-4 border rounded-md cursor-pointer hover:bg-yellow-100 envio-opcion" data-envio="domicilio">
-                        <i class="fas fa-truck text-3xl text-yellow-500 mb-2"></i>
-                        <span class="font-medium">Entrega a domicilio</span>
-                        <input type="radio" name="metodo_envio" value="domicilio" class="hidden">
-                    </div>
-                    <!-- Opción: Recojo en tienda -->
-                    <div class="flex flex-col items-center p-4 border rounded-md cursor-pointer hover:bg-yellow-100 envio-opcion" data-envio="tienda">
-                        <i class="fas fa-store text-3xl text-yellow-500 mb-2"></i>
-                        <span class="font-medium">Recojo en tienda</span>
-                        <input type="radio" name="metodo_envio" value="tienda" class="hidden">
-                    </div>
-                </div>
-            </div>
-
+    <div class="main-content mt-8 flex flex-col items-center">
+        <!-- Carrito de Compras -->
+        <div class="cart-container w-full max-w-4xl px-4 py-6 bg-white shadow-md rounded-md mb-8">
             <div class="cart-details">
-                <h2 class="text-2xl font-bold mb-4">Carrito de Compras</h2>
+                <h2 class="text-2xl font-bold mb-4 text-center">Carrito de Compras</h2>
                 <form action="CarIndex.php" method="post">
                     <?php
                     $total = 0;
@@ -150,14 +154,16 @@ if (isset($_POST['actualizar'])) {
                             $subtotal = $item['Precio'] * $item['Cantidad'];
                             $total += $subtotal;
                     ?>
-                            <div class="cart-item">
-                                <img src="../basededatos/<?php echo $item['Imagen']; ?>" alt="<?php echo $item['Nombre']; ?>">
-                                <div>
-                                    <p class="text-lg font-semibold"><?php echo $item['Nombre']; ?></p>
-                                    <p class="text-sm text-gray-500">S/ <?php echo number_format($item['Precio'], 2); ?></p>
+                            <div class="cart-item flex justify-between items-center py-4 border-b border-gray-300">
+                                <div class="flex items-center">
+                                    <img src="../basededatos/<?php echo $item['Imagen']; ?>" alt="<?php echo $item['Nombre']; ?>" class="w-16 h-16 mr-4">
+                                    <div>
+                                        <p class="text-lg font-semibold"><?php echo $item['Nombre']; ?></p>
+                                        <p class="text-sm text-gray-500">S/ <?php echo number_format($item['Precio'], 2); ?></p>
+                                    </div>
                                 </div>
                                 <div>
-                                    <input type="number" name="cantidad[<?php echo $item['Id']; ?>]" value="<?php echo $item['Cantidad']; ?>" class="w-12 text-center border rounded">
+                                    <input type="number" name="cantidad[<?php echo $item['Id']; ?>]" value="<?php echo $item['Cantidad']; ?>" class="w-12 text-center border rounded-md">
                                 </div>
                                 <p class="text-lg font-semibold">S/ <?php echo number_format($subtotal, 2); ?></p>
                                 <button type="submit" name="eliminar" value="<?php echo $item['Id']; ?>" class="text-red-600 hover:text-red-800"><i class="fas fa-trash-alt"></i></button>
@@ -170,7 +176,8 @@ if (isset($_POST['actualizar'])) {
                     ?>
                     <a href="../index.php" class="text-blue-500 hover:underline mt-4 block">← Seguir comprando</a>
             </div>
-            <div class="cart-summary">
+
+            <div class="cart-summary mt-6">
                 <h3 class="text-xl font-bold">Resumen del pedido</h3>
                 <div class="mt-4">
                     <p>Items: <?php echo isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0; ?></p>
@@ -181,8 +188,31 @@ if (isset($_POST['actualizar'])) {
             </div>
             </form>
         </div>
+
+        <!-- Carta de Envío de Pedidos (centrada en la parte inferior) -->
+        <div class="w-full max-w-4xl px-4 py-6 bg-white shadow-md rounded-md mt-8 mb-4">
+            <h2 class="text-lg font-bold mb-4 text-center">¿Cómo quieres recibir tus productos?</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="flex flex-col items-center p-6 border rounded-md cursor-pointer hover:bg-yellow-100 envio-opcion" data-envio="domicilio">
+                    <i class="fas fa-truck text-3xl text-yellow-500 mb-2"></i>
+                    <span class="font-medium">Entrega a domicilio</span>
+                    <input type="radio" name="metodo_envio" value="domicilio" class="hidden">
+                </div>
+                <div class="flex flex-col items-center p-6 border rounded-md cursor-pointer hover:bg-yellow-100 envio-opcion" data-envio="tienda">
+                    <i class="fas fa-store text-3xl text-yellow-500 mb-2"></i>
+                    <span class="font-medium">Recojo en tienda</span>
+                    <input type="radio" name="metodo_envio" value="tienda" class="hidden">
+                </div>
+            </div>
+        </div>
     </div>
 
+
+    <!-- Whatsapp -->
+    <?php include 'whatsapp.php'; ?>
+
+    <!--Footer-->
+    <?php include 'footer.php'; ?>
     <!-- Modal para Entrega a Domicilio -->
     <div id="modal-domicilio" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center hidden z-50">
         <div class="bg-white rounded-lg w-96 p-6 relative">
@@ -190,23 +220,20 @@ if (isset($_POST['actualizar'])) {
                 <i class="fas fa-times"></i>
             </button>
             <h2 class="text-xl font-bold mb-4">Entrega a Domicilio</h2>
-            <p class="text-sm text-gray-600 mb-4">Por favor, confirma tu dirección para la entrega:</p>
-            <form>
+            <form action="CarIndex.php" method="post">
+                <input type="hidden" name="metodo_envio" value="domicilio">
                 <label for="direccion" class="block text-sm font-medium">Dirección:</label>
-                <input
-                    type="text"
-                    id="direccion"
-                    name="direccion"
-                    class="w-full border rounded px-3 py-2 mb-4"
-                    placeholder="Ingrese su dirección"
-                    value="<?php echo isset($_SESSION['cl']['dircl']) ? htmlspecialchars($_SESSION['cl']['dircl'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                <input type="text" id="direccion" name="direccion" class="w-full border rounded px-3 py-2 mb-4" placeholder="Ingrese su dirección" required>
+
                 <label for="referencia" class="block text-sm font-medium">Referencia:</label>
-                <input type="text" id="referencia" class="w-full border rounded px-3 py-2 mb-4" placeholder="Ingrese una referencia (opcional)">
+                <input type="text" id="referencia" name="referencia" class="w-full border rounded px-3 py-2 mb-4" placeholder="Ingrese una referencia (opcional)">
+
                 <div class="mt-4 bg-yellow-100 text-yellow-800 p-3 rounded-md">
                     <p class="text-sm font-semibold">¿Tus datos personales están actualizados?</p>
                     <a href="Perfil.php" class="text-blue-500 hover:underline text-sm">Valida tus datos personales aquí</a>
                 </div>
-                <button type="button" onclick="cerrarModal('domicilio')" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded mt-4">Confirmar</button>
+                <button type="submit" name="confirmar_envio" class="mt-4 py-2 px-4 bg-green-500 text-white rounded">Confirmar envio</button>
+                <button type="button" onclick="eliminarMetodoEnvio()" class="mt-4 py-2 px-4 bg-red-500 text-white rounded">Eliminar Método de Envío</button>
             </form>
         </div>
     </div>
@@ -218,48 +245,193 @@ if (isset($_POST['actualizar'])) {
                 <i class="fas fa-times"></i>
             </button>
             <h2 class="text-xl font-bold mb-4">Recojo en Tienda</h2>
-            <p class="text-sm text-gray-600 mb-4">Por favor, selecciona la tienda donde deseas recoger tu pedido:</p>
-            <form>
-                <label for="tienda" class="block text-sm font-medium">Seleccionar tienda:</label>
-                <select id="tienda" class="w-full border rounded px-3 py-2 mb-4">
-                    <option value="">Seleccione una tienda</option>
-                    <option value="tienda1">Calle Vernal</option>
-                    <option value="tienda2">Calle Victor Raul</option>
-                </select>
+            <form action="CarIndex.php" method="post">
+                <input type="hidden" name="metodo_envio" value="tienda">
+                <label for="fecha-recojo" class="block text-sm font-medium">Fecha de Recojo:</label>
+                <input type="date" id="fecha-recojo" name="fecha_recojo" class="w-full border rounded px-3 py-2 mb-4" required>
+
+                <label for="hora-recojo" class="block text-sm font-medium">Hora de Recojo:</label>
+                <input type="time" id="hora-recojo" name="hora_recojo" class="w-full border rounded px-3 py-2 mb-4" required>
+
                 <div class="mt-4 bg-yellow-100 text-yellow-800 p-3 rounded-md">
                     <p class="text-sm font-semibold">¿Tus datos personales están actualizados?</p>
                     <a href="Perfil.php" class="text-blue-500 hover:underline text-sm">Valida tus datos personales aquí</a>
                 </div>
-                <button type="button" onclick="cerrarModal('tienda')" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded mt-4">Confirmar</button>
+                <button type="submit" name="confirmar_envio" class="mt-4 py-2 px-4 bg-green-500 text-white rounded">Confirmar recojo</button>
+                <button type="button" onclick="eliminarMetodoEnvio()" class="mt-4 py-2 px-4 bg-red-500 text-white rounded">Eliminar Método de Envío</button>
             </form>
         </div>
     </div>
 
-    <!--Footer-->
-    <?php include 'footer.php'; ?>
 
-    <!-- Scripts -->
+
     <script>
-        // Mostrar modal
-        document.querySelectorAll('.envio-opcion').forEach(opcion => {
-            opcion.addEventListener('click', function() {
-                const tipo = this.getAttribute('data-envio');
-                mostrarModal(tipo);
+        document.addEventListener('DOMContentLoaded', function() {
+            const envioDomicilio = document.querySelector('[data-envio="domicilio"]');
+            const envioTienda = document.querySelector('[data-envio="tienda"]');
+            const btnPagar = document.querySelector('[href="../compras/compras.php"]'); // Enlace "Pagar"
+            const cantidades = document.querySelectorAll('input[type="number"]'); // Campos de cantidad
+
+            // Función para cerrar el modal
+            function cerrarModal(tipo) {
+                const modal = document.getElementById(`modal-${tipo}`);
+                if (modal) {
+                    modal.classList.add('hidden'); // Ocultar el modal
+                    console.log(`Modal ${tipo} cerrado`);
+                } else {
+                    console.log(`Modal ${tipo} no encontrado para cerrar`);
+                }
+            }
+
+            // Función para abrir el modal correspondiente
+            function abrirModal(tipo) {
+                const modal = document.getElementById(`modal-${tipo}`);
+                if (modal) {
+                    modal.classList.remove('hidden');
+                    console.log(`Modal ${tipo} abierto`);
+
+                    // Mostrar los datos guardados en la sesión
+                    if (tipo === 'domicilio') {
+                        const fechaDomicilio = <?php echo json_encode($_SESSION['envio']['fecha_recojo'] ?? ''); ?>;
+                        const horaDomicilio = <?php echo json_encode($_SESSION['envio']['hora_recojo'] ?? ''); ?>;
+                        const direccionDomicilio = <?php echo json_encode($_SESSION['envio']['direccion'] ?? ''); ?>;
+                        const referenciaDomicilio = <?php echo json_encode($_SESSION['envio']['referencia'] ?? ''); ?>;
+
+                        if (fechaDomicilio) document.getElementById('fecha-recojo').value = fechaDomicilio;
+                        if (horaDomicilio) document.getElementById('hora-recojo').value = horaDomicilio;
+                        if (direccionDomicilio) document.getElementById('direccion').value = direccionDomicilio;
+                        if (referenciaDomicilio) document.getElementById('referencia').value = referenciaDomicilio;
+                    }
+
+                    if (tipo === 'tienda') {
+                        const fechaTienda = <?php echo json_encode($_SESSION['envio']['fecha_recojo'] ?? ''); ?>;
+                        const horaTienda = <?php echo json_encode($_SESSION['envio']['hora_recojo'] ?? ''); ?>;
+
+                        if (fechaTienda) document.getElementById('fecha-recojo').value = fechaTienda;
+                        if (horaTienda) document.getElementById('hora-recojo').value = horaTienda;
+                    }
+                } else {
+                    console.log(`Modal ${tipo} no encontrado para abrir`);
+                }
+            }
+
+            // Verificar si ya se ha seleccionado un método de envío y actualizar la interfaz
+            const metodoEnvio = <?php echo isset($_SESSION['envio']) ? json_encode($_SESSION['envio']['metodo']) : 'null'; ?>;
+            console.log('Método de envío seleccionado:', metodoEnvio);
+
+            if (metodoEnvio === 'domicilio') {
+                envioTienda.classList.add('pointer-events-none'); // Deshabilitar el botón de Recojo en Tienda
+                envioTienda.classList.add('bg-gray-300'); // Cambiar el color del botón
+                abrirModal('domicilio'); // Abrir modal de domicilio si ya se seleccionó
+            } else if (metodoEnvio === 'tienda') {
+                envioDomicilio.classList.add('pointer-events-none'); // Deshabilitar el botón de Entrega a Domicilio
+                envioDomicilio.classList.add('bg-gray-300'); // Cambiar el color del botón
+                abrirModal('tienda'); // Abrir modal de tienda si ya se seleccionó
+            }
+
+            // Asignar eventos para abrir los modales
+            envioDomicilio.addEventListener('click', function() {
+                console.log('Intentando abrir el modal de Domicilio');
+                if (!envioDomicilio.classList.contains('pointer-events-none')) {
+                    abrirModal('domicilio');
+                }
+            });
+
+            envioTienda.addEventListener('click', function() {
+                console.log('Intentando abrir el modal de Tienda');
+                if (!envioTienda.classList.contains('pointer-events-none')) {
+                    abrirModal('tienda');
+                }
+            });
+
+            // Asignar evento para cerrar el modal usando addEventListener
+            const cerrarTienda = document.querySelector('[onclick="cerrarModal(\'tienda\')"]');
+            const cerrarDomicilio = document.querySelector('[onclick="cerrarModal(\'domicilio\')"]');
+
+            if (cerrarTienda) {
+                cerrarTienda.addEventListener('click', function() {
+                    cerrarModal('tienda');
+                });
+            }
+
+            if (cerrarDomicilio) {
+                cerrarDomicilio.addEventListener('click', function() {
+                    cerrarModal('domicilio');
+                });
+            }
+
+            // Función para eliminar el método de envío
+            function eliminarMetodoEnvio() {
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = 'CarIndex.php';
+
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'eliminar_envio';
+                input.value = 'true';
+
+                form.appendChild(input);
+                document.body.appendChild(form);
+                form.submit();
+            }
+
+            // Validar si se seleccionó un método de envío para habilitar el enlace "Pagar"
+            function validarMetodoEnvio() {
+                if (metodoEnvio !== null) {
+                    btnPagar.classList.remove('pointer-events-none');
+                    btnPagar.classList.remove('bg-gray-300');
+                    btnPagar.classList.add('bg-green-500'); // Cambiar a color habilitado
+                    btnPagar.href = '../compras/compras.php'; // Habilitar enlace
+                } else {
+                    btnPagar.classList.add('pointer-events-none');
+                    btnPagar.classList.add('bg-gray-300');
+                    btnPagar.classList.remove('bg-green-500'); // Asegurarse de que no esté verde
+                    btnPagar.href = '#'; // Deshabilitar enlace
+                }
+            }
+
+            // Llamamos a la validación inicial
+            validarMetodoEnvio();
+
+            // Revalidar el enlace de pagar cada vez que se cambie el método de envío
+            const metodoEnvioElements = document.querySelectorAll('[data-envio]');
+            metodoEnvioElements.forEach(function(element) {
+                element.addEventListener('click', function() {
+                    // Verificar que el valor de metodoEnvio cambió
+                    validarMetodoEnvio();
+                });
+            });
+
+            // Manejar el click en el enlace "Pagar"
+            btnPagar.addEventListener('click', function(event) {
+                if (metodoEnvio === null) {
+                    // Evitar que el enlace funcione si no se ha seleccionado un método de envío
+                    event.preventDefault();
+                    // Mostrar SweetAlert si no se ha seleccionado un método de envío
+                    Swal.fire({
+                        icon: 'warning',
+                        title: '¡Atención!',
+                        text: 'Debes seleccionar un método de envío antes de proceder al pago.',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+            });
+
+            // Validación para evitar valores negativos en las cantidades
+            cantidades.forEach(function(input) {
+                input.addEventListener('input', function() {
+                    if (parseInt(input.value) < 0) {
+                        input.value = 0; // Si es negativo, lo dejamos en 0
+                        alert('La cantidad no puede ser negativa');
+                    }
+                });
             });
         });
-
-        function mostrarModal(tipo) {
-            const modalId = `modal-${tipo}`;
-            document.getElementById(modalId).classList.remove('hidden');
-        }
-
-        // Cerrar modal
-        function cerrarModal(tipo) {
-            const modalId = `modal-${tipo}`;
-            document.getElementById(modalId).classList.add('hidden');
-        }
     </script>
-</body>
 
+
+
+</body>
 
 </html>

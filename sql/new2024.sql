@@ -647,11 +647,11 @@ ADD COLUMN `hora_act` TIME NULL;
 
 -- Nuevos campos para la tabla pedidos 21-11-2024
 ALTER TABLE pedidos
-ADD COLUMN departamento VARCHAR(100) NULL AFTER est_ped,
-ADD COLUMN provincia VARCHAR(100) NULL AFTER departamento,
-ADD COLUMN distrito VARCHAR(100) NULL AFTER provincia,
 ADD COLUMN referencia_opc TEXT NULL AFTER distrito,
 ADD COLUMN tipo_envio BOOLEAN NULL AFTER referencia_opc,
 ADD COLUMN precio_unit DECIMAL(10,2) AFTER can_ped,
 ADD COLUMN total DECIMAL(10,2) AFTER precio_unit;
 
+ALTER TABLE pedidos
+ADD COLUMN fecha_recojo DATE,
+ADD COLUMN hora_recojo TIME;
