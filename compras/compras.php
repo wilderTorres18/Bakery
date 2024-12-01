@@ -186,7 +186,7 @@ echo "</body></html>";
                 <a href="<?php echo $whatsapp_url; ?>" class="btn btn-success" target="_blank">Enviar Captura por WhatsApp</a>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="window.location.href='/tienda.php';">Cerrar</button>
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='/verPedido.php';">Cerrar</button>
             </div>
         </div>
     </div>

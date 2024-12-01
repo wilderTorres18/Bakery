@@ -63,6 +63,11 @@ $result = $stmt->get_result();
     <div class="container mx-auto my-10 p-5 bg-white shadow-md rounded-md">
         <h1 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Mis Pedidos</h1>
 
+        <!-- Mensaje de validación de pago -->
+        <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-6">
+            <strong>Nota:</strong> El pago de tu pedido será validado a través de WhatsApp. Una vez confirmado, procederemos a preparar tu pedido y actualizar su estado. ¡Gracias por tu compra!
+        </div>
+
         <!-- Filtro por fecha -->
         <form method="get" class="mb-6">
             <div class="flex justify-center items-center space-x-4">
@@ -92,7 +97,29 @@ $result = $stmt->get_result();
                             <tr class="hover:bg-gray-100 transition duration-200">
                                 <td class="py-2 px-4 border-b text-center text-sm"><?php echo $pedido['cod_ped']; ?></td>
                                 <td class="py-2 px-4 border-b text-center text-sm"><?php echo date("d/m/Y", strtotime($pedido['Fec_ped'])); ?></td>
-                                <td class="py-2 px-4 border-b text-center text-sm"><?php echo $pedido['estado_pedido']; ?></td>
+
+                                <!-- Aquí aplicamos la clase correspondiente al estado -->
+                                <td class="py-2 px-4 border-b text-center text-sm">
+                                    <?php
+                                    switch ($pedido['estado_pedido']) {
+                                        case "Pendiente":
+                                            echo '<span class="text-yellow-600 font-semibold">PENDIENTE</span>';
+                                            break;
+                                        case "Pagado":
+                                            echo '<span class="text-blue-600 font-semibold">PAGADO</span>';
+                                            break;
+                                        case "En Proceso":
+                                            echo '<span class="text-orange-600 font-semibold">EN PROCESO</span>';
+                                            break;
+                                        case "Entregado":
+                                            echo '<span class="text-green-600 font-semibold">ENTREGADO</span>';
+                                            break;
+                                        default:
+                                            echo '<span class="text-gray-500 font-semibold">Estado Desconocido</span>';
+                                    }
+                                    ?>
+                                </td>
+
                                 <td class="py-2 px-4 border-b text-center text-sm"><?php echo "S/ " . number_format($pedido['total'], 2); ?></td>
                                 <td class="py-2 px-4 border-b text-center text-sm"><?php echo $pedido['tipo_envio']; ?></td>
                                 <td class="py-2 px-4 border-b text-center text-sm">
