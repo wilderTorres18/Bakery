@@ -10,12 +10,12 @@ $query = "
         pedidos.hora_ped AS hora_pedido,
         pedidos.can_ped AS cant, 
         pedidos.dir_ped AS dir, 
+        pedidos.precio_unit AS precio_unitario, 
         pedidos.est_ped AS estado_pedido, 
         clientes.nombre AS nom, 
         clientes.apellido_1 AS ap1, 
         clientes.apellido_2 AS ap2, 
-        catproducto.nombre AS nomproduct, 
-        (catproducto.precio * pedidos.can_ped) AS pro_precio
+        catproducto.nombre AS nomproduct
     FROM 
         pedidos
     JOIN 
@@ -44,7 +44,7 @@ while ($fila = mysqli_fetch_array($result)) {
     $ap1 = $fila['ap1'];
     $ap2 = $fila['ap2'];
     $nomproducto = $fila['nomproduct'];
-    $pro_precio = $fila['pro_precio'];
+    $precio_unitario = $fila['precio_unitario'];
 
     // Agrupar los pedidos por código de pedido y cliente
     $pedidos[$codigo_pedido][$cliente_dni][] = [
@@ -56,7 +56,7 @@ while ($fila = mysqli_fetch_array($result)) {
         'nombre' => $nom,
         'apellidos' => "$ap1 $ap2",
         'producto' => $nomproducto,
-        'precio' => $pro_precio
+        'precio_unitario' => $precio_unitario
     ];
 }
 
@@ -180,14 +180,14 @@ function renderModals($i, $cliente, $detalles)
     $total_general = 0;
 
     foreach ($detalles as $detalle) {
-        $total = $detalle['cantidad'] * $detalle['precio'];
+        $total = $detalle['cantidad'] * $detalle['precio_unitario'];
         $total_general += $total;
 
         echo "
                         <div style='display: flex; justify-content: space-between;'>
                             <span style='flex: 2; font-weight: bold;'>{$detalle['producto']}</span>
                             <span style='flex: 1; text-align: center;'>{$detalle['cantidad']}</span>
-                            <span style='flex: 2; text-align: right;'>S/ {$detalle['precio']}</span>
+                            <span style='flex: 2; text-align: right;'>S/ {$detalle['precio_unitario']}</span>
                         </div>
         ";
     }
