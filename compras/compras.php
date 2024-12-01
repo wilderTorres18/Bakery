@@ -1,5 +1,6 @@
 <?php
 session_start();
+date_default_timezone_set('America/Lima');
 require("../basededatos/connectionbd.php");
 
 echo "<!DOCTYPE html>
@@ -79,11 +80,11 @@ try {
             '" . $arreglo[$i]['Cantidad'] . "',
             '" . $arreglo[$i]['Precio'] . "',
             '$total',
-            '" . $cl['dircl'] . "',
+            $direccion,
             '" . $cl['descl'] . "',
             '" . $arreglo[$i]['Id'] . "',
             '" . $cl['dnicl'] . "',
-            '1',
+            'Pendiente',
             $referencia,
             $fecha_act,
             $hora_act,

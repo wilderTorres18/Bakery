@@ -13,9 +13,29 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
 // Obtener el dni_cl del cliente logueado
 $dni_cl = $_SESSION['cl']['dnicl'];
 
-$query = "SELECT * FROM pedidos WHERE dni_cl = ?";
+// Obtener la fecha filtrada si existe
+$fecha_filtro = isset($_GET['fecha']) ? $_GET['fecha'] : '';
+
+// Consulta para obtener los pedidos del cliente con el filtro de fecha
+$query = "SELECT 
+            cod_ped, 
+            MAX(Fec_ped) AS Fec_ped, 
+            MAX(est_ped) AS estado_pedido, 
+            SUM(total) AS total,
+            MAX(tipo_envio) AS tipo_envio  -- Agregamos el campo tipo_envio
+          FROM pedidos 
+          WHERE dni_cl = ? 
+          " . ($fecha_filtro ? "AND Fec_ped LIKE ?" : "") . "
+          GROUP BY cod_ped";
+
+
 $stmt = $conn->prepare($query);
-$stmt->bind_param("s", $dni_cl);
+if ($fecha_filtro) {
+    $fecha_filtro = "%" . $fecha_filtro . "%";  // Preparar filtro para fecha
+    $stmt->bind_param("ss", $dni_cl, $fecha_filtro);
+} else {
+    $stmt->bind_param("s", $dni_cl);
+}
 $stmt->execute();
 $result = $stmt->get_result();
 ?>
@@ -32,49 +52,60 @@ $result = $stmt->get_result();
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/629388bad9.js" crossorigin="anonymous"></script>
 
-    <!-- Custom favicon for this template-->
-    <link rel="icon" type="image/png" href="logo.png" />
-
     <title>Panadería "Los Gemelos"</title>
-
 </head>
 
 <body class="bg-gray-100">
 
-    <!--Navigation-->
+    <!-- Navigation -->
     <?php include 'navigation.php'; ?>
+
     <div class="container mx-auto my-10 p-5 bg-white shadow-md rounded-md">
-        <h1 class="text-2xl font-bold text-gray-800 mb-6">Mis Pedidos</h1>
+        <h1 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Mis Pedidos</h1>
+
+        <!-- Filtro por fecha -->
+        <form method="get" class="mb-6">
+            <div class="flex justify-center items-center space-x-4">
+                <input type="date" name="fecha" value="<?php echo htmlspecialchars($fecha_filtro); ?>" class="p-2 border rounded-md" placeholder="Filtrar por fecha">
+                <button type="submit" class="p-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600">Filtrar</button>
+                <?php if ($fecha_filtro): ?>
+                    <a href="verPedido.php" class="p-2 bg-red-500 text-white rounded-md hover:bg-red-600">Eliminar Filtro</a>
+                <?php endif; ?>
+            </div>
+        </form>
 
         <?php if ($result->num_rows > 0): ?>
-            <table class="min-w-full bg-white border-collapse border border-gray-300">
-                <thead>
-                    <tr>
-                        <th class="py-2 px-4 border-b">ID Pedido</th>
-                        <th class="py-2 px-4 border-b">Fecha</th>
-                        <th class="py-2 px-4 border-b">Estado</th>
-                        <th class="py-2 px-4 border-b">Total</th>
-                        <!-- -<th class="py-2 px-4 border-b">Acciones</th> -->
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php while ($pedido = $result->fetch_assoc()): ?>
-                        <tr>
-                            <td class="py-2 px-4 border-b text-center"><?php echo $pedido['id_ped']; ?></td>
-                            <td class="py-2 px-4 border-b text-center"><?php echo $pedido['Fec_ped']; ?></td>
-                            <td class="py-2 px-4 border-b text-center"><?php echo $pedido['est_ped']; ?></td>
-                            <td class="py-2 px-4 border-b text-center"><?php echo "S/ " . number_format($pedido['can_ped'], 2); ?></td>
-                            <!--                             <td class="py-2 px-4 border-b text-center">
-                                <a href="detalle_pedido.php?id=<?php echo $pedido['id_pedido']; ?>" class="text-blue-500 hover:underline">Ver Detalles</a>
-                            </td> -->
+            <div class="overflow-x-auto max-w-4xl mx-auto">
+                <table class="min-w-full bg-white table-auto border-collapse shadow-lg rounded-lg">
+                    <thead>
+                        <tr class="bg-yellow-500 text-white">
+                            <th class="py-2 px-4 border-b text-left text-sm">Código de Pedido</th>
+                            <th class="py-2 px-4 border-b text-left text-sm">Fecha</th>
+                            <th class="py-2 px-4 border-b text-left text-sm">Estado</th>
+                            <th class="py-2 px-4 border-b text-left text-sm">Total</th>
+                            <th class="py-2 px-4 border-b text-left text-sm">Envió</th>
+                            <th class="py-2 px-4 border-b text-left text-sm">Acciones</th>
                         </tr>
-                    <?php endwhile; ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php while ($pedido = $result->fetch_assoc()): ?>
+                            <tr class="hover:bg-gray-100 transition duration-200">
+                                <td class="py-2 px-4 border-b text-center text-sm"><?php echo $pedido['cod_ped']; ?></td>
+                                <td class="py-2 px-4 border-b text-center text-sm"><?php echo date("d/m/Y", strtotime($pedido['Fec_ped'])); ?></td>
+                                <td class="py-2 px-4 border-b text-center text-sm"><?php echo $pedido['estado_pedido']; ?></td>
+                                <td class="py-2 px-4 border-b text-center text-sm"><?php echo "S/ " . number_format($pedido['total'], 2); ?></td>
+                                <td class="py-2 px-4 border-b text-center text-sm"><?php echo $pedido['tipo_envio']; ?></td>
+                                <td class="py-2 px-4 border-b text-center text-sm">
+                                    <a href="detalle_pedido.php?cod_ped=<?php echo $pedido['cod_ped']; ?>" class="text-blue-500 hover:underline">Ver Detalles</a>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
+            </div>
         <?php else: ?>
-            <p class="text-gray-700">No tienes pedidos registrados.</p>
+            <p class="text-gray-700 text-center">No tienes pedidos registrados.</p>
         <?php endif; ?>
-
     </div>
 
     <!-- Whatsapp -->
@@ -83,10 +114,6 @@ $result = $stmt->get_result();
     <!-- Footer -->
     <?php include 'footer.php'; ?>
 
-    <!--JavaScript-->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNddZrEvvOCcfjOgiWtLNwSEbCrsczx3phrrYsDAyzpCfwfjJrEMyuwYvJtbt3I" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.min.js" integrity="sha384-pP5pYqQn9l3Bbo1Mj4Ad5Nq1dhevhSiwAHuQPs6abQh4Jt5e1Lx6U5G78ycBocsr" crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -118,7 +118,7 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
         <div class="bg-white p-6 rounded-lg shadow-lg">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-2xl font-bold">Carrito de Compras</h2>
-                <button class="text-gray-600 hover:text-gray-800" id="closeCarritoModal">&times;</button>
+                <button id="closeCarritoModal">&times;</button>
             </div>
             <div id="carritoContent">
                 <!-- Contenido del carrito aquí -->
