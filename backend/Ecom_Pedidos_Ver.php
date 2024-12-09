@@ -63,10 +63,12 @@ if ((isset($_SESSION['cl']))) { ?>
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
+                                                <th>Codigo de Pedido</th>
                                                 <th>Fecha</th>
+                                                <th>Tipo de Envió/Recojo</th>
                                                 <th>Cliente</th>
                                                 <th>Producto</th>
-                                                <th>Dirección</th>
+                                                <th>Otros Datos</th>
                                                 <th>Estado</th>
                                             </tr>
                                         </thead>

@@ -10,8 +10,12 @@ $query = "
         pedidos.hora_ped AS hora_pedido,
         pedidos.can_ped AS cant, 
         pedidos.dir_ped AS dir, 
+        pedidos.referencia_opc AS referencia, 
+        pedidos.fecha_recojo AS fecha_recojo,  
+        pedidos.hora_recojo AS hora_recojo,  
         pedidos.precio_unit AS precio_unitario, 
         pedidos.est_ped AS estado_pedido, 
+        pedidos.tipo_envio AS tipo_envio,
         clientes.nombre AS nom, 
         clientes.apellido_1 AS ap1, 
         clientes.apellido_2 AS ap2, 
@@ -39,7 +43,11 @@ while ($fila = mysqli_fetch_array($result)) {
     $hora_pedido = $fila['hora_pedido'];
     $can = $fila['cant'];
     $dir = $fila['dir'];
+    $referencia = $fila['referencia'];
+    $tipo_envio = $fila['tipo_envio'];
     $est_ped = $fila['estado_pedido'];
+    $hora_recojo = $fila['hora_recojo'];
+    $fecha_recojo = $fila['fecha_recojo'];
     $nom = $fila['nom'];
     $ap1 = $fila['ap1'];
     $ap2 = $fila['ap2'];
@@ -48,10 +56,15 @@ while ($fila = mysqli_fetch_array($result)) {
 
     // Agrupar los pedidos por código de pedido y cliente
     $pedidos[$codigo_pedido][$cliente_dni][] = [
+        'codigo_pedido' => $codigo_pedido,
         'fecha' => $fec,
+        'tipo_envio' => $tipo_envio,
         'hora' => $hora_pedido,
         'cantidad' => $can,
         'direccion' => $dir,
+        'referencia' => $referencia,
+        'hora_recojo' => $hora_recojo,
+        'fecha_recojo' => $fecha_recojo,
         'estado' => $est_ped,
         'nombre' => $nom,
         'apellidos' => "$ap1 $ap2",
@@ -70,16 +83,20 @@ foreach ($pedidos as $codigo => $clientes) {
         $codigo_pedido = isset($cliente['codigo_pedido']) ? $cliente['codigo_pedido'] : 'No definido';
 
         $estado_options = [
-            1 => "Pendiente",
-            0 => "Cancelado",
-            2 => "Pagado",
-            3 => "Entregado"
+            "Pendiente" => "Pendiente",
+            "En Proceso" => "En Proceso",
+            "Pagado" => "Pagado",
+            "Entregado" => "Entregado",
+            "Anulado" => "Anulado"
         ];
+
 
         // Aquí puedes generar la fila de la tabla
         echo "
             <tr align='center'>
+                <td>{$cliente['codigo_pedido']}</td>
                 <td>{$cliente['fecha']}</td>
+                <td>{$cliente['tipo_envio']}</td>
                 <td>
                     <button type='button' class='btn btn-primary' data-toggle='modal' data-target='#userModal$i'>
                         <i class='fas fa-user'></i> Ver Datos
@@ -92,13 +109,14 @@ foreach ($pedidos as $codigo => $clientes) {
                 </td>
                 <td>
                     <button type='button' class='btn btn-primary' data-toggle='modal' data-target='#mensajeModal$i'>
-                        <i class='fas fa-car'></i> Ver Dirección
+                        <i class='fas fa-car'></i> Envio/Recojo
                     </button>
                 </td>
                 <td>
-                    <select class='form-select estado-pedido' data-pedido-id='$i' data-cod-ped='$codigo_pedido'> 
+                    <select class='form-select estado-pedido' data-pedido-id='$i' data-cod-ped='$codigo_pedido' data-original-value='{$cliente['estado']}'> 
                         " . generateEstadoOptions($cliente['estado'], $estado_options) . "
                     </select>
+
                 </td>
             </tr>
         ";
@@ -129,6 +147,8 @@ function getEstadoStyle($estado)
             return 'background-color: green; color: white;';
         case 3:
             return 'background-color: violet; color: white;';
+        case 'Anulado':
+            return 'background-color: red; color: white;';
         default:
             return '';
     }
@@ -141,13 +161,30 @@ function renderModals($i, $cliente, $detalles)
         <div class='modal-dialog' role='document'>
             <div class='modal-content'>
                 <div class='modal-header'>
-                    <h5 class='modal-title' id='mensajeModalLabel$i'>Dirección de {$cliente['nombre']}</h5>
+                    <h5 class='modal-title' id='mensajeModalLabel$i'>Datos de recojo/envio de {$cliente['nombre']}</h5>
                     <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
                         <span aria-hidden='true'>&times;</span>
                     </button>
                 </div>
-                <div class='modal-body'>
-                    " . nl2br($cliente['direccion']) . "
+                <div class='modal-body'>";
+
+    if (!empty($cliente['fecha_recojo'])) {
+        echo "<p><strong>Fecha de recojo en Tienda:</strong> " . nl2br($cliente['fecha_recojo']) . "</p>";
+    }
+
+    if (!empty($cliente['hora_recojo'])) {
+        echo "<p><strong>Hora de recojo en Tienda:</strong> " . nl2br($cliente['hora_recojo']) . "</p>";
+    }
+
+    if (!empty($cliente['direccion'])) {
+        echo "<p><strong>Dirección:</strong> " . nl2br($cliente['direccion']) . "</p>";
+    }
+
+    if (!empty($cliente['referencia'])) {
+        echo "<p><strong>Referencia de envío a domicilio:</strong> " . nl2br($cliente['referencia']) . "</p>";
+    }
+
+    echo "
                 </div>
                 <div class='modal-footer'>
                     <button type='button' class='btn btn-secondary' data-dismiss='modal'>Cerrar</button>
@@ -156,6 +193,8 @@ function renderModals($i, $cliente, $detalles)
         </div>
     </div>
     ";
+
+
 
     // Modal Producto sin Tabla
     echo "
@@ -255,14 +294,14 @@ if (isset($_GET['cod_ped']) && isset($_GET['estado'])) {
 
             Swal.fire({
                 title: '¿Estás seguro?',
-                text: 'Vas a cambiar el estado de todos los pedidos asociados.',
+                text: 'Vas a cambiar el estado del pedido.',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Sí, cambiar',
                 cancelButtonText: 'No, cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    actualizarEstadoMasivo(codPed, nuevoEstado);
+                    actualizarEstado(codPed, nuevoEstado);
                 } else {
                     // Si se cancela, revertir la selección
                     this.value = this.getAttribute('data-original-value');
@@ -271,17 +310,28 @@ if (isset($_GET['cod_ped']) && isset($_GET['estado'])) {
         });
     });
 
-    function actualizarEstadoMasivo(codPed, nuevoEstado) {
-        // Aquí haces una petición AJAX para actualizar el estado en la base de datos
-        fetch(`actualizar_estado.php?cod_ped=${codPed}&estado=${nuevoEstado}`)
+    function actualizarEstado(codPed, nuevoEstado) {
+        fetch(`/basededatos/Ecom_actualizar_estado.php`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    cod_ped: codPed,
+                    estado: nuevoEstado
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
                     Swal.fire('¡Actualizado!', 'El estado del pedido ha sido actualizado.', 'success');
-                    location.reload(); // recargar la página para reflejar los cambios
+                    location.reload(); // Recargar la página para reflejar los cambios
                 } else {
                     Swal.fire('Error', 'No se pudo actualizar el estado.', 'error');
                 }
+            })
+            .catch(error => {
+                Swal.fire('Error', 'Hubo un problema con la actualización.', 'error');
             });
     }
 </script>

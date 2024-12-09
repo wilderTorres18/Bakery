@@ -114,6 +114,9 @@ $result = $stmt->get_result();
                                         case "Entregado":
                                             echo '<span class="text-green-600 font-semibold">ENTREGADO</span>';
                                             break;
+                                        case "Anulado":
+                                            echo '<span class="text-red-600 font-semibold">ANULADO</span>';
+                                            break;
                                         default:
                                             echo '<span class="text-gray-500 font-semibold">Estado Desconocido</span>';
                                     }
