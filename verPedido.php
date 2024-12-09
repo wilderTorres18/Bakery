@@ -157,9 +157,15 @@ $total_paginas = ceil($total_pedidos / $pedidos_por_pagina);
 
                                 <td class="py-2 px-4 border-b text-center text-sm"><?php echo "S/ " . number_format($pedido['total'], 2); ?></td>
                                 <td class="py-2 px-4 border-b text-center text-sm"><?php echo $pedido['tipo_envio']; ?></td>
+                                <!--                                 <td class="py-2 px-4 border-b text-center text-sm">
+                                    <a href="detalle_pedido.php?cod_ped=<?php echo $pedido['cod_ped']; ?>" class="text-blue-500 hover:underline">Ver Detalles</a>
+                                </td> -->
                                 <td class="py-2 px-4 border-b text-center text-sm">
                                     <a href="detalle_pedido.php?cod_ped=<?php echo $pedido['cod_ped']; ?>" class="text-blue-500 hover:underline">Ver Detalles</a>
+                                    <br>
+                                    <a href="generar_ticket.php?cod_ped=<?php echo $pedido['cod_ped']; ?>" class="text-green-500 hover:underline mt-2 block">Descargar Ticket</a>
                                 </td>
+
                             </tr>
                         <?php endwhile; ?>
                     </tbody>
