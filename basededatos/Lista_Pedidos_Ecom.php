@@ -84,12 +84,13 @@ foreach ($pedidos as $codigo => $clientes) {
 
         $estado_options = [
             "Pendiente" => "Pendiente",
-            "En Proceso" => "En Proceso",
+            "En_proceso" => "En Proceso",
             "Pagado" => "Pagado",
             "Entregado" => "Entregado",
             "Anulado" => "Anulado"
         ];
 
+        $estado_color = getEstadoColor($cliente['estado']);
 
         // Aquí puedes generar la fila de la tabla
         echo "
@@ -113,7 +114,7 @@ foreach ($pedidos as $codigo => $clientes) {
                     </button>
                 </td>
                 <td>
-                    <select class='form-select estado-pedido' data-pedido-id='$i' data-cod-ped='$codigo_pedido' data-original-value='{$cliente['estado']}'> 
+                    <select class='form-select estado-pedido' data-pedido-id='$i' data-cod-ped='$codigo_pedido' data-original-value='{$cliente['estado']}' style='color: $estado_color'>
                         " . generateEstadoOptions($cliente['estado'], $estado_options) . "
                     </select>
 
@@ -139,18 +140,35 @@ function generateEstadoOptions($estado_actual, $estado_options)
 function getEstadoStyle($estado)
 {
     switch ($estado) {
-        case 1:
-            return 'background-color: yellow;';
-        case 0:
-            return 'background-color: red; color: white;';
-        case 2:
-            return 'background-color: green; color: white;';
-        case 3:
-            return 'background-color: violet; color: white;';
-        case 'Anulado':
-            return 'background-color: red; color: white;';
+        case "Pendiente":
+            return 'background-color: #fcd34d; color: #6c4e03;'; // Amarillo
+        case "Pagado":
+            return 'background-color: #93c5fd; color: #1e3a8a;'; // Azul
+        case "En_proceso":
+            return 'background-color: #fb923c; color: #9a3412;'; // Naranja
+        case "Entregado":
+            return 'background-color: #34d399; color: #064e3b;'; // Verde
+        case "Anulado":
+            return 'background-color: #f87171; color: #7f1d1d;'; // Rojo
         default:
-            return '';
+            return 'background-color: #d1d5db; color: #4b5563;'; // Gris
+    }
+}
+function getEstadoColor($estado)
+{
+    switch ($estado) {
+        case "Pendiente":
+            return '#6c4e03'; // Amarillo oscuro
+        case "Pagado":
+            return '#1e3a8a'; // Azul oscuro
+        case "En_proceso":
+            return '#9a3412'; // Naranja oscuro
+        case "Entregado":
+            return '#064e3b'; // Verde oscuro
+        case "Anulado":
+            return '#7f1d1d'; // Rojo oscuro
+        default:
+            return '#4b5563'; // Gris oscuro
     }
 }
 

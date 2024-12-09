@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validar que el estado es uno de los valores permitidos
     $estado_options = [
         "Pendiente" => "Pendiente",
-        "En Proceso" => "En Proceso",
+        "En_proceso" => "En_proceso",
         "Pagado" => "Pagado",
         "Entregado" => "Entregado",
         "Anulado" => "Anulado"

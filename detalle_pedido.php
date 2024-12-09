@@ -50,12 +50,11 @@ if (isset($_GET['cod_ped'])) {
     <title>Detalles del Pedido - Panadería "Los Gemelos"</title>
 </head>
 
-<body class="bg-gray-100">
-
+<body class="bg-gray-100 flex flex-col min-h-screen"> <!-- Flex y altura mínima completa -->
     <!-- Navigation -->
     <?php include 'navigation.php'; ?>
 
-    <div class="container mx-auto my-10 p-5 bg-white shadow-xl rounded-xl">
+    <div class="container mx-auto my-10 p-5 bg-white shadow-xl rounded-xl flex-grow"> <!-- Flex-grow para que ocupe el espacio restante -->
         <h1 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Detalles del Pedido</h1>
 
         <?php if ($result->num_rows > 0): ?>
