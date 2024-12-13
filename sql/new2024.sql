@@ -655,3 +655,14 @@ ADD COLUMN total DECIMAL(10,2) AFTER precio_unit;
 ALTER TABLE pedidos
 ADD COLUMN fecha_recojo DATE,
 ADD COLUMN hora_recojo TIME;
+
+
+ALTER TABLE pedidos
+ADD COLUMN hora_ped TIME NULL,
+ADD COLUMN des_ped VARCHAR(500) NULL,
+ADD COLUMN cod_pro INT NULL,
+ADD COLUMN fecha_act DATE NULL,
+ADD COLUMN hora_act TIME NULL,
+ADD COLUMN fecha_recojo DATE NULL,
+ADD COLUMN hora_recojo TIME NULL,
+ADD COLUMN tipo_envio ENUM('domicilio', 'tienda') NULL;

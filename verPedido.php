@@ -17,7 +17,7 @@ $dni_cl = $_SESSION['cl']['dnicl'];
 $fecha_filtro = isset($_GET['fecha']) ? $_GET['fecha'] : '';
 
 // Configuración de paginación
-$pedidos_por_pagina = 5;
+$pedidos_por_pagina = 8;
 $pagina_actual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 $offset = ($pagina_actual - 1) * $pedidos_por_pagina;
 
