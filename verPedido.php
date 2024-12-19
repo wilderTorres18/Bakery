@@ -17,7 +17,7 @@ $dni_cl = $_SESSION['cl']['dnicl'];
 $fecha_filtro = isset($_GET['fecha']) ? $_GET['fecha'] : '';
 
 // Configuración de paginación
-$pedidos_por_pagina = 5;
+$pedidos_por_pagina = 8;
 $pagina_actual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 $offset = ($pagina_actual - 1) * $pedidos_por_pagina;
 
@@ -86,7 +86,7 @@ $total_paginas = ceil($total_pedidos / $pedidos_por_pagina);
 
         <!-- Mensaje de validación de pago -->
         <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-6">
-            <strong>Nota:</strong> El pago de tu pedido será validado a través de WhatsApp. Una vez confirmado, procederemos a preparar tu pedido y actualizar su estado. ¡Gracias por tu compra!
+            <strong>Nota:</strong> Una vez confirmado, procederemos a preparar tu pedido y actualizar su estado. ¡Gracias por tu compra!
         </div>
 
         <!-- Filtro por fecha -->
@@ -163,7 +163,7 @@ $total_paginas = ceil($total_pedidos / $pedidos_por_pagina);
                                 <td class="py-2 px-4 border-b text-center text-sm">
                                     <a href="detalle_pedido.php?cod_ped=<?php echo $pedido['cod_ped']; ?>" class="text-blue-500 hover:underline">Ver Detalles</a>
                                     <br>
-                                    <a href="generar_ticket.php?cod_ped=<?php echo $pedido['cod_ped']; ?>" class="text-green-500 hover:underline mt-2 block">Descargar Ticket</a>
+                                    <a href="generar_ticket.php?cod_ped=<?php echo $pedido['cod_ped']; ?>" class="text-green-500 hover:underline mt-2 block">Generar Ticket</a>
                                 </td>
 
                             </tr>
