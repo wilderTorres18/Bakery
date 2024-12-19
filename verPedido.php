@@ -136,7 +136,7 @@ $total_paginas = ceil($total_pedidos / $pedidos_por_pagina);
                                             $estadoTexto = 'PAGADO';
                                             break;
                                         case "En_proceso":
-                                            $estadoClase = 'bg-orange-300 text-orange-700';
+                                            $estadoClase = 'bg-gray-300 text-gray-700';
                                             $estadoTexto = 'EN PROCESO';
                                             break;
                                         case "Entregado":

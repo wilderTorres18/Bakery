@@ -56,6 +56,11 @@ try {
     $arreglo = $_SESSION['carrito'];
     $cl = $_SESSION['cl'];
 
+/*     echo "<pre>";
+    var_dump($_SESSION['cl']);
+    echo "</pre>";
+ */
+
     // Asegúrate de que los valores de $envio que son NULL no se pasen tal cual en la consulta
     $referencia = isset($envio['referencia']) ? "'" . mysqli_real_escape_string($conn, $envio['referencia']) . "'" : "NULL";
     $direccion = isset($envio['direccion']) ? "'" . mysqli_real_escape_string($conn, $envio['direccion']) . "'" : "NULL";
