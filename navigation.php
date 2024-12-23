@@ -171,4 +171,27 @@ document.addEventListener('click', function(event) {
         const dropdown = document.getElementById('userDropdown');
         dropdown.classList.toggle('hidden');
     }
+
+    function verificarCarrito() {
+        const numeroProductos = <?php echo $numero_productos; ?>;
+        if (numeroProductos > 0) {
+            // Redirigir al carrito si hay productos
+            window.location.href = "CarIndex.php";
+        } else {
+            // Mostrar alerta si el carrito está vacío
+            Swal.fire({
+                icon: 'warning',
+                title: 'Carrito vacío',
+                text: 'Tu carrito está vacío. Agrega productos antes de continuar.',
+                showCancelButton: true,
+                confirmButtonText: 'Ir a la tienda',
+                cancelButtonText: 'Cancelar',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirigir a la tienda si el usuario confirma
+                    window.location.href = "tienda.php";
+                }
+            });
+        }
+    }
 </script>

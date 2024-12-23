@@ -37,12 +37,12 @@ if (isset($_POST['confirmar_envio'])) {
     exit;
 }
 
-
-if (isset($_POST['eliminar_envio']) && $_POST['eliminar_envio'] === 'true') {
-    unset($_SESSION['envio']);
-    header("Location: CarIndex.php"); // Redirigir para actualizar la página
+if (isset($_POST['eliminar_envio'])) {
+    unset($_SESSION['envio']); // Borra la información de envío
+    header("Location: CarIndex.php"); // Redirige para evitar reenvíos
     exit;
 }
+
 
 /* echo "<pre>";
 var_dump($_SESSION['envio']);
@@ -182,7 +182,14 @@ echo "</pre>";
                 <div class="mt-4">
                     <p>Items: <?php echo isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0; ?></p>
                     <p class="text-lg font-bold">Total: S/ <?php echo number_format($total, 2); ?></p>
-                    <button type="submit" name="actualizar" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mt-4">Actualizar</button>
+                    <button
+                        type="submit"
+                        name="actualizar"
+                        class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mt-4"
+                        <?php echo empty($_SESSION['carrito']) ? 'disabled' : ''; ?>>Actualizar</button>
+                    <?php if (empty($_SESSION['carrito'])): ?>
+                        <p class="text-red-500 mt-2">No hay productos en el carrito para actualizar.</p>
+                    <?php endif; ?>
                     <a href="../compras/compras.php" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded mt-4 inline-block">Proceder a pagar</a>
                 </div>
             </div>
@@ -233,7 +240,8 @@ echo "</pre>";
                     <a href="Perfil.php" class="text-blue-500 hover:underline text-sm">Valida tus datos personales aquí</a>
                 </div>
                 <button type="submit" name="confirmar_envio" class="mt-4 py-2 px-4 bg-green-500 text-white rounded">Confirmar envio</button>
-                <button type="button" onclick="eliminarMetodoEnvio()" class="mt-4 py-2 px-4 bg-red-500 text-white rounded">Eliminar Método de Envío</button>
+                <input type="hidden" name="eliminar_envio" value="true">
+                <button type="submit" class="mt-4 py-2 px-4 bg-red-500 text-white rounded">Eliminar Método de Envío</button>
             </form>
         </div>
     </div>
@@ -258,7 +266,8 @@ echo "</pre>";
                     <a href="Perfil.php" class="text-blue-500 hover:underline text-sm">Valida tus datos personales aquí</a>
                 </div>
                 <button type="submit" name="confirmar_envio" class="mt-4 py-2 px-4 bg-green-500 text-white rounded">Confirmar recojo</button>
-                <button type="button" onclick="eliminarMetodoEnvio()" class="mt-4 py-2 px-4 bg-red-500 text-white rounded">Eliminar Método de Envío</button>
+                <input type="hidden" name="eliminar_envio" value="true">
+                <button type="submit" class="mt-4 py-2 px-4 bg-red-500 text-white rounded">Eliminar Método de Envío</button>
             </form>
         </div>
     </div>
@@ -267,6 +276,18 @@ echo "</pre>";
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+
+
+
+
+            const btnActualizar = document.querySelector('button[name="actualizar"]');
+            const carritoItems = <?php echo json_encode($_SESSION['carrito'] ?? []); ?>;
+
+            if (carritoItems.length === 0) {
+                btnActualizar.disabled = true;
+                btnActualizar.classList.add('cursor-not-allowed', 'opacity-50');
+            }
+
             const envioDomicilio = document.querySelector('[data-envio="domicilio"]');
             const envioTienda = document.querySelector('[data-envio="tienda"]');
             const btnPagar = document.querySelector('[href="../compras/compras.php"]'); // Enlace "Pagar"
