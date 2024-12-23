@@ -51,14 +51,6 @@ while ($fila4 = mysqli_fetch_array($result4)) {
   $flag3 = 1;
   $tar = $tar + 10;
 }
-$sd = "";
-$query5 = "SELECT COUNT(*) as cont FROM Bodega";
-$result5 = mysqli_query($conn, $query5);
-
-
-while ($fila5 = mysqli_fetch_array($result5)) {
-  $bode = $fila5['cont'];
-}
 
 $query6 = "SELECT COUNT(*) as cont FROM CatProducto WHERE estado=1";
 $result6 = mysqli_query($conn, $query6);
@@ -211,34 +203,15 @@ if ($tar > 100) {
             <div class="small text-gray-500">Sistema · 1m</div>
           </div>
         </a>
+        
         <a class="dropdown-item d-flex align-items-center" href="#">
           <div class="dropdown-list-image mr-3">
-            <img class="rounded-circle" src="../img/man.png" alt="">
-            <div class="status-indicator"></div>
-          </div>
-          <div>
-            <div class="text-truncate">Bodega(s) actualmente activas : <?php echo $bode; ?></div>
-            <div class="small text-gray-500">Bot · 2d</div>
-          </div>
-        </a>
-        <a class="dropdown-item d-flex align-items-center" href="#">
-          <div class="dropdown-list-image mr-3">
-            <img class="rounded-circle" src="../img/lñ.jpg" alt="">
+            <img class="rounded-circle" src="../img/perro.jpg" alt="">
             <div class="status-indicator bg-warning"></div>
           </div>
           <div>
             <div class="text-truncate">Producto(s) activos : <?php echo $prod; ?></div>
-            <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-          </div>
-        </a>
-        <a class="dropdown-item d-flex align-items-center" href="#">
-          <div class="dropdown-list-image mr-3">
-            <img class="rounded-circle" src="../img/perro.jpg" alt="">
-            <div class="status-indicator bg-success"></div>
-          </div>
-          <div>
-            <div class="text-truncate">Revise el calendario</div>
-            <div class="small text-gray-500">Chicken the Dog · 2w</div>
+            <div class="small text-gray-500">Tefy Gomez · 2d</div>
           </div>
         </a>
         <!--        <a class="dropdown-item text-center small text-gray-500" href="calendario/">Leer Mas</a> -->

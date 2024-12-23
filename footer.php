@@ -21,6 +21,6 @@ if ($result && mysqli_num_rows($result) > 0) {
                 <i class="fab fa-facebook"></i>
             </a>
         </div>
-        <p>Sitio diseñado por <a href="#" class="underline">WJ SOFTWORKS</a> - PIURA - PERU</p>
+        <p>.</p>
     </div>
 </footer>

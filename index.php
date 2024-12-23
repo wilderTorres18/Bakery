@@ -100,109 +100,164 @@ $fotoPerfil = isset($_SESSION['fotoPerfil']) ? $_SESSION['fotoPerfil'] : './img/
 </head>
 
 <body class="bg-gray-100">
-    <!--Navigation-->
-    <nav class="bg-white">
-        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-            <div class="relative flex items-center justify-between h-16">
-                <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                    <!-- Mobile menu button-->
-                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                        </svg>
-                        <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-                <div class="flex-1 flex items-center justify-between sm:items-stretch sm:justify-start">
-                    <a class="navbar-brand flex-shrink-0" href="index.php">
-                        <img src="logo.png" width="45" height="90" class="d-inline-block align-top" alt="">
-                    </a>
-                    <div class="hidden sm:block sm:ml-6">
-                        <div class="flex space-x-4">
-                            <a href="index.php" class="text-white bg-yellow-700 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Inicio</a>
-                            <a href="tienda.php" class="text-white bg-yellow-700 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Tienda</a>
-                            <a href="historia.php" class="text-white bg-yellow-700 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Historia</a>
-                            <a href="establecimiento.php" class="text-white bg-yellow-700 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Establecimientos</a>
-                            <a href="contacto.php" class="text-white bg-yellow-700 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Contáctanos</a>
-                        </div>
+<!--Navigation-->
+<nav class="bg-white">
+    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+        <div class="relative flex items-center justify-between h-16">
+            <!-- Mobile menu button -->
+            <div class="flex items-center sm:hidden">
+                <button type="button" 
+                        onclick="toggleMobileMenu()"
+                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" 
+                        aria-controls="mobile-menu" 
+                        aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <!-- Icon when menu is closed -->
+                    <svg id="menu-open-icon" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                    <!-- Icon when menu is open -->
+                    <svg id="menu-close-icon" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Logo -->
+            <div class="flex-1 flex items-center justify-between sm:items-stretch">
+                <a class="navbar-brand flex-shrink-0" href="index.php">
+                    <img src="logo.png" width="45" height="90" class="d-inline-block align-top" alt="">
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden sm:block sm:ml-6">
+                    <div class="flex space-x-4">
+                        <a href="index.php" class="text-white bg-yellow-700 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Inicio</a>
+                        <a href="tienda.php" class="text-white bg-yellow-700 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Tienda</a>
+                        <a href="historia.php" class="text-white bg-yellow-700 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Historia</a>
+                        <a href="establecimiento.php" class="text-white bg-yellow-700 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Establecimientos</a>
+                        <a href="contacto.php" class="text-white bg-yellow-700 hover:bg-yellow-600 px-3 py-2 rounded-md text-sm font-medium">Contáctanos</a>
                     </div>
-                    <form id="filterForm" class="relative mt-0 max-w-screen-md mx-auto flex items-center">
-                        <div class="relative flex items-center">
-                            <span class="absolute left-0 pl-3 flex items-center pointer-events-none">
+                </div>
+
+                <!-- Search Bar - Visible on both mobile and desktop -->
+                <div class="flex-1 px-4 flex justify-center">
+                    <form id="filterForm" class="w-full max-w-lg">
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
                                 <i class="fas fa-search text-gray-400"></i>
                             </span>
-                            <input type="text" class="border-2 border-gray-300 bg-white h-10 pl-10 pr-10 rounded-lg text-sm focus:outline-none w-full" id="barra-busqueda" name="busqueda" placeholder="¿Qué se te antoja hoy?" value="<?php echo htmlspecialchars($busqueda); ?>">
+                            <input type="text" 
+                                   class="w-full border-2 border-gray-300 bg-white h-10 pl-10 pr-10 rounded-lg text-sm focus:outline-none" 
+                                   id="barra-busqueda" 
+                                   name="busqueda" 
+                                   placeholder="¿Qué se te antoja hoy?" 
+                                   value="<?php echo htmlspecialchars($busqueda); ?>">
                             <?php if ($busqueda != ''): ?>
-                                <span class="absolute right-0 pr-3 flex items-center">
-                                    <button type="buton" id="clearSearch" class="text-gray-400 focus:outline-none">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </span>
+                            <button type="button" 
+                                    onclick="clearSearch()" 
+                                    class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 focus:outline-none">
+                                <i class="fas fa-times"></i>
+                            </button>
                             <?php endif; ?>
                         </div>
-
                     </form>
-                    <script>
-                        function clearSearch() {
-                            document.getElementById('barra-busqueda').value = ''; // Limpiar el campo de búsqueda
-                            // Aquí puedes agregar cualquier lógica adicional, como reenviar el formulario si es necesario.
-                        }
-                    </script>
+                </div>
 
-                    <div class="hidden sm:block">
-                        <div class="flex items-center">
-                            <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                <?php if (!(isset($_SESSION['cl']))) { ?>
-                                    <a href="nuevo_cliente.php" class="btn bg-green-500 hover:bg-green-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Registrarse</a>
-                                <?php } ?>
-                            </div>
-                            <div class="form-inline my-2 my-lg-0">
-                                <?php if (!(isset($_SESSION['cl']))) { ?>
-                                    <a href="login/" class="btn bg-blue-500 hover:bg-blue-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Iniciar sesión</a>
-                                <?php } ?>
-                                <!--                        <?php if (isset($_SESSION['cl'])) { ?>
-                                    <a href="salir.php" class="btn bg-red-500 hover:bg-red-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Salir</a>
-                                <?php } ?> -->
-                            </div>
-                            <a href="./carrito/CarIndex.php" id="carrito-btn" class="ml-4 text-gray-900 hover:text-gray-600 relative">
-                                <i class="fas fa-shopping-cart fa-2x"></i>
-                                <span id="cart-count" class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center"><?php echo $numero_productos; ?></span>
-                            </a>
+                <!-- User Actions -->
+                <div class="flex items-center space-x-4">
+                    <!-- Desktop Authentication Buttons -->
+                    <div class="hidden sm:flex items-center space-x-2">
+                        <?php if (!(isset($_SESSION['cl']))) { ?>
+                        <a href="nuevo_cliente.php" class="bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded-md text-sm font-medium">Registrarse</a>
+                        <a href="login/" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-md text-sm font-medium">Iniciar sesión</a>
+                        <?php } ?>
+                    </div>
 
-                            <!-- Información del usuario -->
-                            <?php if (isset($_SESSION['cl'])) { ?>
-                                <div class="relative ml-4">
-                                    <div class="flex items-center cursor-pointer" onclick="toggleDropdown()">
-                                        <img class="w-10 h-10 rounded-full border-2 border-gray-300" src="<?php echo $fotoPerfil; ?>" alt="Foto de perfil">
-                                        <span class="ml-3 text-gray-700 font-medium"><?php echo $nomcl ?></span>
-                                        <i class="fas fa-chevron-down ml-2 text-gray-500"></i>
-                                    </div>
-                                    <!-- Dropdown -->
-                                    <div id="userDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg overflow-hidden z-10">
-                                        <a href="Perfil.php" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Perfil</a>
-                                        <a href="verPedido.php" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Pedidos</a>
-                                        <div class="border-t border-gray-200"></div>
-                                        <a href="salir.php" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Cerrar sesión</a>
-                                    </div>
-                                </div>
-                            <?php } ?>
+                    <!-- Shopping Cart -->
+                    <a href="./carrito/CarIndex.php" id="carrito-btn" class="text-gray-900 hover:text-gray-600 relative">
+                        <i class="fas fa-shopping-cart fa-2x"></i>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
+                            <?php echo $numero_productos; ?>
+                        </span>
+                    </a>
+
+                    <!-- User Profile -->
+                    <?php if (isset($_SESSION['cl'])) { ?>
+                    <div class="relative">
+                        <div class="flex items-center cursor-pointer" onclick="toggleDropdown()">
+                            <img class="w-10 h-10 rounded-full border-2 border-gray-300" src="<?php echo $fotoPerfil; ?>" alt="Foto de perfil">
+                            <span class="ml-3 text-gray-700 font-medium hidden sm:block"><?php echo $nomcl ?></span>
+                            <i class="fas fa-chevron-down ml-2 text-gray-500 hidden sm:block"></i>
+                        </div>
+                        <!-- User Dropdown -->
+                        <div id="userDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg overflow-hidden z-10">
+                            <a href="Perfil.php" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Perfil</a>
+                            <a href="verPedido.php" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Pedidos</a>
+                            <div class="border-t border-gray-200"></div>
+                            <a href="salir.php" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Cerrar sesión</a>
                         </div>
                     </div>
+                    <?php } ?>
                 </div>
-                <!-- Mobile menu, show/hide based on menu state. -->
-                <div class="sm:hidden" id="mobile-menu">
-                    <div class="px-2 pt-2 pb-3 space-y-1">
-                        <a href="index.php" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Inicio</a>
-                        <a href="tienda.php" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Tienda</a>
-                        <a href="historia.php" class="text-gray-900 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Historia</a>
-                        <a href="establecimiento.php" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Establecimientos</a>
-                        <a href="contacto.php" class="text-gray-900 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contáctanos</a>
-                    </div>
-                </div>
-    </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="sm:hidden hidden" id="mobile-menu">
+        <div class="px-2 pt-2 pb-3 space-y-1">
+            <a href="index.php" class="text-white bg-yellow-700 hover:bg-yellow-600 block px-3 py-2 rounded-md text-base font-medium">Inicio</a>
+            <a href="tienda.php" class="text-white bg-yellow-700 hover:bg-yellow-600 block px-3 py-2 rounded-md text-base font-medium">Tienda</a>
+            <a href="historia.php" class="text-white bg-yellow-700 hover:bg-yellow-600 block px-3 py-2 rounded-md text-base font-medium">Historia</a>
+            <a href="establecimiento.php" class="text-white bg-yellow-700 hover:bg-yellow-600 block px-3 py-2 rounded-md text-base font-medium">Establecimientos</a>
+            <a href="contacto.php" class="text-white bg-yellow-700 hover:bg-yellow-600 block px-3 py-2 rounded-md text-base font-medium">Contáctanos</a>
+            
+            <!-- Mobile Authentication Buttons -->
+            <?php if (!(isset($_SESSION['cl']))) { ?>
+            <div class="mt-4 space-y-2">
+                <a href="nuevo_cliente.php" class="bg-green-500 hover:bg-green-600 text-white block px-3 py-2 rounded-md text-base font-medium">Registrarse</a>
+                <a href="login/" class="bg-blue-500 hover:bg-blue-600 text-white block px-3 py-2 rounded-md text-base font-medium">Iniciar sesión</a>
+            </div>
+            <?php } ?>
+        </div>
+    </div>
+</nav>
+
+<script>
+// Toggle mobile menu
+function toggleMobileMenu() {
+    const mobileMenu = document.getElementById('mobile-menu');
+    const openIcon = document.getElementById('menu-open-icon');
+    const closeIcon = document.getElementById('menu-close-icon');
+    
+    mobileMenu.classList.toggle('hidden');
+    openIcon.classList.toggle('hidden');
+    closeIcon.classList.toggle('hidden');
+}
+
+// Toggle user dropdown
+function toggleDropdown() {
+    const dropdown = document.getElementById('userDropdown');
+    dropdown.classList.toggle('hidden');
+}
+
+// Clear search function
+function clearSearch() {
+    document.getElementById('barra-busqueda').value = '';
+    document.getElementById('filterForm').submit();
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(event) {
+    const dropdown = document.getElementById('userDropdown');
+    const userMenu = document.querySelector('.cursor-pointer');
+    
+    if (!dropdown.contains(event.target) && !userMenu.contains(event.target)) {
+        dropdown.classList.add('hidden');
+    }
+});
+</script>
     <!-- Banner de Imagenes -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
@@ -396,29 +451,29 @@ $fotoPerfil = isset($_SESSION['fotoPerfil']) ? $_SESSION['fotoPerfil'] : './img/
     <br><br>
     <h1 class="text-3xl font-bold text-center mb-8">Nuestros Productos</h1>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        <div class="bg-white rounded-lg shadow overflow-hidden cursor-pointer" onclick="openModal('login/images/img-02.jpg')">
-            <img src="login/images/img-02.jpg" alt="Imagen 1" class="w-full h-48 object-cover">
+        <div class="bg-white rounded-lg shadow overflow-hidden cursor-pointer" onclick="openModal('img/italiano.png')">
+            <img src="img/italiano.png" alt="Imagen 1" class="w-full h-48 object-cover">
         </div>
-        <div class="bg-white rounded-lg shadow overflow-hidden cursor-pointer" onclick="openModal('login/images/img-02.jpg')">
-            <img src="login/images/img-02.jpg" alt="Imagen 2" class="w-full h-48 object-cover">
+        <div class="bg-white rounded-lg shadow overflow-hidden cursor-pointer" onclick="openModal('img/hambur.png')">
+            <img src="img/hambur.png" alt="Imagen 2" class="w-full h-48 object-cover">
         </div>
-        <div class="bg-white rounded-lg shadow overflow-hidden cursor-pointer" onclick="openModal('login/images/img-02.jpg')">
-            <img src="login/images/img-02.jpg" alt="Imagen 3" class="w-full h-48 object-cover">
+        <div class="bg-white rounded-lg shadow overflow-hidden cursor-pointer" onclick="openModal('img/cachanga.png')">
+            <img src="img/cachanga.png" alt="Imagen 3" class="w-full h-48 object-cover">
         </div>
-        <div class="bg-white rounded-lg shadow overflow-hidden cursor-pointer" onclick="openModal('login/images/img-02.jpg')">
-            <img src="login/images/img-02.jpg" alt="Imagen 4" class="w-full h-48 object-cover">
+        <div class="bg-white rounded-lg shadow overflow-hidden cursor-pointer" onclick="openModal('img/punta.png')">
+            <img src="img/punta.png" alt="Imagen 4" class="w-full h-48 object-cover">
         </div>
-        <div class="bg-white rounded-lg shadow overflow-hidden cursor-pointer" onclick="openModal('login/images/img-02.jpg')">
-            <img src="login/images/img-02.jpg" alt="Imagen 5" class="w-full h-48 object-cover">
+        <div class="bg-white rounded-lg shadow overflow-hidden cursor-pointer" onclick="openModal('img/enrrollado.png')">
+            <img src="img/enrrollado.png" alt="Imagen 5" class="w-full h-48 object-cover">
         </div>
-        <div class="bg-white rounded-lg shadow overflow-hidden cursor-pointer" onclick="openModal('login/images/img-02.jpg')">
-            <img src="login/images/img-02.jpg" alt="Imagen 6" class="w-full h-48 object-cover">
+        <div class="bg-white rounded-lg shadow overflow-hidden cursor-pointer" onclick="openModal('img/frances.png')">
+            <img src="img/frances.png" alt="Imagen 6" class="w-full h-48 object-cover">
         </div>
-        <div class="bg-white rounded-lg shadow overflow-hidden cursor-pointer" onclick="openModal('login/images/img-02.jpg')">
-            <img src="login/images/img-02.jpg" alt="Imagen 7" class="w-full h-48 object-cover">
+        <div class="bg-white rounded-lg shadow overflow-hidden cursor-pointer" onclick="openModal('img/cachitos.png')">
+            <img src="img/cachitos.png" alt="Imagen 7" class="w-full h-48 object-cover">
         </div>
-        <div class="bg-white rounded-lg shadow overflow-hidden cursor-pointer" onclick="openModal('login/images/img-02.jpg')">
-            <img src="login/images/img-02.jpg" alt="Imagen 8" class="w-full h-48 object-cover">
+        <div class="bg-white rounded-lg shadow overflow-hidden cursor-pointer" onclick="openModal('img/Redondo.png')">
+            <img src="img/redondo.png" alt="Imagen 8" class="w-full h-48 object-cover">
         </div>
     </div>
 

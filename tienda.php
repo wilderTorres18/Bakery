@@ -33,23 +33,6 @@ $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
             <h1 class="text-4xl font-bold text-gray-800">"Los Gemelos"</h1>
             <p class="mt-2 text-gray-700">Del horno a tu mesa, frescura y calidad en cada bocado.</p>
 
-            <form id="filterForm" class="relative mt-6 max-w-screen-md mx-auto">
-                <div class="relative flex items-center">
-                    <span class="absolute left-0 pl-3 flex items-center pointer-events-none">
-                        <i class="fas fa-search text-gray-400"></i>
-                    </span>
-                    <input type="text" class="border-2 border-gray-300 bg-white h-10 pl-10 pr-10 rounded-lg text-sm focus:outline-none w-full" id="barra-busqueda" name="busqueda" placeholder="¿Qué se te antoja hoy?" value="<?php echo htmlspecialchars($busqueda); ?>">
-                    <?php if ($busqueda != ''): ?>
-                        <span class="absolute right-0 pr-3 flex items-center">
-                            <button type="button" id="clearSearch" class="text-gray-400 focus:outline-none">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </span>
-                    <?php endif; ?>
-                </div>
-                <button type="submit" class="hidden"></button>
-            </form>
-
 
             <div class="mt-4">
                 <button onclick="applyFilter('')" class="inline-block bg-white text-gray-800 py-2 px-4 rounded-lg shadow hover:bg-gray-200">Todos</button>

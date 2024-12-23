@@ -74,21 +74,21 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
           <form action="basededatos/agregarMensaje.php" method="POST">
             <div class="mb-4">
               <label for="tel" class="block text-gray-600 font-bold mb-2">Teléfono</label>
-              <input type="tel" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-yellow-500" id="tel" name="tel" placeholder="" maxlength="9" minlength="9" pattern="\d{9}" required oninput="validateTel(this)">
+              <input type="tel" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-yellow-500" id="tel" name="tel" placeholder="" maxlength="9" minlength="9" pattern="\d{9}" required oninput="validateTel(this)" required>
               <span id="telError" class="text-red-500 text-sm hidden">Debe ser un número de 9 dígitos.</span>
             </div>
 
             <div class="mb-4">
               <label for="nom" class="block text-gray-600 font-bold mb-2">Nombres</label>
-              <input type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-yellow-500" id="nom" name="nom" placeholder="">
+              <input type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-yellow-500" id="nom" name="nom" placeholder="" required>
             </div>
             <div class="mb-4">
               <label for="dir" class="block text-gray-600 font-bold mb-2">Dirección</label>
-              <input type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-yellow-500" id="dir" name="dir" placeholder="">
+              <input type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-yellow-500" id="dir" name="dir" placeholder="" required>
             </div>
             <div class="mb-4">
               <label for="des" class="block text-gray-600 font-bold mb-2">Mensaje</label>
-              <textarea class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-yellow-500" id="des" name="des" rows="4" placeholder=""></textarea>
+              <textarea class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-yellow-500" id="des" name="des" rows="4" placeholder="" required></textarea>
             </div>
             <div class="text-right">
               <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg">Enviar</button>
@@ -104,6 +104,19 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
       </div>
     </div>
   </div>
+
+  <!-- Carrito Modal -->
+  <div id="carritoModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75  hidden">
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold">Carrito de Compras</h2>
+                <button id="closeCarritoModal">&times;</button>
+            </div>
+            <div id="carritoContent">
+                <!-- Contenido del carrito aquí -->
+            </div>
+        </div>
+    </div>
 
   <!-- Whatsapp -->
   <?php include 'whatsapp.php'; ?>
@@ -151,6 +164,93 @@ $numero_productos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 
       }
     }
   </script>
+  <script>
+        $(document).ready(function() {
+            $('.product-carousel').slick({
+                slidesToShow: 4, // Número de productos visibles por vez
+                slidesToScroll: 1, // Número de productos que se desplazan por vez
+                autoplay: true, // Activa el desplazamiento automático
+                autoplaySpeed: 3000, // Tiempo en milisegundos entre cada desplazamiento automático
+                dots: true, // Muestra puntos de navegación
+                arrows: true, // Muestra flechas de navegación
+                pauseOnHover: true, // Pausa el autoplay cuando se pasa el ratón por encima
+                responsive: [{
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 1,
+                            infinite: true,
+                            dots: true
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            });
+        });
+        $('.add-to-cart').click(function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            $.ajax({
+                url: './carrito/CarModal.php',
+                method: 'GET',
+                data: {
+                    id: id
+                },
+                success: function(response) {
+                    $('#carritoContent').html(response);
+                    $('#carritoModal').removeClass('hidden');
+                    updateCartCount();
+                }
+            });
+        });
+
+        $('#carrito-btn').click(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: './carrito/CarModal.php',
+                method: 'GET',
+                success: function(response) {
+                    $('#carritoContent').html(response);
+                    $('#carritoModal').removeClass('hidden');
+                }
+            });
+        });
+
+        $('#closeCarritoModal').click(function() {
+            $('#carritoModal').addClass('hidden');
+        });
+
+        function updateCartCount() {
+            $.ajax({
+                url: './carrito/CarModal.php',
+                method: 'POST',
+                data: {
+                    action: 'count'
+                },
+                success: function(response) {
+                    $('#cart-count').text(response);
+                }
+            });
+        }
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById('userDropdown');
+            dropdown.classList.toggle('hidden');
+        }
+    </script>
 
 </body>
 

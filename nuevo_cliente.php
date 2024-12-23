@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/629388bad9.js"></script>
-    <title>Freskypan - Panadería en Fusagasugá</title>
+    <title>Registrate</title>
     <style>
         .bg-custom {
             background-image: url('./backend/img/2024/vision.jpg'); /* Reemplaza con la ruta a tu imagen */
@@ -43,35 +43,35 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="text-gray-800 font-semibold block my-3 text-md" for="dni">DNI</label>
-                        <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="number" name="dni" id="dni" placeholder="DNI" />
+                        <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="number" name="dni" id="dni" placeholder="DNI" required/>
                     </div>
                     <div>
                         <label class="text-gray-800 font-semibold block my-3 text-md" for="tel">Teléfono</label>
-                        <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="number" name="telefono" id="tel" placeholder="999999999" />
+                        <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="number" name="telefono" id="tel" placeholder="999999999" required/>
                     </div>
                     <div>
                         <label class="text-gray-800 font-semibold block my-3 text-md" for="nom">Nombre</label>
-                        <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="nombre" id="nom" placeholder="Nombre" />
+                        <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="nombre" id="nom" placeholder="Nombre" required/>
                     </div>
                     <div>
                         <label class="text-gray-800 font-semibold block my-3 text-md" for="a1">Primer apellido</label>
-                        <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="apellido_1" id="a1" placeholder="Primer apellido" />
+                        <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="apellido_1" id="a1" placeholder="Primer apellido" required/>
                     </div>
                     <div>
                         <label class="text-gray-800 font-semibold block my-3 text-md" for="a2">Segundo apellido</label>
-                        <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="apellido_2" id="a2" placeholder="Segundo apellido" />
+                        <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="apellido_2" id="a2" placeholder="Segundo apellido" required/>
                     </div>
                     <div>
                         <label class="text-gray-800 font-semibold block my-3 text-md" for="dir">Dirección</label>
-                        <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="direccion" id="dir" placeholder="Dirección" />
+                        <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="direccion" id="dir" placeholder="Dirección" required/>
                     </div>
                     <div>
-                        <label class="text-gray-800 font-semibold block my-3 text-md" for="des">Descripción</label>
-                        <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="descripcion" id="des" placeholder="Descripción" />
+                        <label class="text-gray-800 font-semibold block my-3 text-md" for="des">Referencia de Dirección</label>
+                        <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="descripcion" id="des" placeholder="Referencia " required/>
                     </div>
                     <div>
                         <label class="text-gray-800 font-semibold block my-3 text-md" for="pass">Password</label>
-                        <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="password" name="pass" id="pass" placeholder="......" />
+                        <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="password" name="pass" id="pass" placeholder="......" required/>
                     </div>
                 </div>
                 <button type="submit" class="w-full mt-6 btn-register rounded-lg px-4 py-2 text-lg tracking-wide font-semibold font-sans">Registrar</button>
