@@ -52,10 +52,11 @@ $fotoPerfil = isset($_SESSION['fotoPerfil']) ? $_SESSION['fotoPerfil'] : './img/
                             <a href="salir.php" class="btn bg-red-500 hover:bg-red-600 text-white my-2 my-sm-0 px-3 py-2 rounded-md text-sm font-medium">Salir</a>
                         <?php } ?> -->
                     </div>
-                    <a href="CarIndex.php" id="carrito-btn" class="ml-4 text-gray-900 hover:text-gray-600 relative">
+                    <a href="javascript:void(0)" id="carrito-btn" class="ml-4 text-gray-900 hover:text-gray-600 relative" onclick="verificarCarrito()">
                         <i class="fas fa-shopping-cart fa-2x"></i>
                         <span id="cart-count" class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center"><?php echo $numero_productos; ?></span>
                     </a>
+
                     <!-- Información del usuario -->
                     <?php if (isset($_SESSION['cl'])) { ?>
                         <div class="relative ml-4">
@@ -83,5 +84,28 @@ $fotoPerfil = isset($_SESSION['fotoPerfil']) ? $_SESSION['fotoPerfil'] : './img/
     function toggleDropdown() {
         const dropdown = document.getElementById('userDropdown');
         dropdown.classList.toggle('hidden');
+    }
+
+    function verificarCarrito() {
+        const numeroProductos = <?php echo $numero_productos; ?>;
+        if (numeroProductos > 0) {
+            // Redirigir al carrito si hay productos
+            window.location.href = "CarIndex.php";
+        } else {
+            // Mostrar alerta si el carrito está vacío
+            Swal.fire({
+                icon: 'warning',
+                title: 'Carrito vacío',
+                text: 'Tu carrito está vacío. Agrega productos antes de continuar.',
+                showCancelButton: true,
+                confirmButtonText: 'Ir a la tienda',
+                cancelButtonText: 'Cancelar',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirigir a la tienda si el usuario confirma
+                    window.location.href = "tienda.php";
+                }
+            });
+        }
     }
 </script>
