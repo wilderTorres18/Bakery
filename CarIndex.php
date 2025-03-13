@@ -277,11 +277,9 @@ echo "</pre>";
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 
-
-
-
             const btnActualizar = document.querySelector('button[name="actualizar"]');
             const carritoItems = <?php echo json_encode($_SESSION['carrito'] ?? []); ?>;
+            
 
             if (carritoItems.length === 0) {
                 btnActualizar.disabled = true;
