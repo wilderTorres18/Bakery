@@ -51,7 +51,7 @@ Con este avance, **Los Gemelos** no solo busca modernizar sus operaciones, sino 
 | Archivo              | Enlace                                                                                            |
 | -------------------- | ------------------------------------------------------------------------------------------------- |
 | Bocetos              | [Descargar](https://docs.google.com/document/d/1pHNUs5WQnKnSdEgVMdUzsRmFBoFjTFVIigRXLwjksVA/edit?usp=sharing)|
-| Manual        | [Descargar](https://drive.google.com/drive/folders/1UcpOuH4Ig02_zBZ58njj2i7Y7ZdBx4yZ?usp=sharing) |
+| Manual        | [Descargar](https://docs.google.com/document/d/1pHNUs5WQnKnSdEgVMdUzsRmFBoFjTFVIigRXLwjksVA/edit?usp=sharing) |
 ## Instalación
 
 Mueva la carpeta descargada a su servidor, recuerde importar la base de datos que está dentro de la carpeta SQL.
