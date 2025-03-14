@@ -1,12 +1,18 @@
 ![FreskyPan Software ERP](img/panaderia.png)
 
-# FreskyPan
+# Los Gemelos
 
-Este aplicativo pretende **automatizar** la forma en la que los gerentes y empleados manejan la **producción** e **inventarios** de una panificadora, con esto en mente se plantea la idea de pasar de un ámbito analógico a uno digital apoyados en una **plataforma virtual** en donde se llevaran a cabo distintas tareas relacionadas con la **administración** del establecimiento (ver, ocultar, modificar).
+El presente proyecto tiene como objetivo **automatizar** y mejorar la gestión de la **producción** e **inventarios** en la panificadora **"Los Gemelos"**, brindando una solución integral para la administración del establecimiento. A través de esta plataforma virtual, los gerentes y empleados podrán gestionar de manera eficiente todas las actividades relacionadas con la operación diaria de la panificadora.
+
+Este sistema digital sustituye la gestión tradicional en papel y proporciona un entorno más ágil y controlado. Las funcionalidades clave del sistema incluyen la capacidad de **visualizar, ocultar, modificar y eliminar** registros en tiempo real, lo que optimiza la administración y reduce posibles errores humanos.
+
+Es importante señalar que este proyecto es una **mejora significativa** sobre un proyecto llamado**"Freskypan"**, incorporando nuevas características y un diseño más intuitivo, con el objetivo de aumentar la eficiencia operativa, mejorar la precisión de los inventarios y agilizar los procesos de producción.
+
+Con este avance, **Los Gemelos** no solo busca modernizar sus operaciones, sino también potenciar la productividad, optimizar los recursos y mejorar la experiencia tanto para empleados como para clientes.
 
 ## Capturas
 
-![Los Gemelos](https://i.pinimg.com/564x/0a/e7/4d/0ae74d826a800c30ffb617363e5e6bb8.jpg)
+![Los Gemelos](img/screenshots/login_user.png)
 
 ## Objetivos
 
