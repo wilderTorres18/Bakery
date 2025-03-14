@@ -26,8 +26,7 @@ Con este avance, **Los Gemelos** no solo busca modernizar sus operaciones, sino 
 - Implementar un sistema que permita el control estructurado del
   inventario y el área de producción para proporcionar un manejo
   administrativo dentro dicha entidad.
-- Analizar los requerimientos que se necesitan para el desarrollo de la
-  ERP.
+- Analizar los requerimientos que se necesitan para el desarrollo de el Sistema.
 - Implementar en el software que permita la iteración rápida y dinámica
   con el usuario final y el servidor.
 
