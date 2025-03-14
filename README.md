@@ -50,15 +50,8 @@ Con este avance, **Los Gemelos** no solo busca modernizar sus operaciones, sino 
 
 | Archivo              | Enlace                                                                                            |
 | -------------------- | ------------------------------------------------------------------------------------------------- |
-| Bocetos              | [Descargar](https://drive.google.com/drive/folders/1-9OAr7iJVqql0uvNTpbnihSJ-nz-91gB?usp=sharing) |
-| Diapositivas         | [Descargar](https://drive.google.com/drive/folders/1UcpOuH4Ig02_zBZ58njj2i7Y7ZdBx4yZ?usp=sharing) |
-| Evaluación           | [Descargar](https://drive.google.com/drive/folders/1MaN727ayfZcXXdlHrd4I_LggYYD6ewMe?usp=sharing) |
-| Historias de Usuario | [Descargar](https://drive.google.com/drive/folders/1hYHAMaa1GCWaSr0Ytax4328zEi3MyxdF?usp=sharing) |
-| ISO 25040            | [Descargar](https://drive.google.com/drive/folders/1cNY4as9KmAOfAp0HZJa7Yv08AFAYHv7c?usp=sharing) |
-| Marco Teórico        | [Descargar](https://drive.google.com/drive/folders/1ykSK8njpL9b60qncs6gUnVeyCcHS8Dt-?usp=sharing) |
-| Norma 830            | [Descargar](https://drive.google.com/drive/folders/1UbmYFZYbN1mwKJ74XNt3h6MD1XdpoUQ8?usp=sharing) |
-| SQL                  | [Descargar](https://drive.google.com/drive/folders/1eqf0Vdiv5qRVm69MFLSyV1kNHUGOiBG9?usp=sharing) |
-
+| Bocetos              | [Descargar](https://docs.google.com/document/d/1pHNUs5WQnKnSdEgVMdUzsRmFBoFjTFVIigRXLwjksVA/edit?usp=sharing)|
+| Manual        | [Descargar](https://drive.google.com/drive/folders/1UcpOuH4Ig02_zBZ58njj2i7Y7ZdBx4yZ?usp=sharing) |
 ## Instalación
 
 Mueva la carpeta descargada a su servidor, recuerde importar la base de datos que está dentro de la carpeta SQL.
