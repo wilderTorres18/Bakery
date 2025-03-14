@@ -12,7 +12,7 @@ Con este avance, **Los Gemelos** no solo busca modernizar sus operaciones, sino 
 
 ## Capturas
 
-![Los Gemelos](img/screenshots/login_user.png)
+![Los Gemelos](img/screenshot/login_user.png)
 
 ## Objetivos
 
